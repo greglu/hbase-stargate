@@ -32,6 +32,10 @@ module HBase
       safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
     end
 
+    def delete(path)
+      safe_request { @connection.delete(@url.path + path) }
+    end
+
     private
     def safe_request(&block)
       response = yield

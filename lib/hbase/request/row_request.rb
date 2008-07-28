@@ -28,6 +28,14 @@ module HBase
       end
 
       def delete(columns = nil)
+        if columns
+          if columns.is_a? String
+            columns = [columns]
+          elsif columns.is_a? Array
+          end
+          @path << "?column=#{columns.join(';')}"
+        end
+        @path
       end
     end
   end

@@ -23,11 +23,12 @@ module HBase
   <value>#{[data[:value]].pack("m")}</value>
 </column>
 EOF
-        row = Response::RowResponse.new(post(request.create, xml_data))
+        Response::RowResponse.new(post(request.create, xml_data))
       end
 
-      def delete_row(table_name, name, timestamp = nil)
+      def delete_row(table_name, name, timestamp = nil, columns = nil)
         request = Request::RowRequest.new(table_name, name, timestamp)
+        Response::RowResponse.new(delete(request.delete(columns)))
       end
     end
   end
