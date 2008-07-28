@@ -1,10 +1,10 @@
 module HBase
   module Request
     class BasicRequest
-      attr_reader :url
+      attr_reader :path
 
-      def initialize(url)
-        @url = url
+      def initialize(path)
+        @path = path
       end
     end
   end

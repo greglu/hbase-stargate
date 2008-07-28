@@ -1,6 +1,6 @@
 module HBase
   module Model
-    class RegionDescriptor
+    class RegionDescriptor < Record
     end
   end
 end

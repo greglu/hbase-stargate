@@ -1,6 +1,6 @@
 module HBase
   module Model
-    class Row
+    class Row < Record
       attr_reader :name
       attr_reader :timestamp
       attr_reader :columns

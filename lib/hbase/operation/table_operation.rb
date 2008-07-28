@@ -1,16 +1,13 @@
 module HBase
   module Operation
     module TableOperation
-      def index
+      def show_table(name)
       end
 
-      def show(name)
+      def create_table(name, data)
       end
 
-      def create(name, data)
-      end
-
-      def regions(name, start_row = nil, end_row = nil)
+      def table_regions(name, start_row = nil, end_row = nil)
       end
     end
   end

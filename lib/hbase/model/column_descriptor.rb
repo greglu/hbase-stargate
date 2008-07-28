@@ -6,7 +6,7 @@ module HBase
       BLOCK = "BLOCK"
     end
 
-    class ColumnDescriptor
+    class ColumnDescriptor < Record
       attr_reader :name
       attr_reader :compression
       attr_reader :bloomfilter
