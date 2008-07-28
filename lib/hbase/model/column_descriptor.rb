@@ -19,11 +19,11 @@ module HBase
     end
 
     class ColumnDescriptor < Record
-      attr_reader :name
-      attr_reader :compression
-      attr_reader :bloomfilter
-      attr_reader :maximum_cell_size
-      attr_reader :max_versions
+      attr_accessor :name
+      attr_accessor :compression
+      attr_accessor :bloomfilter
+      attr_accessor :maximum_cell_size
+      attr_accessor :max_versions
     end
   end
 end

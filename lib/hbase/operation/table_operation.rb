@@ -7,6 +7,7 @@ module HBase
       end
 
       def create_table(name, data)
+        raise NotImplementedError, "create_table not supported by HBase yet"
       end
 
       def table_regions(name, start_row = nil, end_row = nil)

@@ -9,12 +9,11 @@ module HBase
       end
 
       def show
-        self
+        @path
       end
 
       def regions(start_row = nil, end_row = nil)
         @path << "/regions"
-        self
       end
     end
   end

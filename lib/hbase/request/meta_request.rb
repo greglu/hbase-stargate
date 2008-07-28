@@ -6,7 +6,7 @@ module HBase
       end
 
       def list_tables
-        self
+        @path
       end
     end
   end

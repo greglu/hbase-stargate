@@ -1,8 +1,8 @@
 module HBase
   module Model
     class Column < Record
-      attr_reader :name
-      attr_reader :value
+      attr_accessor :name
+      attr_accessor :value
     end
   end
 end

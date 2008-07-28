@@ -1,9 +1,10 @@
 module HBase
   module Model
     class Row < Record
-      attr_reader :name
-      attr_reader :timestamp
-      attr_reader :columns
+      attr_accessor :table_name
+      attr_accessor :name
+      attr_accessor :timestamp
+      attr_accessor :columns
     end
   end
 end

@@ -1,16 +1,33 @@
 module HBase
   module Operation
     module RowOperation
-      def timestamps(table_name, name)
+      def row_timestamps(table_name, name)
+        raise NotImplementedError, "Currently not supported in native hbase client"
       end
 
-      def show(table_name, name, timestamp = nil)
+      def show_row(table_name, name, timestamp = nil, columns = nil)
+        request = Request::RowRequest.new(table_name, name, timestamp)
+        row = Response::RowResponse.new(get(request.show(columns))).parse
+        row.table_name = table_name
+        row.name = name
+        row.timestamp = timestamp
+        row
       end
 
-      def create(table_name, name, data, timestamp = nil)
+      def create_row(table_name, name, timestamp = nil, data = { })
+        request = Request::RowRequest.new(table_name, name, timestamp)
+        xml_data =<<EOF
+<?xml version='1.0' encoding='UTF-8'?>
+<column>
+  <name>#{data[:name]}</name>
+  <value>#{[data[:value]].pack("m")}</value>
+</column>
+EOF
+        row = Response::RowResponse.new(post(request.create, xml_data))
       end
 
-      def delete(table_name, name, timestamp = nil)
+      def delete_row(table_name, name, timestamp = nil)
+        request = Request::RowRequest.new(table_name, name, timestamp)
       end
     end
   end

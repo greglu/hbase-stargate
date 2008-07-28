@@ -24,12 +24,12 @@ module HBase
       @connection.read_timeout = opts[:timeout] if opts[:timeout]
     end
 
-    def get(request)
-      safe_request { @connection.get(@url.path + request.path) }
+    def get(path)
+      safe_request { @connection.get(@url.path + path) }
     end
 
-    def post(request)
-      safe_request { @connection.post(@url.path + request.path, request.data, {'Content-Type' => 'text/xml'}) }
+    def post(path, data)
+      safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
     end
 
     private
