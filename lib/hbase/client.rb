@@ -1,12 +1,12 @@
 require 'net/http'
-require 'hbase/operation/mix_operation'
+require 'hbase/operation/meta_operation'
 require 'hbase/operation/table_operation'
 require 'hbase/operation/row_operation'
 require 'hbase/operation/scanner_operation'
 
 module HBase
   class Client
-    include Operation::MixOperation
+    include Operation::MetaOperation
     include Operation::TableOperation
     include Operation::RowOperation
     include Operation::ScannerOperation

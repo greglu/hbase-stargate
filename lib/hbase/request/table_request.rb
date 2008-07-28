@@ -4,17 +4,17 @@ module HBase
       attr_reader :name
       attr_reader :body
 
-      def initialize(path, name)
-        super(path)
-        @path << "/#{name}"
+      def initialize(name)
+        super("/#{name}")
       end
 
       def show
-        @path
+        self
       end
 
       def regions(start_row = nil, end_row = nil)
         @path << "/regions"
+        self
       end
     end
   end

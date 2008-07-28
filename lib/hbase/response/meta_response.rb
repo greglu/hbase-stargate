@@ -1,6 +1,6 @@
 module HBase
   module Response
-    class MixResponse < BasicResponse
+    class MetaResponse < BasicResponse
       attr_reader :method
 
       def initialize(raw_data, method)

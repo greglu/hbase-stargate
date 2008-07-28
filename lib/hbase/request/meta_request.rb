@@ -1,6 +1,6 @@
 module HBase
   module Request
-    class MixRequest < BasicRequest
+    class MetaRequest < BasicRequest
       def initialize
         super("/")
       end

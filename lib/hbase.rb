@@ -37,4 +37,8 @@ class String #:nodoc:
   def blank?
     self !~ /\S/
   end
+
+  def to_b
+    self == "true" ? true : false
+  end
 end
