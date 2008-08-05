@@ -5,15 +5,32 @@ module HBase
       attr_reader :body
 
       def initialize(name)
-        super("/#{name}")
+        super("")
+        @name = name
       end
 
       def show
-        @path
+        @path << "#{name}"
       end
 
       def regions(start_row = nil, end_row = nil)
-        @path << "/regions"
+        @path << "/#{name}/regions"
+      end
+
+      def create
+        @path << "/tables"
+      end
+
+      def enable
+        @path << "/tables/#{name}/enable"
+      end
+
+      def disable
+        @path << "/tables/#{name}/disable"
+      end
+
+      def delete
+        @path << "/tables/#{name}"
       end
     end
   end

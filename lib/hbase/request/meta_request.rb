@@ -8,6 +8,10 @@ module HBase
       def list_tables
         @path
       end
+
+      def create_table
+        @path << "/tables"
+      end
     end
   end
 end

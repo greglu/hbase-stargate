@@ -19,6 +19,9 @@ module HBase
     end
 
     class ColumnDescriptor < Record
+      AVAILABLE_OPTS = { :name => "name", :max_versions => "max-versions", :compression => "compression",
+                         :in_memory => "in-memory", :block_cache => "block-cache", :max_cell_size => "max-cell-size",
+                         :ttl => "time-to-live", :bloomfilter => "bloomfilter"}
       attr_accessor :name
       attr_accessor :compression
       attr_accessor :bloomfilter

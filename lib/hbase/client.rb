@@ -28,7 +28,7 @@ module HBase
       safe_request { @connection.get(@url.path + path) }
     end
 
-    def post(path, data)
+    def post(path, data = nil)
       safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
     end
 
