@@ -11,7 +11,7 @@ bin/start-hbase.sh
 
 2. ruby code
 {{{
-require 'lib/hbase'
+require 'hbase'
 
 client = HBase::Client.new("http://localhost:60010/api") # this url is the default.
 tables = client.list_tables                              # list available tables
