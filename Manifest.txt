@@ -3,6 +3,7 @@ MIT-LICENSE
 Manifest.txt
 README.txt
 Rakefile
+hbase-ruby.gemspec
 lib/hbase.rb
 lib/hbase/client.rb
 lib/hbase/exception.rb
