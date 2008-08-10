@@ -25,6 +25,14 @@ row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:foo
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
 }}}
 
+3. rails config
+
+For those who wants to use hbase in their rails application, can add this line to the environment.rb
+
+{{{
+config.gem 'sishen-hbase-ruby', :lib => "hbase", :source => "http://gems.github.com"
+}}}
+
 
 == INSTALLTION
  build the gem:
