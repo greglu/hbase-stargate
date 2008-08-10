@@ -1,4 +1,3 @@
-(in /Users/sishen/Work/feedbackmining/hbase-ruby)
 Gem::Specification.new do |s|
   s.name = %q{hbase-ruby}
   s.version = "0.1"
