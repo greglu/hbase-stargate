@@ -13,7 +13,6 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://sishen.lifegoo.com}
   s.rdoc_options = ["--main", "README.txt"]
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{hbase-ruby}
   s.rubygems_version = %q{1.2.0}
   s.summary = %q{a pure ruby client for hbase using REST interface}
 

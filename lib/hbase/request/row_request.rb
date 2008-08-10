@@ -18,7 +18,8 @@ module HBase
             columns = [columns]
           elsif columns.is_a? Array
           end
-          @path << "?column=#{columns.join(';')}"
+          params = columns.collect { |column| "column=#{column}" }.join('&')
+          @path << "?#{params}"
         end
         @path
       end
@@ -33,7 +34,8 @@ module HBase
             columns = [columns]
           elsif columns.is_a? Array
           end
-          @path << "?column=#{columns.join(';')}"
+          params = columns.collect { |column| "column=#{column}" }.join('&')
+          @path << "?#{params}"
         end
         @path
       end
