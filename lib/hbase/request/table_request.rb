@@ -6,7 +6,7 @@ module HBase
 
       def initialize(name)
         super("")
-        @name = name
+        @name = CGI.escape(name) if name
       end
 
       def show

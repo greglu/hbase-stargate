@@ -1,3 +1,5 @@
+require 'cgi'
+
 module HBase
   module Request
     class BasicRequest

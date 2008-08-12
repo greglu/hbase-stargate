@@ -6,9 +6,9 @@ module HBase
       attr_reader :timestamp
 
       def initialize(table_name, name, timestamp)
-        @table_name, @name, @timestamp = table_name, name, timestamp
-        path = "/#{table_name}/row/#{name}"
-        path << "/#{timestamp}" if timestamp
+        @table_name, @name, @timestamp = CGI.escape(table_name), CGI.escape(name), timestamp
+        path = "/#{@table_name}/row/#{@name}"
+        path << "/#{@timestamp}" if timestamp
         super(path)
       end
 
