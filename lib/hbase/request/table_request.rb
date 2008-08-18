@@ -18,19 +18,19 @@ module HBase
       end
 
       def create
-        @path << "/tables"
+        @path << "/"
       end
 
       def enable
-        @path << "/tables/#{name}/enable"
+        @path << "/#{name}/enable"
       end
 
       def disable
-        @path << "/tables/#{name}/disable"
+        @path << "/#{name}/disable"
       end
 
       def delete
-        @path << "/tables/#{name}"
+        @path << "/#{name}"
       end
     end
   end
