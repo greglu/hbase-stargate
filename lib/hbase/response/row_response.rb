@@ -8,8 +8,10 @@ module HBase
         row.elements.each("column") do |col|
           name = col.elements["name"].text.strip.unpack("m").first
           value = col.elements["value"].text.strip.unpack("m").first
+          timestamp = col.elements["timestamp"].text.strip.to_i
           columns << Model::Column.new(:name => name,
-                                :value => value)
+                                       :value => value,
+                                       :timestamp => timestamp)
         end
         Model::Row.new(:columns => columns)
       end

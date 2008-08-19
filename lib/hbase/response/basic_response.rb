@@ -5,7 +5,6 @@ module HBase
     class BasicResponse
 
       def initialize(raw_data)
-        puts raw_data
         @raw_data = raw_data
       end
 

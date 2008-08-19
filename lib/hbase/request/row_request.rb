@@ -12,7 +12,7 @@ module HBase
         super(path)
       end
 
-      def show(columns = nil)
+      def show(columns = nil, version = nil)
         if columns
           if columns.is_a? String
             columns = [columns]
@@ -20,6 +20,7 @@ module HBase
           end
           params = columns.collect { |column| "column=#{column}" }.join('&')
           @path << "?#{params}"
+          @path << "&version=#{version}" if version
         end
         @path
       end

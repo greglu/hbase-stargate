@@ -5,9 +5,9 @@ module HBase
         raise NotImplementedError, "Currently not supported in native hbase client"
       end
 
-      def show_row(table_name, name, timestamp = nil, columns = nil)
+      def show_row(table_name, name, timestamp = nil, columns = nil, version = nil)
         request = Request::RowRequest.new(table_name, name, timestamp)
-        row = Response::RowResponse.new(get(request.show(columns))).parse
+        row = Response::RowResponse.new(get(request.show(columns, version))).parse
         row.table_name = table_name
         row.name = name
         row.timestamp = timestamp
