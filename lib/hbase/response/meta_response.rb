@@ -13,7 +13,7 @@ module HBase
         when :list_tables
           if raw_data.blank?
             puts "There are no available tables in the HBase"
-            return nil
+            return []
           end
 
           doc = REXML::Document.new(raw_data)

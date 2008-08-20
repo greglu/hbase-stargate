@@ -38,9 +38,16 @@ module HBase
 
     private
     def safe_request(&block)
-      response = yield
+      begin
+        response = yield
+      rescue Errno::ECONNREFUSED
+        raise ConnectionNotEstablishedError, "can't connect to #{@url}"
+      rescue Timeout::Error => e
+        raise ConnectionTimeoutError, "execution expired. Maybe query disabled tables"
+      end
+
       case response
-        when Net::HTTPSuccess then response.body
+      when Net::HTTPSuccess then response.body
       else
         response.error!
       end
