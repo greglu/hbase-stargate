@@ -22,14 +22,14 @@ module HBase
         end
       end
 
-      def create_row(table_name, name, timestamp = nil, *args)
+      def create_row(table_name, name, timestamp = nil, columns = nil)
         begin
           request = Request::RowRequest.new(table_name, name, timestamp)
           data = []
-          if args.instance_of? Array
-            data = args
-          elsif args.instance_of? Hash
-            data = [args]
+          if columns.instance_of? Array
+            data = columns
+          elsif columns.instance_of? Hash
+            data = [columns]
           else
             raise StandardError, "Only Array or Hash data accepted"
           end
