@@ -19,6 +19,10 @@ module HBase
         raise "invalid http url: #{url}"
       end
 
+      unless @url.path =~ /^\/api/
+        @url += (@url[-1] == '/' ? "api" : "/api")
+      end
+
       # Not actually opening the connection yet, just setting up the persistent connection.
       @connection = Net::HTTP.new(@url.host, @url.port)
       @connection.read_timeout = opts[:timeout] if opts[:timeout]

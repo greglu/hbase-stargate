@@ -1,6 +1,14 @@
 module HBase
   module Operation
     module RowOperation
+      Converter = {
+        '&' => '&amp;',
+        '<' => '&lt;',
+        '>' => '&gt;',
+        "'" => '&apos;',
+        '"' => '&quot;'
+      }
+
       def row_timestamps(table_name, name)
         raise NotImplementedError, "Currently not supported in native hbase client"
       end
@@ -35,7 +43,8 @@ module HBase
           end
           xml_data ="<?xml version='1.0' encoding='UTF-8'?><columns>"
           data.each do |d|
-            xml_data << "<column><name>#{d[:name]}</name>"
+            escape_name = d[:name].gsub(/[&<>'"]/) { |match| Converter[match] }
+            xml_data << "<column><name>#{escape_name}</name>"
             xml_data << "<value>#{[d[:value]].pack("m") rescue ''}</value></column>"
           end
           xml_data << "</columns>"
