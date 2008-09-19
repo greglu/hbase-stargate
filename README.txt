@@ -16,6 +16,8 @@ require 'hbase'
 client = HBase::Client.new("http://localhost:60010/api") # this url is the default.
 tables = client.list_tables                              # list available tables
 
+table = client.create_table('users', 'habbit')           # create a table whose column_family is habbit
+
 table = client.show_table('users')                       # show the meta info of table users 
 
 row = client.show_row('users', 'sishen')                 # show the data of row 'sishen' in table 'users'

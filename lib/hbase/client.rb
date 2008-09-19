@@ -20,7 +20,7 @@ module HBase
       end
 
       unless @url.path =~ /^\/api/
-        @url += (@url[-1] == '/' ? "api" : "/api")
+        @url.path += (@url.path[-1] == '/' ? "api" : "/api")
       end
 
       # Not actually opening the connection yet, just setting up the persistent connection.
@@ -38,6 +38,10 @@ module HBase
 
     def delete(path)
       safe_request { @connection.delete(@url.path + path) }
+    end
+
+    def put(path, data = nil)
+      safe_request { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
     end
 
     private
