@@ -4,14 +4,11 @@ module HBase
       NONE = "NONE"
       RECORD = "RECORD"
       BLOCK = "BLOCK"
+      
+      CTYPES = [NONE, RECORD, BLOCK]
 
       def to_compression_type(type_string)
-        case type_string
-        when "RECORD" then RECORD
-        when "BLOCK"  then BLOCK
-        else
-          NONE
-        end
+        CTYPES.include?(type_string) ? type_string : NONE
       end
 
       module_function :to_compression_type
