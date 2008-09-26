@@ -2,7 +2,7 @@ module HBase
   module Request
     class MetaRequest < BasicRequest
       def initialize
-        super("/")
+        super("")
       end
 
       def list_tables
