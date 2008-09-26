@@ -7,7 +7,6 @@ module HBase
 
       def to_compression_type(type_string)
         case type_string
-        when "NONE"   then NONE
         when "RECORD" then RECORD
         when "BLOCK"  then BLOCK
         else
