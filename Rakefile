@@ -9,3 +9,5 @@ Hoe.new('sishen-hbase-ruby', '0.3.0') do |p|
   p.summary = 'a pure ruby client for hbase using REST interface'
   p.description = 'hbase-ruby is a pure ruby client for hbase and enable the ruby app enjoy the power of HBase'
 end
+
+Dir['tasks/**/*.rake'].each { |rake| load rake }
