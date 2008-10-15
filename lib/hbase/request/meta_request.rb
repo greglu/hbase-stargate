@@ -6,7 +6,7 @@ module HBase
       end
 
       def list_tables
-        @path
+        @path << "/"
       end
 
       def create_table
