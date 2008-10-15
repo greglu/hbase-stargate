@@ -31,21 +31,12 @@ module HBase
       end
 
       def disable
-        @path << "/#{name}//disable"
+        @path << "/#{name}/disable"
       end
 
       def delete(columns = nil)
         @path << "/#{name}"
-        if columns
-          if columns.is_a? String
-            columns = [columns]
-          elsif columns.is_a? Array
-          else
-            raise StandardError, "Only String or Array type allows for columns"
-          end
-          params = columns.collect { |column| "column=#{column}" }.join('%')
-          @path << "?#{params}"
-        end
+        @path << "?#{pack_params(columns)}" if columns
         @path
       end
     end

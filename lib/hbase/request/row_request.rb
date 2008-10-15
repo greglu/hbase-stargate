@@ -28,13 +28,6 @@ module HBase
         @path << "?#{pack_params(columns)}" if columns
         @path
       end
-      
-      private
-        
-        def pack_params columns
-          columns = [columns] unless columns.is_a? Array
-          columns.collect { |column| "column=#{column}" }.join('&')
-        end
     end
   end
 end

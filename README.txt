@@ -25,17 +25,24 @@ Here is the example:
 require 'hbase'
 
 client = HBase::Client.new("http://localhost:60010/api") # this url is the default.
+
+# Table Operation
 tables = client.list_tables                              # list available tables
-
 table = client.create_table('users', 'habbit')           # create a table whose column_family is habbit
-
 table = client.show_table('users')                       # show the meta info of table users 
+client.disable_table('users')                            # disable table users
+client.enable_table('users')                             # enable table users
+client.delete_table('users')                             # delete table users
 
+# Row Operation
 row = client.show_row('users', 'sishen')                 # show the data of row 'sishen' in table 'users'
-
 row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:football', :value => 'i like football'}) # create the row 'sishen' with the data in the table 'users'
-
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
+
+# Scanner Operation
+scanner = client.open_scanner('users', 'habbit:')
+rows = client.get_rows(scanner)
+client.close_scanner(scanner)
 }}}
 
 == Testing

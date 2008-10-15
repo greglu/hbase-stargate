@@ -8,6 +8,20 @@ module HBase
       def initialize(path)
         @path = path
       end
+
+
+      protected
+
+      def pack_params columns
+        if columns.is_a? String
+          columns = [columns]
+        elsif columns.is_a? Array
+        else
+          raise StandardError, "Only String or Array type allows for columns"
+        end
+
+        columns.collect { |column| "column=#{column}" }.join('&')
+      end
     end
   end
 end
