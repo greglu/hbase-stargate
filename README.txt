@@ -1,15 +1,26 @@
-hbase-ruby is a pure ruby client for HBase using REST interface
+hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase). It works with the most recent version of HBase REST interface.
+
+== INSTALLTION
+
+$gem install sishen-hbase-ruby -s http://gems.github.com
+
+For those who wants to use hbase in their rails application, can add this line to the environment.rb
+
+{{{
+config.gem 'sishen-hbase-ruby', :lib => "hbase", :source => "http://gems.github.com"
+}}}
+
+To build the gem yourself:
+
+$rake gem
 
 == USAGE
 
-First launch HBase:
+First download the recent version of hbase (svn checkout http://svn.apache.org/repos/asf/hadoop/hbase/trunk hbase), compile it with 'ant', then launch HBase server:
 
-1.
-{{{
-bin/start-hbase.sh
-}}}
+$bin/start-hbase.sh
 
-2. ruby code
+Here is the example:
 {{{
 require 'hbase'
 
@@ -27,25 +38,7 @@ row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:foo
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
 }}}
 
-3. rails config
-
-For those who wants to use hbase in their rails application, can add this line to the environment.rb
-
-{{{
-config.gem 'sishen-hbase-ruby', :lib => "hbase", :source => "http://gems.github.com"
-}}}
-
-
-== INSTALLTION
- build the gem:
-
-  rake gem
-
-and install the versioned gem:
-
-  gem install pkg/hbase-ruby-x.x.x.gem 
-
 == Copyright
 
-Copyright (c) 2007 Dingding Ye <yedingding@gmail.com>
+Copyright (c) 2008 Dingding Ye <yedingding@gmail.com>
 Distributed under MIT License
