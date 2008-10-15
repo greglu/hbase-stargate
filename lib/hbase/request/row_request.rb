@@ -7,19 +7,12 @@ module HBase
 
       def initialize(table_name, name, timestamp)
         @table_name, @name, @timestamp = CGI.escape(table_name), CGI.escape(name), timestamp
-        path = "/#{@table_name}/row/#{@name}"
-        path << "/#{@timestamp}" if timestamp
-        super(path)
+        super("/#{@table_name}/row/#{@name}/#{@timestamp}")
       end
 
       def show(columns = nil, version = nil)
         if columns
-          if columns.is_a? String
-            columns = [columns]
-          elsif columns.is_a? Array
-          end
-          params = columns.collect { |column| "column=#{column}" }.join('&')
-          @path << "?#{params}"
+          @path << pack_params(columns)
           @path << "&version=#{version}" if version
         end
         @path
@@ -30,16 +23,16 @@ module HBase
       end
 
       def delete(columns = nil)
-        if columns
-          if columns.is_a? String
-            columns = [columns]
-          elsif columns.is_a? Array
-          end
-          params = columns.collect { |column| "column=#{column}" }.join('&')
-          @path << "?#{params}"
-        end
+        @path << "?#{pack_params(columns)}" if columns
         @path
       end
+      
+      private
+        
+        def pack_params columns
+          columns = [columns] unless columns.is_a? Array
+          columns.collect { |column| "column=#{column}" }.join('&')
+        end
     end
   end
 end
