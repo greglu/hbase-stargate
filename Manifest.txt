@@ -13,6 +13,7 @@ lib/hbase/model/column_descriptor.rb
 lib/hbase/model/region_descriptor.rb
 lib/hbase/model/row.rb
 lib/hbase/model/table_descriptor.rb
+lib/hbase/model/scanner.rb
 lib/hbase/operation/meta_operation.rb
 lib/hbase/operation/row_operation.rb
 lib/hbase/operation/scanner_operation.rb
@@ -28,3 +29,4 @@ lib/hbase/response/basic_response.rb
 lib/hbase/response/meta_response.rb
 lib/hbase/response/row_response.rb
 lib/hbase/response/table_response.rb
+lib/hbase/response/scanner_response.rb
