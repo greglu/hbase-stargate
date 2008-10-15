@@ -5,9 +5,11 @@ module HBase
       attr_reader :name
       attr_reader :timestamp
 
-      def initialize(table_name, name, timestamp)
+      def initialize(table_name, name, timestamp=nil)
         @table_name, @name, @timestamp = CGI.escape(table_name), CGI.escape(name), timestamp
-        super("/#{@table_name}/row/#{@name}/#{@timestamp}")
+        path = "/#{@table_name}/row/#{@name}"
+        path << "/#{@timestamp}" if timestamp
+        super(path)
       end
 
       def show(columns = nil, version = nil)
