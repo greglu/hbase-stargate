@@ -10,12 +10,12 @@ module HBase
       end
 
       def show
-        member_path
+        @path << "/#{name}"
       end
 
       def regions(start_row = nil, end_row = nil)
         #TODO no handle the args!
-        member_path << "/regions"
+        @path << "/#{name}/regions"
       end
 
       def create
@@ -23,18 +23,19 @@ module HBase
       end
 
       def update
-        member_path
+        @path << "/#{name}"
       end
 
       def enable
-        member_path << "/enable"
+        @path << "/#{name}/enable"
       end
 
       def disable
-        member_path << "/disable"
+        @path << "/#{name}//disable"
       end
 
       def delete(columns = nil)
+        @path << "/#{name}"
         if columns
           if columns.is_a? String
             columns = [columns]
@@ -43,17 +44,10 @@ module HBase
             raise StandardError, "Only String or Array type allows for columns"
           end
           params = columns.collect { |column| "column=#{column}" }.join('%')
-          member_path << "?#{params}"
+          @path << "?#{params}"
         end
         @path
       end
-      
-      private
-        
-        def member_path
-          @path << "/#{name}"
-          @path
-        end
     end
   end
 end
