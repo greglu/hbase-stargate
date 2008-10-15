@@ -38,6 +38,20 @@ row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:foo
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
 }}}
 
+== Testing
+
+First you want to install rspec gem:
+
+{{{
+	sudo gem install rspec
+  }}}
+
+Now, you can run the spec by following rake task:
+
+{{{
+	rake examples
+  }}}
+
 == Copyright
 
 Copyright (c) 2008 Dingding Ye <yedingding@gmail.com>
