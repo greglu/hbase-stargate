@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'hoe'
 
-Hoe.new('sishen-hbase-ruby', '0.3.0') do |p|
+Hoe.new('sishen-hbase-ruby', '0.4.0') do |p|
   p.rubyforge_name = 'sishen-hbase-ruby'
   p.author = 'Ye Dingding'
   p.email = 'yedingding@gmail.com'

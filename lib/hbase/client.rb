@@ -55,7 +55,8 @@ module HBase
       end
 
       case response
-      when Net::HTTPSuccess then response.body
+      when Net::HTTPSuccess
+        response.body.blank? ? response.header : response.body
       else
         response.error!
       end
