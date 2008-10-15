@@ -3,6 +3,8 @@ module HBase
     class ScannerResponse < BasicResponse
       def parse_content(raw_data)
         doc = REXML::Document.new(raw_data)
+        doc = doc.elements["rows"] if doc.elements["rows"] && doc.elements["rows"].has_elements?
+
         rows = []
         doc.elements.each("row") do |row|
           row_name = row.elements["name"].text.strip.unpack("m").first
