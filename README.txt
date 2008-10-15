@@ -2,10 +2,10 @@ hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase). It 
 
 == INSTALLTION
 
-$gem install sishen-hbase-ruby -s http://gems.github.com
+$gem sources -a http://gems.github.com
+$gem install sishen-hbase-ruby
 
-For those who wants to use hbase in their rails application, can add this line to the environment.rb
-
+For those who wants to use hbase in their rails application, can add this line to the environment.rb:
 {{{
 config.gem 'sishen-hbase-ruby', :lib => "hbase", :source => "http://gems.github.com"
 }}}
