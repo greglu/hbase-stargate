@@ -10,3 +10,14 @@ describe HBase::Model::CompressionType do
   end
 
 end
+
+describe HBase::Model::ColumnDescriptor do
+
+  it "should be have such attributes" do
+    column = HBase::Model::ColumnDescriptor.new({})
+    %w{name compression bloomfilter maximum_cell_size max_versions}.each do |method|
+      column.should respond_to(method)
+    end
+  end
+
+end
