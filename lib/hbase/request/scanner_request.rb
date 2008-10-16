@@ -11,14 +11,7 @@ module HBase
 
       def open(columns, start_row = nil, end_row = nil, timestamp = nil)
         search = []
-        if columns.is_a? String
-          search << "column=#{columns}"
-        elsif columns.is_a? Array
-          search << columns.collect { |col| "column=#{col}" }.join("&")
-        else
-          raise StandardError, "Only string or array type allowed for columns attr."
-        end
-
+        search << pack_params(columns)
         search << "start_row=#{CGI.escape(start_row)}" if start_row
         search << "end_row=#{CGI.escape(end_row)}" if end_row
         search << "timestamp=#{CGI.escape(timestamp)}" if timestamp

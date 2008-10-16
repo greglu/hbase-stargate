@@ -14,7 +14,7 @@ module HBase
 
       def show(columns = nil, version = nil)
         if columns
-          @path << pack_params(columns)
+          @path << "?#{pack_params(columns)}"
           @path << "&version=#{version}" if version
         end
         @path
