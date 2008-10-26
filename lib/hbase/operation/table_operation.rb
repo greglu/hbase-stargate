@@ -113,6 +113,8 @@ module HBase
             arg.each do |k,v|
               if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
                 xml_data << "<#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>#{v}</#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>"
+              else
+                xml_data << "<metadata><name>#{k}</name><value>#{v}</value></metadata>"
               end
             end
             xml_data << "</columnfamily>"

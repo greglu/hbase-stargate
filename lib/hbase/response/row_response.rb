@@ -5,6 +5,7 @@ module HBase
         doc = REXML::Document.new(raw_data)
         row = doc.elements["row"]
         columns = []
+        count = row.elements["count"].text.strip.to_i rescue 0
         row.elements.each("column") do |col|
           name = col.elements["name"].text.strip.unpack("m").first
           value = col.elements["value"].text.strip.unpack("m").first rescue nil
@@ -13,7 +14,7 @@ module HBase
                                        :value => value,
                                        :timestamp => timestamp)
         end
-        Model::Row.new(:columns => columns)
+        Model::Row.new(:total_count => count, :columns => columns)
       end
     end
   end

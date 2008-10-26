@@ -12,10 +12,12 @@ module HBase
         super(path)
       end
 
-      def show(columns = nil, version = nil)
+      def show(columns = nil, options = { })
         if columns
           @path << "?#{pack_params(columns)}"
-          @path << "&version=#{version}" if version
+          @path << "&version=#{options[:version]}" if options[:version]
+          @path << "&offset=#{options[:offset]}" if options[:offset]
+          @path << "&limit=#{options[:limit]}" if options[:limit]
         end
         @path
       end
