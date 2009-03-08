@@ -1,6 +1,11 @@
 hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase). It works with the most recent version of HBase REST interface.
 
-== INSTALLTION
+h1. Versions
+
+* "hbase-0.20dev version": http://github.com/sishen/hbase-ruby/tree/master
+* "hbase-0.19 version": http://github.com/sishen/hbase-ruby/tree/hbase-0.19
+ 
+h1. INSTALLTION
 
 $gem sources -a http://gems.github.com
 $gem install sishen-hbase-ruby
@@ -14,7 +19,7 @@ To build the gem yourself:
 
 $rake gem
 
-== USAGE
+h1. USAGE
 
 First download the recent version of hbase (svn checkout http://svn.apache.org/repos/asf/hadoop/hbase/trunk hbase), compile it with 'ant', then launch HBase server:
 
@@ -45,21 +50,21 @@ rows = client.get_rows(scanner)
 client.close_scanner(scanner)
 }}}
 
-== Testing
+h1. Testing
 
 First you want to install rspec gem:
 
 {{{
 	sudo gem install rspec
-  }}}
+}}}
 
 Now, you can run the spec by following rake task:
 
 {{{
-	rake examples
-  }}}
+	rake hbase
+}}}
 
-== Copyright
+h1. Copyright
 
 Copyright (c) 2008 Dingding Ye <yedingding@gmail.com>
 Distributed under MIT License

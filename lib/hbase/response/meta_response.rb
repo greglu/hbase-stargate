@@ -20,7 +20,8 @@ module HBase
           entry = doc.elements["tables"]
           tables = []
           entry.elements.each("table") do |table|
-            t = Model::TableDescriptor.new(:name => table.text.strip)
+            name = table.elements["name"].text.strip rescue nil
+            t = Model::TableDescriptor.new(:name => name)
             tables << t
           end
           tables

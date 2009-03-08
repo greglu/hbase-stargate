@@ -73,6 +73,11 @@ module HBase
         end
       end
 
+      def destroy_table(name, columns = nil)
+        disable_table(name)
+        delete_table(name, columns)
+      end
+
       def enable_table(name)
         begin
           request = Request::TableRequest.new(name)

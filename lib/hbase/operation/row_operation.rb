@@ -18,7 +18,6 @@ module HBase
           request = Request::RowRequest.new(table_name, name, timestamp)
           row = Response::RowResponse.new(get(request.show(columns, options))).parse
           row.table_name = table_name
-          row.name = name
           row.timestamp = timestamp
           row
         rescue Net::ProtocolError => e
@@ -34,12 +33,14 @@ module HBase
         begin
           request = Request::RowRequest.new(table_name, name, timestamp)
           data = []
-          if columns.instance_of? Array
-            data = columns
-          elsif columns.instance_of? Hash
-            data = [columns]
-          else
-            raise StandardError, "Only Array or Hash data accepted"
+          if columns
+            if columns.instance_of? Array
+              data = columns
+            elsif columns.instance_of? Hash
+              data = [columns]
+            else
+              raise StandardError, "Only Array or Hash data accepted"
+            end
           end
           xml_data ="<?xml version='1.0' encoding='UTF-8'?><columns>"
           data.each do |d|
@@ -49,7 +50,7 @@ module HBase
           end
           xml_data << "</columns>"
 
-          Response::RowResponse.new(post(request.create, xml_data))
+          post(request.create, xml_data)
         rescue Net::ProtocolError => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"

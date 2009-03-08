@@ -9,11 +9,11 @@ module HBase
         super(path)
       end
 
-      def open(columns, start_row = nil, end_row = nil, timestamp = nil)
+      def open(columns, start_row = nil, stop_row = nil, timestamp = nil)
         search = []
         search << pack_params(columns)
         search << "start_row=#{CGI.escape(start_row)}" if start_row
-        search << "end_row=#{CGI.escape(end_row)}" if end_row
+        search << "stop_row=#{CGI.escape(end_row)}" if stop_row
         search << "timestamp=#{CGI.escape(timestamp)}" if timestamp
 
         @path << "?" << search.join('&')

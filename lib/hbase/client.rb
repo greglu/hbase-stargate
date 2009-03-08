@@ -51,12 +51,13 @@ module HBase
       rescue Errno::ECONNREFUSED
         raise ConnectionNotEstablishedError, "can't connect to #{@url}"
       rescue Timeout::Error => e
+        puts e.backtrace.join("\n")
         raise ConnectionTimeoutError, "execution expired. Maybe query disabled tables"
       end
 
       case response
       when Net::HTTPSuccess
-        response.body.blank? ? response.header : response.body
+        response.body
       else
         response.error!
       end

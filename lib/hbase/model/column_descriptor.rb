@@ -4,7 +4,7 @@ module HBase
       NONE = "NONE"
       RECORD = "RECORD"
       BLOCK = "BLOCK"
-      
+
       CTYPES = [NONE, RECORD, BLOCK]
 
       def to_compression_type(type_string)
