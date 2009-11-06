@@ -13,14 +13,10 @@ module HBase
 
     attr_reader :url, :connection
 
-    def initialize(url = "http://localhost:60010/api", opts = {})
+    def initialize(url = "http://localhost:60050/", opts = {})
       @url = URI.parse(url)
       unless @url.kind_of? URI::HTTP
         raise "invalid http url: #{url}"
-      end
-
-      unless @url.path =~ /^\/api/
-        @url.path += (@url.path[-1] == '/' ? "api" : "/api")
       end
 
       # Not actually opening the connection yet, just setting up the persistent connection.
@@ -29,7 +25,7 @@ module HBase
     end
 
     def get(path)
-      safe_request { @connection.get(@url.path + path) }
+      safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}) }
     end
 
     def post(path, data = nil)

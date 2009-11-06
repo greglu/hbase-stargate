@@ -16,14 +16,15 @@ module HBase
             return []
           end
 
-          doc = REXML::Document.new(raw_data)
-          entry = doc.elements["tables"]
           tables = []
-          entry.elements.each("table") do |table|
-            name = table.elements["name"].text.strip rescue nil
+          doc = JSON.parse(raw_data)
+
+          doc["table"].each do |table|
+            name = table["name"].strip rescue nil
             t = Model::TableDescriptor.new(:name => name)
             tables << t
           end
+
           tables
         else
             puts "method '#{@method}' not supported yet"

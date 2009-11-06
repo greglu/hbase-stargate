@@ -1,4 +1,5 @@
 require 'rexml/document'
+require 'json'
 
 module HBase
   module Response

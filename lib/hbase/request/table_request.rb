@@ -10,7 +10,7 @@ module HBase
       end
 
       def show
-        @path << "/#{name}"
+        @path << "/#{name}/schema"
       end
 
       def regions(start_row = nil, end_row = nil)
@@ -34,10 +34,13 @@ module HBase
         @path << "/#{name}/disable"
       end
 
-      def delete(columns = nil)
-        @path << "/#{name}"
-        @path << "?#{pack_params(columns)}" if columns
-        @path
+      def delete(columns)
+        warn "[DEPRECATION] the use of the 'columns' argument is deprecated. Please use the delete method without any arguments." if columns
+        delete
+      end
+
+      def delete
+        @path << "/#{name}/schema"
       end
     end
   end
