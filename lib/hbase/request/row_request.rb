@@ -7,18 +7,19 @@ module HBase
 
       def initialize(table_name, name, timestamp=nil)
         @table_name, @name, @timestamp = CGI.escape(table_name), CGI.escape(name), timestamp
-        path = "/#{@table_name}/row/#{@name}"
-        path << "/#{@timestamp}" if timestamp
+        path = "/#{@table_name}/#{@name}"
         super(path)
       end
 
       def show(columns = nil, options = { })
         if columns
-          @path << "?#{pack_params(columns)}"
-          @path << "&version=#{options[:version]}" if options[:version]
-          @path << "&offset=#{options[:offset]}" if options[:offset]
-          @path << "&limit=#{options[:limit]}" if options[:limit]
+          @path << "/#{pack_params(columns)}"
         end
+        @path << "/#{@timestamp}" if @timestamp
+
+        @path << "?"
+        @path << "&v=#{options[:version]}" if options[:version]
+
         @path
       end
 
@@ -27,7 +28,8 @@ module HBase
       end
 
       def delete(columns = nil)
-        @path << "?#{pack_params(columns)}" if columns
+        @path << "/#{pack_params(columns)}" if columns
+        @path << "/#{@timestamp}" if @timestamp
         @path
       end
     end

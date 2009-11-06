@@ -20,7 +20,7 @@ module HBase
           raise StandardError, "Only String or Array type allows for columns"
         end
 
-        columns.collect { |column| "column=#{column}" }.join('&')
+        columns.join(',')
       end
     end
   end

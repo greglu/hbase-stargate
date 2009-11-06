@@ -15,8 +15,9 @@ module HBase
 
       def show_row(table_name, name, timestamp = nil, columns = nil, options = { })
         begin
+          options[:version] ||= 1
           request = Request::RowRequest.new(table_name, name, timestamp)
-          row = Response::RowResponse.new(get(request.show(columns, options))).parse
+          row = Response::RowResponse.new(get(request.show(columns, options))).parse.first
           row.table_name = table_name
           row.timestamp = timestamp
           row
