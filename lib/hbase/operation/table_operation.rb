@@ -11,28 +11,31 @@ module HBase
       end
 
       def create_table(name, *args)
-        request = Request::TableRequest.new(nil)
+        request = Request::TableRequest.new(name)
 
         raise StandardError, "Table name must be of type String" unless name.instance_of? String
 
         begin
-          xml_data = "<?xml version='1.0' encoding='UTF-8'?><table><name>#{name}</name><columnfamilies>"
+          xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><TableSchema name='#{name}' IS_META='false' IS_ROOT='false'>"
           for arg in args
             if arg.instance_of? String
-              xml_data << "<columnfamily><name>#{arg}</name></columnfamily>"
+              xml_data << "<ColumnSchema name='#{arg}' />"
             elsif arg.instance_of? Hash
-              xml_data << "<columnfamily>"
+              xml_data << "<ColumnSchema "
+
               arg.each do |k,v|
                 if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
-                  xml_data << "<#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>#{v}</#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>"
+                  xml_data << "#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}='#{v}' "
                 end
               end
-              xml_data << "</columnfamily>"
+
+              xml_data << "/>"
             else
               raise StandardError, "#{arg.class.to_s} of #{arg.to_s} is not of Hash Type"
             end
           end
-          xml_data << "</columnfamilies></table>"
+          xml_data << "</TableSchema>"
+          debugger
           Response::TableResponse.new(post(request.create, xml_data))
         rescue Net::ProtocolError => e
           if e.to_s.include?("TableExistsException")

@@ -19,7 +19,7 @@ module HBase
       end
 
       def create
-        @path << "/"
+        @path << "/#{name}/schema"
       end
 
       def update

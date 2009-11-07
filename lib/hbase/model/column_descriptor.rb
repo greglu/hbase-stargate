@@ -15,14 +15,18 @@ module HBase
     end
 
     class ColumnDescriptor < Record
-      AVAILABLE_OPTS = { :name => "name", :max_versions => "max-versions", :compression => "compression",
-                         :in_memory => "in-memory", :block_cache => "block-cache", :max_cell_size => "max-cell-size",
-                         :ttl => "time-to-live", :bloomfilter => "bloomfilter"}
+      AVAILABLE_OPTS = {  :name => "name", :max_versions => "VERSIONS", :versions => "VERSIONS",
+                          :compression => "COMPRESSION", :in_memory => "IN_MEMORY",
+                          :block_cache => "BLOCKCACHE", :blockcache => "BLOCKCACHE",
+                          :blocksize => "BLOCKSIZE", :length => "LENGTH", :ttl => "TTL",
+                          :bloomfilter => "BLOOMFILTER"}
       attr_accessor :name
       attr_accessor :compression
       attr_accessor :bloomfilter
       attr_accessor :maximum_cell_size
       attr_accessor :max_versions
+
+      attr_accessor :versions
     end
   end
 end
