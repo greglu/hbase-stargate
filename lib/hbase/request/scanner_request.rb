@@ -9,16 +9,16 @@ module HBase
         super(path)
       end
 
-      def open(columns, start_row = nil, stop_row = nil, timestamp = nil)
-
+      def open
+        @path
       end
 
-      def get_rows(scanner_id, limit = 1)
-        @path << "/#{scanner_id}"
+      def get_rows(scanner)
+        @path = URI.parse(scanner.scanner_url).path
       end
 
-      def close(scanner_id)
-        @path << "/#{scanner_id}"
+      def close(scanner)
+        @path = URI.parse(scanner.scanner_url).path
       end
     end
   end

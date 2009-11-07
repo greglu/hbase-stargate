@@ -1,33 +1,35 @@
 module HBase
   module Response
     class ScannerResponse < BasicResponse
+      attr_reader :method
+
+      def initialize(raw_data, method)
+        @method = method
+        super(raw_data)
+      end
+
       def parse_content(raw_data)
-        puts raw_data
-
-        doc = REXML::Document.new(raw_data)
-
-        if doc.elements["/scanner"] && doc.elements["/scanner"].has_elements?
-          scanner = doc.elements["scanner"]
-          id = scanner.elements["id"].text.strip.to_i
-          Model::Scanner.new(:scanner_id => id)
-
-        elsif doc.elements["rows"] && doc.elements["rows"].has_elements?
-          doc = doc.elements["rows"]
-          rows = []
-          doc.elements.each("row") do |row|
-            row_name = row.elements["name"].text.strip.unpack("m").first
-            columns = []
-            row.elements.each("column") do |col|
-              name = col.elements["name"].text.strip.unpack("m").first
-              value = col.elements["value"].text.strip.unpack("m").first rescue nil
-              timestamp = col.elements["timestamp"].text.strip.to_i
-              columns << Model::Column.new(:name => name,
-                                           :value => value,
-                                           :timestamp => timestamp)
-            end
-            rows << Model::Row.new(:name => row_name, :columns => columns)
+        case @method
+        when :open_scanner
+          case raw_data
+          when Net::HTTPCreated
+            HBase::Model::Scanner.new(:scanner_url => raw_data["Location"])
+          else
+            raise StandardError, "Unable to open scanner. Received the following message: #{raw_data.message}"
           end
-          rows
+        when :get_rows
+          # Dispatch it to RowResponse, since that method is made
+          # to deal with rows already.
+          RowResponse.new(raw_data).parse
+        when :close_scanner
+          case raw_data
+          when Net::HTTPOK
+            return true
+          else
+            raise StandardError, "Unable to close scanner. Received the following message: #{raw_data.message}"
+          end
+        else
+          puts "method '#{@method}' not supported yet"
         end
       end
     end

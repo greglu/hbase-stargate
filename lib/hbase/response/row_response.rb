@@ -16,12 +16,12 @@ module HBase
             value = col["$"].strip.unpack('m').first rescue nil
             timestamp = col["timestamp"].to_i
 
-            columns << Model::Column.new( :name => name,
-                                          :value => value,
-                                          :timestamp => timestamp)
+            columns << HBase::Model::Column.new(  :name => name,
+                                                  :value => value,
+                                                  :timestamp => timestamp)
           end
 
-          model_rows << Model::Row.new(:name => rname, :total_count => count, :columns => columns)
+          model_rows << HBase::Model::Row.new(:name => rname, :total_count => count, :columns => columns)
         end
 
         model_rows

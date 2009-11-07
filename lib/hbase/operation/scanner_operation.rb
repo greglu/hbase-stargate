@@ -1,10 +1,41 @@
 module HBase
   module Operation
     module ScannerOperation
-      def open_scanner(table_name, columns, start_row = nil, stop_row = nil, timestamp = nil)
+      # Trying to maintain some API stability for now
+      def open_scanner(table_name, columns, start_row, stop_row = nil, timestamp = nil)
+        warn "[DEPRECATION] This method is deprecated. Use #open_scanner(table_name, options) instead."
+
+        open_scanner(table_name, {:columns => columns, :start_row => start_row, :stop_row => stop_row, :timestamp => timestamp})
+      end
+
+      def open_scanner(table_name, options = {})
+        raise ArgumentError, "options should be given as a Hash" unless options.instance_of? Hash
+        columns = options.delete(:columns)
+
         begin
           request = Request::ScannerRequest.new(table_name)
-          scanner = Response::ScannerResponse.new(post(request.open(columns, start_row, stop_row, timestamp))).parse
+
+          xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><Scanner "
+          options.each do |key,value|
+            if Model::Scanner::AVAILABLE_OPTS.include? key
+              xml_data << "#{Model::Scanner::AVAILABLE_OPTS[key]}='"
+              xml_data << ( (key == :batch) ? value.to_s : [value.to_s].flatten.pack('m') )
+              xml_data << "' "
+            else
+              warn "[open_scanner] Received invalid option key :#{key}"
+            end
+          end
+          if columns
+            xml_data << ">"
+            [columns].flatten.each do |col|
+              xml_data << "<column>#{[col].flatten.pack('m')}</column>"
+            end
+            xml_data << "</Scanner>"
+          else
+            xml_data << "/>"
+          end
+
+          scanner = Response::ScannerResponse.new(post_response(request.open, xml_data), :open_scanner).parse
           scanner.table_name = table_name
           scanner
         rescue Net::ProtocolError => e
@@ -16,10 +47,11 @@ module HBase
         end
       end
 
-      def get_rows(scanner, limit = 1)
+      def get_rows(scanner, limit = nil)
+        warn "[DEPRECATION] Use of 'limit' here is deprecated. Instead, define the batch size when creating the scanner." if limit
         begin
           request = Request::ScannerRequest.new(scanner.table_name)
-          rows = Response::ScannerResponse.new(post(request.get_rows(scanner.scanner_id, limit))).parse
+          rows = Response::ScannerResponse.new(get(request.get_rows(scanner)), :get_rows).parse
           rows.each do |row|
             row.table_name = scanner.table_name
           end
@@ -36,7 +68,7 @@ module HBase
       def close_scanner(scanner)
         begin
           request = Request::ScannerRequest.new(scanner.table_name)
-          Response::ScannerResponse.new(delete(request.close(scanner.scanner_id)))
+          Response::ScannerResponse.new(delete_response(request.close(scanner)), :close_scanner).parse
         rescue StandardError => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table #{table_name} Not Found!"
