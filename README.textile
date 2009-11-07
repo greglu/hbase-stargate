@@ -12,33 +12,32 @@ h2. Versions
 
 
 h2. Installation
+
+<pre>
 <code>$ gem install hbase-ruby -s http://gemcutter.org</code>
+</pre>
 
 To work with this gem in your Rails application, add this to the environment.rb file:
+<pre>
 <code>config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"</code>
+</pre>
 
 To build the gem yourself:
+<pre>
 <code>$ rake gem</code>
+</pre>
 
 
 h2. Getting Started
 
  # Download and unpack the most recent release of HBase from http://hadoop.apache.org/hbase/releases.html#Download
-
  # Edit <hbase-dir>/conf/hbase-env.sh and uncomment/modify the following line to correspond to your Java home path:
-
 export JAVA_HOME=/usr/lib/jvm/java-6-sun
-
  # Copy <hbase-dir>/contrib/stargate/hbase-<version>-stargate.jar into <hbase-dir>/lib
-
  # Copy all the files in the <hbase-dir>/contrib/stargate/lib folder into <hbase-dir>/lib
-
  # Start up HBase:
-
 $ <hbase-dir>/bin/start-hbase.sh
-
  # Start up Stargate (append "-p 1234" at the end if you want to change the port):
-
 $ <hbase-dir>/bin/hbase org.apache.hadoop.hbase.stargate.Main
 
 
