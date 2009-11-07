@@ -1,46 +1,66 @@
-hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase). It works with the most recent version of HBase REST interface.
+hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase) that works with the HBase Stargate interface.
+
+This was originally created by Dingding Ye <yedingding@gmail.com> at http://github.com/sishen/hbase-ruby
+
 
 h2. Versions
 
+* **"hbase-0.20.1 version" - rewritten for Stargate**: http://github.com/greglu/hbase-ruby/tree/master
 * **"hbase-0.20dev version"**: http://github.com/sishen/hbase-ruby/tree/master
 * **"hbase-0.19 version"**: http://github.com/sishen/hbase-ruby/tree/hbase-0.19
- 
-h2. INSTALLTION
 
+
+h2. INSTALLATION
 <pre><code>
-$gem sources -a http://gems.github.com
-$gem install sishen-hbase-ruby
+$ gem install hbase-ruby -s http://gemcutter.org
 </code></pre>
 
-For those who wants to use hbase in their rails application, can add this line to the environment.rb:
-
-config.gem 'sishen-hbase-ruby', :lib => "hbase", :source => "http://gems.github.com"
-
+To work with this gem in your Rails application, add this to the environment.rb file:
+<pre><code>
+config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"
+</code></pre>
 
 To build the gem yourself:
+<pre><code>
+$ rake gem
+</code></pre>
 
-$rake gem
 
-h2. USAGE
+h2. Getting Started
 
-First download the recent version of hbase (svn checkout http://svn.apache.org/repos/asf/hadoop/hbase/trunk hbase), compile it with 'ant', then launch HBase server:
+# Download and unpack the most recent release of HBase from http://hadoop.apache.org/hbase/releases.html#Download
 
-$bin/start-hbase.sh
+# Edit <hbase-dir>/conf/hbase-env.sh and uncomment/modify the following line to correspond to your Java home path:
 
-Here is the example:
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+
+# Copy <hbase-dir>/contrib/stargate/hbase-<version>-stargate.jar into <hbase-dir>/lib
+
+# Copy all the files in the <hbase-dir>/contrib/stargate/lib folder into <hbase-dir>/lib
+
+# Start up HBase:
+
+$ <hbase-dir>/bin/start-hbase.sh
+
+# Start up Stargate (append "-p 1234" at the end if you want to change the port):
+
+$ <hbase-dir>/bin/hbase org.apache.hadoop.hbase.stargate.Main
+
+
+h2. Usage
+
+Here are some examples:
 
 <pre><code>
 require 'hbase'
 
-client = HBase::Client.new("http://localhost:60010/api") # this url is the default.
+client = HBase::Client.new("http://localhost:8080") # this url is the default for stargate.
 
 # Table Operation
 tables = client.list_tables                              # list available tables
 table = client.create_table('users', 'habbit')           # create a table whose column_family is habbit
 table = client.show_table('users')                       # show the meta info of table users 
-client.disable_table('users')                            # disable table users
-client.enable_table('users')                             # enable table users
-client.delete_table('users')                             # delete table users
+client.delete_table('users')                             # delete 'users' table
 
 # Row Operation
 row = client.show_row('users', 'sishen')                 # show the data of row 'sishen' in table 'users'
@@ -48,20 +68,22 @@ row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:foo
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
 
 # Scanner Operation
-scanner = client.open_scanner('users', 'habbit:')
+scanner = client.open_scanner('users', {:start_row => "row2", :batch => 5, :columns => ["habbit:"]}) # See more options from HBase::Model::Scanner.AVAILABLE_OPTS
 rows = client.get_rows(scanner)
 client.close_scanner(scanner)
 </code></pre>
 
+
 h2. Testing
 
-First you want to install rspec gem:
+Run the specs with the following rake task:
 
-sudo gem install rspec
+$ rake spec
 
-Now, you can run the spec by following rake task:
+or pass it the URL to the HBase Stargate server as an argument:
 
-rake hbase
+$ rake spec HBASE_URL=http://localhost:8080
+
 
 h2. Copyright
 

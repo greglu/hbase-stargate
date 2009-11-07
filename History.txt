@@ -1,3 +1,7 @@
+v0.6 Nov 7, 2009
+* Reimplemented entirely with HBase Stargate (old REST API was obsoleted by this)
+* Since Stargate can return JSON, parsing is now done with JSON instead of XML
+* API change to open_scanner. Now expects open_scanner(table_name, options) with available options listed under HBase::Model::Scanner.AVAILABLE_OPTS 
 
 v0.4 Oct 12, 2008
 * support 'scanner'
