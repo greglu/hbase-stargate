@@ -18,14 +18,10 @@ h2. Installation
 </pre>
 
 To work with this gem in your Rails application, add this to the environment.rb file:
-<pre>
-<code>config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"</code>
-</pre>
+<pre><code>config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"</code></pre>
 
 To build the gem yourself:
-<pre>
-<code>$ rake gem</code>
-</pre>
+<pre><code>$ rake gem</code></pre>
 
 
 h2. Getting Started
