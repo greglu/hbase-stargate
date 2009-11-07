@@ -12,18 +12,15 @@ module HBase
       end
 
       def show(columns = nil, options = { })
-        if columns
-          @path << "/#{pack_params(columns)}"
-        end
+        @path << "/#{pack_params(columns)}" if columns
         @path << "/#{@timestamp}" if @timestamp
-
-        @path << "?"
-        @path << "&v=#{options[:version]}" if options[:version]
-
+        @path << "?v=#{options[:version]}" if options[:version]
         @path
       end
 
-      def create
+      def create(columns = nil)
+        @path << "/#{pack_params(columns)}" if columns
+        @path << "/#{@timestamp}" if @timestamp
         @path
       end
 

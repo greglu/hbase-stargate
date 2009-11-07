@@ -43,15 +43,20 @@ module HBase
               raise StandardError, "Only Array or Hash data accepted"
             end
           end
-          xml_data ="<?xml version='1.0' encoding='UTF-8'?><columns>"
+
+          xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><CellSet>"
+          xml_data << "<Row key='#{[name].pack('m') rescue ''}'>"
           data.each do |d|
             escape_name = d[:name].gsub(/[&<>'"]/) { |match| Converter[match] }
-            xml_data << "<column><name>#{escape_name}</name>"
-            xml_data << "<value>#{[d[:value]].pack("m") rescue ''}</value></column>"
+            xml_data << "<Cell "
+            xml_data << "timestamp='#{timestamp}'" if timestamp
+            xml_data << "column='#{[escape_name].pack('m') rescue ''}'>"
+            xml_data << "#{[d[:value]].pack("m") rescue ''}"
+            xml_data << "</Cell>"
           end
-          xml_data << "</columns>"
+          xml_data << "</Row></CellSet>"
 
-          post(request.create, xml_data)
+          post(request.create(data.map{|col| col[:name]}), xml_data)
         rescue Net::ProtocolError => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"

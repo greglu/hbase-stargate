@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), "..", "..", "spec_helper")
 
 describe HBase::Operation::TableOperation do
   before :all do
-    url = ENV["HBASE_URL"].nil? ? "http://localhost:60050/" : ENV["HBASE_URL"]
+    url = ENV["HBASE_URL"].nil? ? "http://localhost:60050" : ENV["HBASE_URL"]
     @client = HBase::Client.new(url)
   end
 
@@ -24,6 +24,7 @@ describe HBase::Operation::TableOperation do
     table.should.is_a? HBase::Model::TableDescriptor
     table.name.should == "test-hbase-ruby"
     table.column_families.should respond_to(:each)
+    table.column_families.map(&:name).should include("habbit")
     table.column_families.each do |cf|
       cf.should.is_a? HBase::Model::ColumnDescriptor
     end

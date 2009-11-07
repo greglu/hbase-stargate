@@ -35,7 +35,6 @@ module HBase
             end
           end
           xml_data << "</TableSchema>"
-          debugger
           Response::TableResponse.new(post(request.create, xml_data))
         rescue Net::ProtocolError => e
           if e.to_s.include?("TableExistsException")
@@ -81,58 +80,16 @@ module HBase
       end
 
       def enable_table(name)
-        begin
-          request = Request::TableRequest.new(name)
-          Response::TableResponse.new(post(request.enable))
-        rescue Net::ProtocolError => e
-          if e.to_s.include?("TableNotFoundException")
-            raise TableNotFoundError, "Table '#{name}' not exists"
-          else
-            raise TableFailEnableError, "Table '#{name}' can not be enabled"
-          end
-        end
+        warn "[DEPRECATION] Explicitly enabling tables isn't required anymore. HBase Stargate will enable/disable as needed."
       end
 
       def disable_table(name)
-        begin
-          request = Request::TableRequest.new(name)
-          Response::TableResponse.new(post(request.disable))
-        rescue Net::ProtocolError => e
-          if e.to_s.include?("TableNotFoundException")
-            raise TableNotFoundError, "Table '#{name}' not exists"
-          else
-            raise TableFailDisableError, "Table '#{name}' can not be disabled"
-          end
-        end
+        warn "[DEPRECATION] Explicitly disabling tables isn't required anymore. HBase Stargate will enable/disable as needed."
       end
 
       def table_regions(name, start_row = nil, end_row = nil)
       end
 
-      private
-      def construct_xml_stream(name, *args)
-        xml_data = "<?xml version='1.0' encoding='UTF-8'?><table><name>#{name}</name><columnfamilies>"
-        for arg in args
-          if arg.instance_of? String
-            xml_data << "<columnfamily><name>#{arg}</name></columnfamily>"
-          elsif arg.instance_of? Hash
-            xml_data << "<columnfamily>"
-            arg.each do |k,v|
-              if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
-                xml_data << "<#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>#{v}</#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}>"
-              else
-                xml_data << "<metadata><name>#{k}</name><value>#{v}</value></metadata>"
-              end
-            end
-            xml_data << "</columnfamily>"
-          else
-            raise StandardError, "#{arg.class.to_s} of #{arg.to_s} is not of Hash Type"
-          end
-        end
-        xml_data << "</columnfamilies></table>"
-
-        xml_data
-      end
     end
   end
 end

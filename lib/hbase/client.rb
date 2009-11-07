@@ -18,7 +18,7 @@ module HBase
       unless @url.kind_of? URI::HTTP
         raise "invalid http url: #{url}"
       end
-debugger
+
       # Not actually opening the connection yet, just setting up the persistent connection.
       @connection = Net::HTTP.new(@url.host, @url.port)
       @connection.read_timeout = opts[:timeout] if opts[:timeout]

@@ -11,7 +11,7 @@ module HBase
       def parse_content(raw_data)
         case @method
         when :list_tables
-          if raw_data.blank?
+          if raw_data.blank? || raw_data == "null" # "null" from json
             puts "There are no available tables in the HBase"
             return []
           end

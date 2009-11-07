@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), "..", "..", "spec_helper")
 describe HBase::Operation::MetaOperation do
 
   before do
-    url = ENV["HBASE_URL"].nil? ? "http://localhost:60050/" : ENV["HBASE_URL"]
+    url = ENV["HBASE_URL"].nil? ? "http://localhost:60050" : ENV["HBASE_URL"]
     @client = HBase::Client.new(url)
   end
 

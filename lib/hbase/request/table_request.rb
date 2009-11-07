@@ -34,12 +34,8 @@ module HBase
         @path << "/#{name}/disable"
       end
 
-      def delete(columns)
+      def delete(columns = nil)
         warn "[DEPRECATION] the use of the 'columns' argument is deprecated. Please use the delete method without any arguments." if columns
-        delete
-      end
-
-      def delete
         @path << "/#{name}/schema"
       end
     end
