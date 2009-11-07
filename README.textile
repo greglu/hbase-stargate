@@ -1,4 +1,5 @@
 hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase) that works with the HBase Stargate interface.
+Stargate is the RESTful web service front end for HBase that can serve up a number of formats including XML, JSON, and protobufs.
 
 This was originally created by Dingding Ye <yedingding@gmail.com> at http://github.com/sishen/hbase-ruby
 
@@ -10,39 +11,33 @@ h2. Versions
 * **"hbase-0.19 version"**: http://github.com/sishen/hbase-ruby/tree/hbase-0.19
 
 
-h2. INSTALLATION
-<pre><code>
-$ gem install hbase-ruby -s http://gemcutter.org
-</code></pre>
+h2. Installation
+<code>$ gem install hbase-ruby -s http://gemcutter.org</code>
 
 To work with this gem in your Rails application, add this to the environment.rb file:
-<pre><code>
-config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"
-</code></pre>
+<code>config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"</code>
 
 To build the gem yourself:
-<pre><code>
-$ rake gem
-</code></pre>
+<code>$ rake gem</code>
 
 
 h2. Getting Started
 
-# Download and unpack the most recent release of HBase from http://hadoop.apache.org/hbase/releases.html#Download
+ # Download and unpack the most recent release of HBase from http://hadoop.apache.org/hbase/releases.html#Download
 
-# Edit <hbase-dir>/conf/hbase-env.sh and uncomment/modify the following line to correspond to your Java home path:
+ # Edit <hbase-dir>/conf/hbase-env.sh and uncomment/modify the following line to correspond to your Java home path:
 
 export JAVA_HOME=/usr/lib/jvm/java-6-sun
 
-# Copy <hbase-dir>/contrib/stargate/hbase-<version>-stargate.jar into <hbase-dir>/lib
+ # Copy <hbase-dir>/contrib/stargate/hbase-<version>-stargate.jar into <hbase-dir>/lib
 
-# Copy all the files in the <hbase-dir>/contrib/stargate/lib folder into <hbase-dir>/lib
+ # Copy all the files in the <hbase-dir>/contrib/stargate/lib folder into <hbase-dir>/lib
 
-# Start up HBase:
+ # Start up HBase:
 
 $ <hbase-dir>/bin/start-hbase.sh
 
-# Start up Stargate (append "-p 1234" at the end if you want to change the port):
+ # Start up Stargate (append "-p 1234" at the end if you want to change the port):
 
 $ <hbase-dir>/bin/hbase org.apache.hadoop.hbase.stargate.Main
 
