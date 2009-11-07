@@ -3,7 +3,7 @@ module HBase
     class Scanner < Record
       AVAILABLE_OPTS = {  :start_row => "startRow", :end_row => "endRow",
                           :start_time => "startTime", :end_time => "endTime",
-                          :batch => "batch" }
+                          :batch => "batch", :limit => "batch" }
 
       attr_accessor :table_name
       attr_accessor :scanner_id
