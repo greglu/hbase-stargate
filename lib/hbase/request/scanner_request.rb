@@ -10,17 +10,11 @@ module HBase
       end
 
       def open(columns, start_row = nil, stop_row = nil, timestamp = nil)
-        search = []
-        search << pack_params(columns)
-        search << "start_row=#{CGI.escape(start_row)}" if start_row
-        search << "stop_row=#{CGI.escape(end_row)}" if stop_row
-        search << "timestamp=#{CGI.escape(timestamp)}" if timestamp
 
-        @path << "?" << search.join('&')
       end
 
       def get_rows(scanner_id, limit = 1)
-        @path << "/#{scanner_id}?limit=#{limit}"
+        @path << "/#{scanner_id}"
       end
 
       def close(scanner_id)

@@ -13,7 +13,7 @@ module HBase
 
     attr_reader :url, :connection
 
-    def initialize(url = "http://localhost:60050/", opts = {})
+    def initialize(url = "http://localhost:8080", opts = {})
       @url = URI.parse(url)
       unless @url.kind_of? URI::HTTP
         raise "invalid http url: #{url}"
