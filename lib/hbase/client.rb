@@ -28,6 +28,11 @@ module HBase
       safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}) }
     end
 
+    # Needed for scanner functionality
+    def get_response(path)
+      safe_response { @connection.get(@url.path + path, {"Accept" => "application/json"}) }
+    end
+
     def post(path, data = nil)
       safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
     end

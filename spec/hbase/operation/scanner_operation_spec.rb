@@ -12,6 +12,12 @@ describe HBase::Operation::ScannerOperation do
     @client.create_row('test-hbase-ruby', 'row3', nil, {:name => 'col1:', :value => "row3-col1"})
   end
 
+  it "should throw TableNotFoundError if a scanner is requested for an non-existant table" do
+    lambda {
+      scanner = @client.open_scanner("test-dsg-ruby")
+    }.should raise_error
+  end
+
   it "should open a scanner and close it successfully" do
     scanner = @client.open_scanner("test-hbase-ruby")
     scanner.should.is_a? HBase::Model::Scanner
@@ -25,17 +31,33 @@ describe HBase::Operation::ScannerOperation do
     }.should_not raise_error
   end
 
-  it "should scan the whole table when given no options" do
+  it "should scan the whole table when given no options and no limit" do
     scanner = @client.open_scanner("test-hbase-ruby")
 
     rows = @client.get_rows(scanner)
-    rows.size.should == 1
-    rows.first.name.should == "row1"
+    rows.size.should == 3
+    rows.each do |row|
+      row.should be_an_instance_of HBase::Model::Row
+      ["row1", "row2", "row3"].should include(row.name)
+    end
 
     @client.close_scanner(scanner).should be_true
   end
 
-  it "should scan the whole table when given a batch size larger than the number of rows" do
+  it "should scan the whole table but limit the results when given a limit" do
+    scanner = @client.open_scanner("test-hbase-ruby")
+
+    rows = @client.get_rows(scanner, 2)
+    rows.size.should == 2
+    rows.each do |row|
+      row.should be_an_instance_of HBase::Model::Row
+      ["row1", "row2"].should include(row.name)
+    end
+
+    @client.close_scanner(scanner).should be_true
+  end
+
+  it "should return all rows when given a batch size larger than the number of rows" do
     scanner = @client.open_scanner("test-hbase-ruby", {:batch => 5})
 
     rows = @client.get_rows(scanner)

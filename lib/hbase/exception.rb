@@ -17,3 +17,5 @@ class HBase::TableFailDisableError < HBase::Exception; end
 class HBase::TableFailEnableError < HBase::Exception; end
 
 class HBase::RowNotFoundError < HBase::Exception; end
+
+class HBase::ScannerError < HBase::Exception; end

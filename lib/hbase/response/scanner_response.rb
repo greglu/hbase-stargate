@@ -15,7 +15,11 @@ module HBase
           when Net::HTTPCreated
             HBase::Model::Scanner.new(:scanner_url => raw_data["Location"])
           else
-            raise StandardError, "Unable to open scanner. Received the following message: #{raw_data.message}"
+            if raw_data.message.include?("TableNotFoundException")
+              raise TableNotFoundError, "Table #{table_name} Not Found!"
+            else
+              raise StandardError, "Unable to open scanner. Received the following message: #{raw_data.message}"
+            end
           end
         when :get_rows
           # Dispatch it to RowResponse, since that method is made
