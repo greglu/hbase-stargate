@@ -1,3 +1,6 @@
+v1.1.2 Nov 8, 2009
+ * A bug with the timestamps in create_row() was fixed. Also updated specs.
+
 v1.1.1 Nov 7, 2009
 * Improved the scanner functionality. Decided it was worth a version bump and release.
 
