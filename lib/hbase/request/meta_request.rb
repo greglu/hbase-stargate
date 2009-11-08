@@ -12,6 +12,14 @@ module HBase
       def create_table
         @path << "/tables"
       end
+
+      def version
+        @path << "/version"
+      end
+
+      def cluster_version
+        @path << "/version/cluster"
+      end
     end
   end
 end

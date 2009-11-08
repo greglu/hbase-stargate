@@ -24,35 +24,35 @@ module HBase
       @connection.read_timeout = opts[:timeout] if opts[:timeout]
     end
 
-    def get(path)
-      safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}) }
+    def get(path, options = {})
+      safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
 
     # Needed for scanner functionality
-    def get_response(path)
-      safe_response { @connection.get(@url.path + path, {"Accept" => "application/json"}) }
+    def get_response(path, options = {})
+      safe_response { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
 
-    def post(path, data = nil)
-      safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
-    end
-
-    # Needed for scanner functionality
-    def post_response(path, data = nil)
-      safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
-    end
-
-    def delete(path)
-      safe_request { @connection.delete(@url.path + path) }
+    def post(path, data = nil, options = {})
+      safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
     # Needed for scanner functionality
-    def delete_response(path)
-      safe_response { @connection.delete(@url.path + path) }
+    def post_response(path, data = nil, options = {})
+      safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
-    def put(path, data = nil)
-      safe_request { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}) }
+    def delete(path, options = {})
+      safe_request { @connection.delete(@url.path + path, options) }
+    end
+
+    # Needed for scanner functionality
+    def delete_response(path, options = {})
+      safe_response { @connection.delete(@url.path + path, options) }
+    end
+
+    def put(path, data = nil, options = {})
+      safe_request { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
     private
