@@ -28,7 +28,6 @@ module HBase
       safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
 
-    # Needed for scanner functionality
     def get_response(path, options = {})
       safe_response { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
@@ -37,7 +36,6 @@ module HBase
       safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
-    # Needed for scanner functionality
     def post_response(path, data = nil, options = {})
       safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
@@ -46,13 +44,16 @@ module HBase
       safe_request { @connection.delete(@url.path + path, options) }
     end
 
-    # Needed for scanner functionality
     def delete_response(path, options = {})
       safe_response { @connection.delete(@url.path + path, options) }
     end
 
     def put(path, data = nil, options = {})
       safe_request { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
+    end
+
+    def put_response(path, data = nil, options = {})
+      safe_response { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
     private

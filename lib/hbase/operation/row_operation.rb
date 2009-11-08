@@ -16,15 +16,17 @@ module HBase
       def show_row(table_name, name, timestamp = nil, columns = nil, options = { })
         begin
           options[:version] ||= 1
+
           request = Request::RowRequest.new(table_name, name, timestamp)
-          row = Response::RowResponse.new(get(request.show(columns, options))).parse.first
+          row = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse.first
           row.table_name = table_name
           row.timestamp = timestamp
           row
         rescue Net::ProtocolError => e
+          # TODO: Use better handling instead of this.
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
-          elsif e.to_s.include?("Row")
+          elsif e.to_s.include?("404")
             raise RowNotFoundError, "Row '#{name}' Not Found"
           end
         end
@@ -49,19 +51,21 @@ module HBase
           data.each do |d|
             escape_name = d[:name].gsub(/[&<>'"]/) { |match| Converter[match] }
             xml_data << "<Cell "
-            xml_data << "timestamp='#{timestamp}'" if timestamp
+            xml_data << "timestamp='#{timestamp}' " if timestamp
             xml_data << "column='#{[escape_name].pack('m') rescue ''}'>"
             xml_data << "#{[d[:value]].pack("m") rescue ''}"
             xml_data << "</Cell>"
           end
           xml_data << "</Row></CellSet>"
 
-          post(request.create(data.map{|col| col[:name]}), xml_data)
+          Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
         rescue Net::ProtocolError => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
           elsif e.to_s.include?("Row")
             raise RowNotFoundError, "Row '#{name}' Not Found"
+          else
+            raise StandardError, "Error encountered while trying to create row: #{e.message}"
           end
         end
       end
@@ -69,7 +73,7 @@ module HBase
       def delete_row(table_name, name, timestamp = nil, columns = nil)
         begin
           request = Request::RowRequest.new(table_name, name, timestamp)
-          Response::RowResponse.new(delete(request.delete(columns)))
+          Response::RowResponse.new(delete_response(request.delete(columns)), :delete_row).parse
         rescue Net::ProtocolError => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"

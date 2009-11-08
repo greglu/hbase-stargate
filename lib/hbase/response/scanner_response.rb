@@ -24,7 +24,7 @@ module HBase
         when :get_rows
           # Dispatch it to RowResponse, since that method is made
           # to deal with rows already.
-          RowResponse.new(raw_data).parse
+          RowResponse.new(raw_data, :show_row).parse
         when :close_scanner
           case raw_data
           when Net::HTTPOK

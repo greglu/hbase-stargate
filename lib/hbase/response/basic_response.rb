@@ -11,6 +11,15 @@ module HBase
       def parse
         parse_content @raw_data
       end
+
+      def verify_success(response)
+        case response
+        when Net::HTTPSuccess
+          true
+        else
+          false
+        end
+      end
     end
   end
 end
