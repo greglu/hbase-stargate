@@ -5,7 +5,7 @@ begin
 
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "hbase-ruby"
-    gemspec.authors = ['Ye Dingding', 'Greg Lu']
+    gemspec.authors = ['Ye Dingding', 'Openplaces']
     gemspec.email = 'greg.lu@gmail.com'
     gemspec.homepage = "http://github.com/greglu/hbase-ruby"
     gemspec.summary = "A pure ruby client for HBase using the Stargate interface."

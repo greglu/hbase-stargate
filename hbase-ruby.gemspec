@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Ye Dingding", "Greg Lu"]
+  s.authors = ["Ye Dingding", "Openplaces"]
   s.date = %q{2009-11-07}
   s.description = %q{A pure ruby client used to interact with HBase through its Stargate interface which serves up XML, JSON, protobuf, and more.}
   s.email = %q{greg.lu@gmail.com}
