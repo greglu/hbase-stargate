@@ -12,20 +12,20 @@ module HBase
       end
 
       def show(columns = nil, options = { })
-        @path << "/#{pack_params(columns)}" if columns
+        @path << (columns ? "/#{pack_params(columns)}" : "/")
         @path << "/#{@timestamp}" if @timestamp
         @path << "?v=#{options[:version]}" if options[:version]
         @path
       end
 
       def create(columns = nil)
-        @path << "/#{pack_params(columns)}" if columns
+        @path << (columns ? "/#{pack_params(columns)}" : "/")
         @path << "/#{@timestamp}" if @timestamp
         @path
       end
 
       def delete(columns = nil)
-        @path << "/#{pack_params(columns)}" if columns
+        @path << (columns ? "/#{pack_params(columns)}" : "/")
         @path << "/#{@timestamp}" if @timestamp
         @path
       end

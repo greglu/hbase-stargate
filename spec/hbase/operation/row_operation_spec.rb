@@ -44,13 +44,28 @@ describe HBase::Operation::RowOperation do
     end
   end
 
-  it "should delete the rows 'row1'" do
+  it "should delete rows when timestamps are defined" do
+    row1 = @client.show_row("test-hbase-ruby", "row1")
+    timestamp = row1.columns.map(&:timestamp).uniq.first
+
     lambda {
-      row1 = @client.delete_row('test-hbase-ruby', 'row1').should be_true
+      @client.delete_row('test-hbase-ruby', 'row1', timestamp).should be_true
     }.should_not raise_error
 
     lambda {
-      row_verify = @client.show_row('test-hbase-ruby', 'row1')
+      @client.show_row('test-hbase-ruby', 'row1')
+    }.should raise_error
+  end
+
+  it "should delete rows without a timestamp provided" do
+    row2 = @client.show_row("test-hbase-ruby", "row2")
+
+    lambda {
+      @client.delete_row('test-hbase-ruby', 'row2').should be_true
+    }.should_not raise_error
+
+    lambda {
+      @client.show_row('test-hbase-ruby', 'row2')
     }.should raise_error
   end
 
