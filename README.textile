@@ -44,7 +44,10 @@ Here are some examples:
 <pre><code>
 require 'hbase'
 
-client = HBase::Client.new("http://localhost:8080") # this url is the default for stargate.
+# Direct connection
+# client = HBase::Client.new("http://localhost:8080") # this url is the default for stargate.
+# Connection through a proxy
+client = HBase::Client.new("http://localhost:8080", { :proxy => "10.2.3.4:8080" }) 
 
 # Table Operation
 tables = client.list_tables                              # list available tables
