@@ -20,7 +20,7 @@ module HBase
       end
 
       # Not actually opening the connection yet, just setting up the persistent connection.
-      if opts[:proxy] then
+      if opts[:proxy]
         proxy_address, proxy_port = opts[:proxy].split(':')
         @connection = Net::HTTP.Proxy(proxy_address, proxy_port).new(@url.host, @url.port)
       else
