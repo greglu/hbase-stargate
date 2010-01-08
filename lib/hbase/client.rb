@@ -1,8 +1,8 @@
 require 'net/http'
-require 'hbase/operation/meta_operation'
-require 'hbase/operation/table_operation'
-require 'hbase/operation/row_operation'
-require 'hbase/operation/scanner_operation'
+require File.dirname(__FILE__) + '/operation/meta_operation'
+require File.dirname(__FILE__) + '/operation/table_operation'
+require File.dirname(__FILE__) + '/operation/row_operation'
+require File.dirname(__FILE__) + '/operation/scanner_operation'
 
 module HBase
   class Client

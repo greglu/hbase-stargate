@@ -4,7 +4,7 @@ describe HBase::Model::Row do
 
   it "should be have such attributes" do
     obj = HBase::Model::Row.new({})
-    %w{name table_name timestamp columns}.each do |method|
+    %w{name table_name columns}.each do |method|
       obj.should respond_to(method)
     end
   end

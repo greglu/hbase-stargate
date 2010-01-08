@@ -2,11 +2,6 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 describe HBase::Model::Record do
 
-  # Stub
-  it "should be true" do
-    true.should == true
-  end
-
   describe "Init" do
 
     it "should be successfuly when has the such instance variable" do

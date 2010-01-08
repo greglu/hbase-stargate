@@ -9,7 +9,7 @@ module HBase
         table["ColumnSchema"].each do |columnfamily|
           colname = columnfamily["name"].strip
           compression = columnfamily["COMPRESSION"].strip
-          bloomfilter = columnfamily["BLOOMFILTER"].strip.to_b
+          bloomfilter = (columnfamily["BLOOMFILTER"].strip =~ /^true$/i ? true : false)
           max_versions = columnfamily["VERSIONS"].strip.to_i
 
           column_descriptor = Model::ColumnDescriptor.new(:name => colname,

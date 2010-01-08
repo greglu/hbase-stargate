@@ -20,7 +20,6 @@ module HBase
           request = Request::RowRequest.new(table_name, name, timestamp)
           row = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse.first
           row.table_name = table_name
-          row.timestamp = timestamp
           row
         rescue Net::ProtocolError => e
           # TODO: Use better handling instead of this.

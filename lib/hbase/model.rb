@@ -11,9 +11,9 @@ module HBase
   end
 end
 
-require 'hbase/model/column'
-require 'hbase/model/column_descriptor'
-require 'hbase/model/region_descriptor'
-require 'hbase/model/row'
-require 'hbase/model/table_descriptor'
-require 'hbase/model/scanner'
+require File.dirname(__FILE__) + '/model/column'
+require File.dirname(__FILE__) + '/model/column_descriptor'
+require File.dirname(__FILE__) + '/model/region_descriptor'
+require File.dirname(__FILE__) + '/model/row'
+require File.dirname(__FILE__) + '/model/table_descriptor'
+require File.dirname(__FILE__) + '/model/scanner'
