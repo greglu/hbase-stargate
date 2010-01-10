@@ -1,5 +1,3 @@
-require 'rubygems'
-
 begin
   require 'jeweler'
 
@@ -10,8 +8,8 @@ begin
     gemspec.homepage = "http://github.com/greglu/hbase-ruby"
     gemspec.summary = "A pure ruby client for HBase using the Stargate interface."
     gemspec.description = "A pure ruby client used to interact with HBase through its Stargate interface which serves up XML, JSON, protobuf, and more."
-    gemspec.files = FileList["{lib,spec,tasks}/**/*","Rakefile","VERSION","History.txt","MIT-LICENSE","README.textile"].to_a
-    gemspec.extra_rdoc_files = FileList["MIT-LICENSE","README.textile"].to_a
+    gemspec.files = FileList["{lib,spec,tasks}/**/*","Rakefile","VERSION","LICENSE","README.textile"].to_a
+    gemspec.extra_rdoc_files = FileList["LICENSE","README.textile"].to_a
 
     gemspec.add_development_dependency "rspec"
     gemspec.add_dependency "json"
