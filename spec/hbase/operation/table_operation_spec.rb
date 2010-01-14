@@ -30,18 +30,6 @@ describe HBase::Operation::TableOperation do
     end
   end
 
-  it "should disable table 'test-hbase-ruby'" do
-    lambda {
-      table = @client.disable_table('test-hbase-ruby')
-    }.should_not raise_error
-  end
-
-  it "should enable table 'test-hbase-ruby'" do
-    lambda {
-      table = @client.enable_table('test-hbase-ruby')
-    }.should_not raise_error
-  end
-
   it "should delete the table 'test-hbase-ruby'" do
     lambda {
       table = @client.destroy_table("test-hbase-ruby")

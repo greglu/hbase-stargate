@@ -1,4 +1,6 @@
-module HBase; end
+module HBase
+  VERSION = File.read(File.join(File.dirname(__FILE__), "..", "VERSION")).chomp.freeze
+end
 
 require File.join(File.dirname(__FILE__), "hbase") + '/client'
 require File.join(File.dirname(__FILE__), "hbase") + '/exception'
