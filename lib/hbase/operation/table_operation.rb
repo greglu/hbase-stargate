@@ -4,8 +4,8 @@ module HBase
       def show_table(name)
         begin
           request = Request::TableRequest.new(name)
-          table_descriptor = Response::TableResponse.new(get(request.show)).parse
-        rescue Net::ProtocolError => e
+          Response::TableResponse.new(get(request.show)).parse
+        rescue Net::ProtocolError
           raise TableNotFoundError, "Table '#{name}' Not found"
         end
       end

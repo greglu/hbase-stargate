@@ -1,5 +1,3 @@
-require "spec"
-require File.join(File.dirname(__FILE__), "..", "lib", "hbase")
-
-Spec::Runner.configure do |config|
-end
+require 'rubygems'
+require 'spec'
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "lib", "hbase"))

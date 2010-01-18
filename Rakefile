@@ -1,3 +1,5 @@
+require 'spec/rake/spectask'
+
 begin
   require 'jeweler'
 
@@ -8,7 +10,7 @@ begin
     gemspec.homepage = "http://github.com/greglu/hbase-ruby"
     gemspec.summary = "A pure ruby client for HBase using the Stargate interface."
     gemspec.description = "A pure ruby client used to interact with HBase through its Stargate interface which serves up XML, JSON, protobuf, and more."
-    gemspec.files = FileList["{lib,spec,tasks}/**/*","Rakefile","VERSION","LICENSE","README.textile"].to_a
+    gemspec.files = FileList["{lib,spec}/**/*","Rakefile","VERSION","LICENSE","README.textile"].to_a
     gemspec.extra_rdoc_files = FileList["LICENSE","README.textile"].to_a
 
     gemspec.add_development_dependency "rspec"
@@ -19,4 +21,7 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
 end
 
-Dir['tasks/**/*.rake'].each { |rake| load rake }
+Spec::Rake::SpecTask.new(:spec) do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = File.open("spec/spec.opts").readlines.map{|x| x.chomp}
+end
