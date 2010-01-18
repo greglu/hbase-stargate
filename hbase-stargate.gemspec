@@ -4,11 +4,11 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{stargate-client}
+  s.name = %q{hbase-stargate}
   s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Ye Dingding", "Openplaces"]
+  s.authors = ["Openplaces"]
   s.date = %q{2010-01-17}
   s.description = %q{A Ruby client used to interact with HBase through its Stargate web service front-end}
   s.email = %q{greg.lu@gmail.com}
@@ -47,53 +47,53 @@ Gem::Specification.new do |s|
      "lib/stargate/response/row_response.rb",
      "lib/stargate/response/scanner_response.rb",
      "lib/stargate/response/table_response.rb",
+     "spec/hbase-stargate/model/column_descriptor_spec.rb",
+     "spec/hbase-stargate/model/column_spec.rb",
+     "spec/hbase-stargate/model/region_descriptor_spec.rb",
+     "spec/hbase-stargate/model/row_spec.rb",
+     "spec/hbase-stargate/model/scanner.rb",
+     "spec/hbase-stargate/model/table_descriptor_spec.rb",
+     "spec/hbase-stargate/operation/meta_operation_spec.rb",
+     "spec/hbase-stargate/operation/row_operation_spec.rb",
+     "spec/hbase-stargate/operation/scanner_operation_spec.rb",
+     "spec/hbase-stargate/operation/table_operation_spec.rb",
+     "spec/hbase-stargate/record_spec.rb",
+     "spec/hbase-stargate/request/meta_request_spec.rb",
+     "spec/hbase-stargate/request/row_request_spec.rb",
+     "spec/hbase-stargate/request/scanner_request_spec.rb",
+     "spec/hbase-stargate/request/table_request_spec.rb",
+     "spec/hbase-stargate/response/meta_response_spec.rb",
+     "spec/hbase-stargate/response/row_response_spec.rb",
+     "spec/hbase-stargate/response/scanner_response_spec.rb",
+     "spec/hbase-stargate/response/table_response_spec.rb",
      "spec/spec.opts",
-     "spec/spec_helper.rb",
-     "spec/stargate-client/model/column_descriptor_spec.rb",
-     "spec/stargate-client/model/column_spec.rb",
-     "spec/stargate-client/model/region_descriptor_spec.rb",
-     "spec/stargate-client/model/row_spec.rb",
-     "spec/stargate-client/model/scanner.rb",
-     "spec/stargate-client/model/table_descriptor_spec.rb",
-     "spec/stargate-client/operation/meta_operation_spec.rb",
-     "spec/stargate-client/operation/row_operation_spec.rb",
-     "spec/stargate-client/operation/scanner_operation_spec.rb",
-     "spec/stargate-client/operation/table_operation_spec.rb",
-     "spec/stargate-client/record_spec.rb",
-     "spec/stargate-client/request/meta_request_spec.rb",
-     "spec/stargate-client/request/row_request_spec.rb",
-     "spec/stargate-client/request/scanner_request_spec.rb",
-     "spec/stargate-client/request/table_request_spec.rb",
-     "spec/stargate-client/response/meta_response_spec.rb",
-     "spec/stargate-client/response/row_response_spec.rb",
-     "spec/stargate-client/response/scanner_response_spec.rb",
-     "spec/stargate-client/response/table_response_spec.rb"
+     "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/greglu/stargate-client}
+  s.homepage = %q{http://github.com/greglu/hbase-stargate}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Ruby client for HBase's Stargate web service}
   s.test_files = [
-    "spec/stargate-client/request/row_request_spec.rb",
-     "spec/stargate-client/request/table_request_spec.rb",
-     "spec/stargate-client/request/meta_request_spec.rb",
-     "spec/stargate-client/request/scanner_request_spec.rb",
-     "spec/stargate-client/model/scanner.rb",
-     "spec/stargate-client/model/column_spec.rb",
-     "spec/stargate-client/model/row_spec.rb",
-     "spec/stargate-client/model/column_descriptor_spec.rb",
-     "spec/stargate-client/model/region_descriptor_spec.rb",
-     "spec/stargate-client/model/table_descriptor_spec.rb",
-     "spec/stargate-client/operation/row_operation_spec.rb",
-     "spec/stargate-client/operation/meta_operation_spec.rb",
-     "spec/stargate-client/operation/scanner_operation_spec.rb",
-     "spec/stargate-client/operation/table_operation_spec.rb",
-     "spec/stargate-client/record_spec.rb",
-     "spec/stargate-client/response/scanner_response_spec.rb",
-     "spec/stargate-client/response/meta_response_spec.rb",
-     "spec/stargate-client/response/table_response_spec.rb",
-     "spec/stargate-client/response/row_response_spec.rb",
+    "spec/hbase-stargate/request/row_request_spec.rb",
+     "spec/hbase-stargate/request/table_request_spec.rb",
+     "spec/hbase-stargate/request/meta_request_spec.rb",
+     "spec/hbase-stargate/request/scanner_request_spec.rb",
+     "spec/hbase-stargate/model/scanner.rb",
+     "spec/hbase-stargate/model/column_spec.rb",
+     "spec/hbase-stargate/model/row_spec.rb",
+     "spec/hbase-stargate/model/column_descriptor_spec.rb",
+     "spec/hbase-stargate/model/region_descriptor_spec.rb",
+     "spec/hbase-stargate/model/table_descriptor_spec.rb",
+     "spec/hbase-stargate/operation/row_operation_spec.rb",
+     "spec/hbase-stargate/operation/meta_operation_spec.rb",
+     "spec/hbase-stargate/operation/scanner_operation_spec.rb",
+     "spec/hbase-stargate/operation/table_operation_spec.rb",
+     "spec/hbase-stargate/record_spec.rb",
+     "spec/hbase-stargate/response/scanner_response_spec.rb",
+     "spec/hbase-stargate/response/meta_response_spec.rb",
+     "spec/hbase-stargate/response/table_response_spec.rb",
+     "spec/hbase-stargate/response/row_response_spec.rb",
      "spec/spec_helper.rb"
   ]
 

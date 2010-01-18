@@ -5,9 +5,9 @@ begin
 
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "hbase-stargate"
-    gemspec.authors = ['Ye Dingding', 'Openplaces']
+    gemspec.authors = ['Openplaces']
     gemspec.email = 'greg.lu@gmail.com'
-    gemspec.homepage = "http://github.com/greglu/stargate-client"
+    gemspec.homepage = "http://github.com/greglu/hbase-stargate"
     gemspec.summary = "Ruby client for HBase's Stargate web service"
     gemspec.description = "A Ruby client used to interact with HBase through its Stargate web service front-end"
     gemspec.files = FileList["{lib,spec}/**/*","Rakefile","VERSION","LICENSE","README.textile"].to_a

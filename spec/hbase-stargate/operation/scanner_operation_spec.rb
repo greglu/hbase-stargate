@@ -5,11 +5,11 @@ describe Stargate::Operation::ScannerOperation do
     url = ENV["STARGATE_URL"].nil? ? "http://localhost:8080" : ENV["STARGATE_URL"]
     @client = Stargate::Client.new(url)
 
-    table = @client.create_table("test-stargate-client", "col1")
+    table = @client.create_table("test-hbase-stargate", "col1")
 
-    @client.create_row('test-stargate-client', 'row1', nil, {:name => 'col1:', :value => "row1-col1"})
-    @client.create_row('test-stargate-client', 'row2', nil, {:name => 'col1:', :value => "row2-col1"})
-    @client.create_row('test-stargate-client', 'row3', nil, {:name => 'col1:', :value => "row3-col1"})
+    @client.create_row('test-hbase-stargate', 'row1', nil, {:name => 'col1:', :value => "row1-col1"})
+    @client.create_row('test-hbase-stargate', 'row2', nil, {:name => 'col1:', :value => "row2-col1"})
+    @client.create_row('test-hbase-stargate', 'row3', nil, {:name => 'col1:', :value => "row3-col1"})
   end
 
   it "should throw TableNotFoundError if a scanner is requested for an non-existant table" do
@@ -19,7 +19,7 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   it "should open a scanner and close it successfully" do
-    scanner = @client.open_scanner("test-stargate-client")
+    scanner = @client.open_scanner("test-hbase-stargate")
     scanner.should.is_a? Stargate::Model::Scanner
 
     lambda {
@@ -32,7 +32,7 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   it "should scan the whole table when given no options and no limit" do
-    scanner = @client.open_scanner("test-stargate-client")
+    scanner = @client.open_scanner("test-hbase-stargate")
 
     rows = @client.get_rows(scanner)
     rows.size.should == 3
@@ -45,7 +45,7 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   it "should scan the whole table but limit the results when given a limit" do
-    scanner = @client.open_scanner("test-stargate-client")
+    scanner = @client.open_scanner("test-hbase-stargate")
 
     rows = @client.get_rows(scanner, 2)
     rows.size.should == 2
@@ -58,7 +58,7 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   it "should return all rows when given a batch size larger than the number of rows" do
-    scanner = @client.open_scanner("test-stargate-client", {:batch => 5})
+    scanner = @client.open_scanner("test-hbase-stargate", {:batch => 5})
 
     rows = @client.get_rows(scanner)
     rows.size.should == 3
@@ -71,7 +71,7 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   it "should scan the correct row when given a start_row" do
-    scanner = @client.open_scanner("test-stargate-client", {:start_row => "row2", :batch => 5})
+    scanner = @client.open_scanner("test-hbase-stargate", {:start_row => "row2", :batch => 5})
 
     rows = @client.get_rows(scanner)
     rows.size.should == 2
@@ -85,7 +85,7 @@ describe Stargate::Operation::ScannerOperation do
 
   it "should scan the correct row when given an end_row" do
     # The end_row defined is exclusive, i.e. end_row does not get returned in scanner
-    scanner = @client.open_scanner("test-stargate-client", {:end_row => "row3", :batch => 5})
+    scanner = @client.open_scanner("test-hbase-stargate", {:end_row => "row3", :batch => 5})
 
     rows = @client.get_rows(scanner)
     rows.size.should == 2
@@ -98,6 +98,6 @@ describe Stargate::Operation::ScannerOperation do
   end
 
   after :all do
-    @client.destroy_table("test-stargate-client")
+    @client.destroy_table("test-hbase-stargate")
   end
 end

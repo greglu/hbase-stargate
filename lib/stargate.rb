@@ -1,6 +1,4 @@
-module Stargate
-  VERSION = File.read(File.join(File.dirname(__FILE__), "..", "VERSION")).chomp.freeze
-end
+module Stargate end
 
 require File.join(File.dirname(__FILE__), "stargate", "client")
 require File.join(File.dirname(__FILE__), "stargate", "exception")

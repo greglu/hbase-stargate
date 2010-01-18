@@ -6,6 +6,8 @@ require File.dirname(__FILE__) + '/operation/scanner_operation'
 
 module Stargate
   class Client
+    VERSION = File.read(File.join(File.dirname(__FILE__), "..", "..", "VERSION")).chomp.freeze
+
     include Operation::MetaOperation
     include Operation::TableOperation
     include Operation::RowOperation
