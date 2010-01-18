@@ -4,7 +4,7 @@ begin
   require 'jeweler'
 
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "stargate-client"
+    gemspec.name = "hbase-stargate"
     gemspec.authors = ['Ye Dingding', 'Openplaces']
     gemspec.email = 'greg.lu@gmail.com'
     gemspec.homepage = "http://github.com/greglu/stargate-client"

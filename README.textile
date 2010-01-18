@@ -1,4 +1,4 @@
-h1. Stargate-Client
+h1. hbase-stargate
 
 A Ruby client for HBase (http://hadoop.apache.org/hbase) that works with the Stargate interface.
 Stargate is the RESTful web service front end for HBase that can serve up a number of formats including XML, JSON, and protobufs.
