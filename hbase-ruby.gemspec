@@ -5,20 +5,19 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hbase-ruby}
-  s.version = "1.1.3"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ye Dingding", "Openplaces"]
-  s.date = %q{2009-11-25}
+  s.date = %q{2010-01-17}
   s.description = %q{A pure ruby client used to interact with HBase through its Stargate interface which serves up XML, JSON, protobuf, and more.}
   s.email = %q{greg.lu@gmail.com}
   s.extra_rdoc_files = [
-    "MIT-LICENSE",
+    "LICENSE",
      "README.textile"
   ]
   s.files = [
-    "History.txt",
-     "MIT-LICENSE",
+    "LICENSE",
      "README.textile",
      "Rakefile",
      "VERSION",
@@ -68,8 +67,7 @@ Gem::Specification.new do |s|
      "spec/hbase/response/scanner_response_spec.rb",
      "spec/hbase/response/table_response_spec.rb",
      "spec/spec.opts",
-     "spec/spec_helper.rb",
-     "tasks/rspec.rake"
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/greglu/hbase-ruby}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -77,26 +75,26 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A pure ruby client for HBase using the Stargate interface.}
   s.test_files = [
-    "spec/spec_helper.rb",
-     "spec/hbase/record_spec.rb",
-     "spec/hbase/response/table_response_spec.rb",
-     "spec/hbase/response/row_response_spec.rb",
-     "spec/hbase/response/scanner_response_spec.rb",
-     "spec/hbase/response/meta_response_spec.rb",
-     "spec/hbase/model/column_spec.rb",
-     "spec/hbase/model/column_descriptor_spec.rb",
-     "spec/hbase/model/scanner.rb",
-     "spec/hbase/model/region_descriptor_spec.rb",
-     "spec/hbase/model/table_descriptor_spec.rb",
-     "spec/hbase/model/row_spec.rb",
+    "spec/hbase/request/row_request_spec.rb",
      "spec/hbase/request/table_request_spec.rb",
      "spec/hbase/request/meta_request_spec.rb",
-     "spec/hbase/request/row_request_spec.rb",
      "spec/hbase/request/scanner_request_spec.rb",
+     "spec/hbase/model/scanner.rb",
+     "spec/hbase/model/column_spec.rb",
+     "spec/hbase/model/row_spec.rb",
+     "spec/hbase/model/column_descriptor_spec.rb",
+     "spec/hbase/model/region_descriptor_spec.rb",
+     "spec/hbase/model/table_descriptor_spec.rb",
+     "spec/hbase/operation/row_operation_spec.rb",
+     "spec/hbase/operation/meta_operation_spec.rb",
      "spec/hbase/operation/scanner_operation_spec.rb",
      "spec/hbase/operation/table_operation_spec.rb",
-     "spec/hbase/operation/meta_operation_spec.rb",
-     "spec/hbase/operation/row_operation_spec.rb"
+     "spec/hbase/record_spec.rb",
+     "spec/hbase/response/scanner_response_spec.rb",
+     "spec/hbase/response/meta_response_spec.rb",
+     "spec/hbase/response/table_response_spec.rb",
+     "spec/hbase/response/row_response_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
