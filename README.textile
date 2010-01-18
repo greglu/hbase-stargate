@@ -1,24 +1,19 @@
-hbase-ruby is a pure ruby client for HBase (http://hadoop.apache.org/hbase) that works with the HBase Stargate interface.
+h1. Stargate-Client
+
+A Ruby client for HBase (http://hadoop.apache.org/hbase) that works with the Stargate interface.
 Stargate is the RESTful web service front end for HBase that can serve up a number of formats including XML, JSON, and protobufs.
 
-This was originally created by Dingding Ye <yedingding@gmail.com> at http://github.com/sishen/hbase-ruby
-
-
-h2. Versions
-
-* **"hbase-0.20.1 version" - rewritten for Stargate**: http://github.com/greglu/hbase-ruby/tree/master
-* **"hbase-0.20dev version"**: http://github.com/sishen/hbase-ruby/tree/master
-* **"hbase-0.19 version"**: http://github.com/sishen/hbase-ruby/tree/hbase-0.19
+This project is based off the work of Dingding Ye <yedingding@gmail.com> at http://github.com/sishen/hbase-ruby
 
 
 h2. Installation
 
 <pre>
-<code>$ gem install hbase-ruby -s http://gemcutter.org</code>
+<code>$ gem install stargate-client -s http://gemcutter.org</code>
 </pre>
 
 To work with this gem in your Rails application, add this to the environment.rb file:
-<pre><code>config.gem 'hbase-ruby', :lib => "hbase", :source => "http://gemcutter.org"</code></pre>
+<pre><code>config.gem 'stargate-client', :lib => "stargate", :source => "http://gemcutter.org"</code></pre>
 
 To build the gem yourself:
 <pre><code>$ rake gem</code></pre>
@@ -42,12 +37,12 @@ h2. Usage
 Here are some examples:
 
 <pre><code>
-require 'hbase'
+require 'stargate'
 
 # Direct connection
-# client = HBase::Client.new("http://localhost:8080") # this url is the default for stargate.
+# client = Stargate::Client.new("http://localhost:8080") # this url is the default for stargate.
 # Connection through a proxy
-client = HBase::Client.new("http://localhost:8080", { :proxy => "10.2.3.4:8080" }) 
+client = Stargate::Client.new("http://localhost:8080", { :proxy => "10.2.3.4:8080" }) 
 
 # Table Operation
 tables = client.list_tables                              # list available tables
@@ -60,8 +55,8 @@ row = client.show_row('users', 'sishen')                 # show the data of row 
 row2 = client.create_row('users', 'sishen', Time.now.to_i, {:name => 'habbit:football', :value => 'i like football'}) # create the row 'sishen' with the data in the table 'users'
 client.delete_row('users', 'sishen', nil, 'habbit:football')  # delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
 
-# Scanner Operation (see spec/hbase/operation/scanner_operation_spec.rb for more examples)
-scanner = client.open_scanner('users', {:start_row => "row2", :batch => 5, :columns => ["habbit:"]}) # See more options from HBase::Model::Scanner.AVAILABLE_OPTS
+# Scanner Operation (see spec/stargate-client/operation/scanner_operation_spec.rb for more examples)
+scanner = client.open_scanner('users', {:start_row => "row2", :batch => 5, :columns => ["habbit:"]}) # See more options from Stargate::Model::Scanner.AVAILABLE_OPTS
 rows = client.get_rows(scanner)
 client.close_scanner(scanner)
 </code></pre>
@@ -75,7 +70,7 @@ $ rake spec
 
 or pass it the URL to the HBase Stargate server as an argument:
 
-$ rake spec HBASE_URL=http://localhost:8080
+$ rake spec STARGATE_URL=http://localhost:8080
 
 
 h2. Copyright
