@@ -9,11 +9,11 @@ This project is based off the work of Dingding Ye <yedingding@gmail.com> at http
 h2. Installation
 
 <pre>
-<code>$ gem install stargate-client -s http://gemcutter.org</code>
+<code>$ gem install hbase-stargate -s http://gemcutter.org</code>
 </pre>
 
 To work with this gem in your Rails application, add this to the environment.rb file:
-<pre><code>config.gem 'stargate-client', :lib => "stargate", :source => "http://gemcutter.org"</code></pre>
+<pre><code>config.gem 'hbase-stargate', :lib => "stargate", :source => "http://gemcutter.org"</code></pre>
 
 To build the gem yourself:
 <pre><code>$ rake gem</code></pre>
