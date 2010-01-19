@@ -1,4 +1,9 @@
-require 'json'
+begin
+  require 'json'
+rescue LoadError => e
+  puts "[hbase-stargate] json is required. Install it with 'gem install json' (or json-jruby for JRuby)"
+  raise e
+end
 
 module Stargate
   module Response

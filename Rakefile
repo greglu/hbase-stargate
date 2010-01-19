@@ -14,7 +14,6 @@ begin
     gemspec.extra_rdoc_files = FileList["LICENSE","README.textile"].to_a
 
     gemspec.add_development_dependency "rspec"
-    gemspec.add_dependency "json"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hbase-stargate}
-  s.version = "1.5.0"
+  s.version = "1.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Openplaces"]
-  s.date = %q{2010-01-17}
+  s.date = %q{2010-01-18}
   s.description = %q{A Ruby client used to interact with HBase through its Stargate web service front-end}
   s.email = %q{greg.lu@gmail.com}
   s.extra_rdoc_files = [
@@ -75,7 +75,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Ruby client for HBase's Stargate web service}
   s.test_files = [
-    "spec/hbase-stargate/request/row_request_spec.rb",
+    "spec/spec_helper.rb",
+     "spec/hbase-stargate/record_spec.rb",
+     "spec/hbase-stargate/request/row_request_spec.rb",
      "spec/hbase-stargate/request/table_request_spec.rb",
      "spec/hbase-stargate/request/meta_request_spec.rb",
      "spec/hbase-stargate/request/scanner_request_spec.rb",
@@ -89,12 +91,10 @@ Gem::Specification.new do |s|
      "spec/hbase-stargate/operation/meta_operation_spec.rb",
      "spec/hbase-stargate/operation/scanner_operation_spec.rb",
      "spec/hbase-stargate/operation/table_operation_spec.rb",
-     "spec/hbase-stargate/record_spec.rb",
      "spec/hbase-stargate/response/scanner_response_spec.rb",
      "spec/hbase-stargate/response/meta_response_spec.rb",
      "spec/hbase-stargate/response/table_response_spec.rb",
-     "spec/hbase-stargate/response/row_response_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/hbase-stargate/response/row_response_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -103,14 +103,11 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 0"])
-      s.add_runtime_dependency(%q<json>, [">= 0"])
     else
       s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<json>, [">= 0"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<json>, [">= 0"])
   end
 end
 
