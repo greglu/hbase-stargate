@@ -16,7 +16,7 @@ To work with this gem in your Rails application, add this to the environment.rb 
 <pre><code>config.gem 'hbase-stargate', :lib => "stargate", :source => "http://gemcutter.org"</code></pre>
 
 To build the gem yourself:
-<pre><code>$ rake gem</code></pre>
+<pre><code>$ rake build</code></pre>
 
 
 h2. Getting Started
@@ -75,5 +75,5 @@ $ rake spec STARGATE_URL=http://localhost:8080
 
 h2. Copyright
 
-Copyright (c) 2008 Dingding Ye <yedingding@gmail.com>
+Copyright (c) 2008 Openplaces.org
 Distributed under MIT License
