@@ -1,13 +1,6 @@
 module Stargate
   module Operation
     module RowOperation
-      Converter = {
-        '&' => '&amp;',
-        '<' => '&lt;',
-        '>' => '&gt;',
-        "'" => '&apos;',
-        '"' => '&quot;'
-      }
 
       def row_timestamps(table_name, name)
         raise NotImplementedError, "Currently not supported in Stargate client"
@@ -65,7 +58,7 @@ module Stargate
           end
           xml_data << "</Row></CellSet>"
 
-          Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
+          Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data, {'Content-Type' => 'text/xml'}), :create_row).parse
         rescue Net::ProtocolError => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
@@ -73,6 +66,24 @@ module Stargate
             raise RowNotFoundError, "Row '#{name}' Not Found"
           else
             raise StandardError, "Error encountered while trying to create row: #{e.message}"
+          end
+        end
+      end
+
+      def read_row(table_name, name, options = {})
+        begin
+          options[:version] ||= 1
+
+          request = Request::RowRequest.new(table_name, name, options[:timestamp])
+          row = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse.first
+          row.table_name = table_name
+          row
+        rescue Net::ProtocolError => e
+          # TODO: Use better handling instead of this.
+          if e.to_s.include?("Table")
+            raise TableNotFoundError, "Table '#{table_name}' Not Found"
+          elsif e.to_s.include?("404")
+            raise RowNotFoundError, "Row '#{name}' Not Found"
           end
         end
       end

@@ -11,7 +11,7 @@ module Stargate
       def open_scanner(table_name, options = {})
         raise ArgumentError, "options should be given as a Hash" unless options.instance_of? Hash
         columns = options.delete(:columns)
-        batch = options.delete(:batch) || "10"
+        batch = options.delete(:batch) || "50"
         start_time = options.delete(:start_time)
         end_time = options.delete(:end_time)
 
@@ -39,7 +39,7 @@ module Stargate
             xml_data << "/>"
           end
 
-          scanner = Response::ScannerResponse.new(post_response(request.open, xml_data), :open_scanner).parse
+          scanner = Response::ScannerResponse.new(post_response(request.open, xml_data, {'Content-Type' => 'text/xml'}), :open_scanner).parse
           scanner.table_name = table_name
           scanner.batch_size = batch
           scanner

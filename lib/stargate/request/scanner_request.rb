@@ -5,8 +5,7 @@ module Stargate
 
       def initialize(table_name)
         @table_name = CGI.escape(table_name)
-        path = "/#{@table_name}/scanner"
-        super(path)
+        super("/#{@table_name}/scanner")
       end
 
       def open

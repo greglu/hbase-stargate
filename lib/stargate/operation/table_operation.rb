@@ -4,8 +4,8 @@ module Stargate
 
       def table_exists?(name)
         begin
-          request_path = Request::TableRequest.new(name).show
-          table_response(name, get_response(request_path))
+          request = Request::TableRequest.new(name)
+          table_response(name, get_response(request.show))
           true
         rescue Stargate::Exception
           false
@@ -13,8 +13,8 @@ module Stargate
       end
 
       def show_table(name)
-        request_path = Request::TableRequest.new(name).show
-        response = table_response(name, get_response(request_path))
+        request = Request::TableRequest.new(name)
+        response = table_response(name, get_response(request.show))
         Response::TableResponse.new(response.body, :show).parse
       end
 
@@ -88,7 +88,7 @@ module Stargate
 
       def delete_table(name, columns = nil)
         request = Request::TableRequest.new(name)
-        response = delete_response(request.delete(columns))
+        response = delete_response(request.delete)
         Response::TableResponse.new(response, :delete).parse
       end
 
