@@ -9,8 +9,13 @@ module Stargate
       attr_accessor :scanner_url
       attr_accessor :batch_size
 
-      # Deprecation: scanner_url is used instead of just the ID
-      attr_accessor :scanner_id
+      def scanner_id
+        warn "[DEPRECATION] scanner_url is now used instead of scanner_id. "
+      end
+
+      def scanner_id=(id=nil)
+        scanner_id
+      end
     end
   end
 end

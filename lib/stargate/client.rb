@@ -28,6 +28,7 @@ module Stargate
       else
         @connection = Net::HTTP.new(@url.host, @url.port)
       end
+
       @connection.read_timeout = opts[:timeout] if opts[:timeout]
     end
 
@@ -40,11 +41,11 @@ module Stargate
     end
 
     def post(path, data = nil, options = {})
-      safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
+      safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'application/json'}.merge(options)) }
     end
 
     def post_response(path, data = nil, options = {})
-      safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
+      safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'application/json'}.merge(options)) }
     end
 
     def delete(path, options = {})

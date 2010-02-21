@@ -10,7 +10,7 @@ module Stargate
         warn "[DEPRECATION] timestamp attribute will be removed from the Row model. "
       end
 
-      def timestamp=
+      def timestamp=(stamp=nil)
         timestamp
       end
     end

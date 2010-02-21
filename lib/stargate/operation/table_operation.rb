@@ -1,47 +1,71 @@
 module Stargate
   module Operation
     module TableOperation
-      def show_table(name)
+
+      def table_exists?(name)
         begin
-          request = Request::TableRequest.new(name)
-          Response::TableResponse.new(get(request.show)).parse
-        rescue Net::ProtocolError
-          raise TableNotFoundError, "Table '#{name}' Not found"
+          request_path = Request::TableRequest.new(name).show
+          table_response(name, get_response(request_path))
+          true
+        rescue Stargate::Exception
+          false
         end
       end
 
+      def show_table(name)
+        request_path = Request::TableRequest.new(name).show
+        response = table_response(name, get_response(request_path))
+        Response::TableResponse.new(response.body, :show).parse
+      end
+
+      ##
+      #
+      #
       def create_table(name, *args)
-        request = Request::TableRequest.new(name)
+        raise ArgumentError, "Table name must be of type String" unless name.is_a? String
 
-        raise StandardError, "Table name must be of type String" unless name.instance_of? String
+        # Creating the table's structure as a Hash then turning it into JSON
+        table_structure = {"name" => name, "IS_META" => false, "IS_ROOT" => false}
+        table_structure["ColumnSchema"] = []
 
-        begin
-          xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><TableSchema name='#{name}' IS_META='false' IS_ROOT='false'>"
-          for arg in args
-            if arg.instance_of? String
-              xml_data << "<ColumnSchema name='#{arg}' />"
-            elsif arg.instance_of? Hash
-              xml_data << "<ColumnSchema "
+        # The arguments for defining the column families
+        # can be presented as a collection of Strings and Hashes
+        for column in args
+          case column
 
-              arg.each do |k,v|
-                if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
-                  xml_data << "#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}='#{v}' "
-                end
+          # If the column is defined by a String, then treat it as a name
+          when String
+            table_structure["ColumnSchema"] << {"name" => column}
+
+          # If the column is defined by a Hash, then resolve it into the
+          # proper collection of attributes
+          when Hash
+            resolved_column = {}
+            column.each do |k,v|
+              if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
+                resolved_column[Model::ColumnDescriptor::AVAILABLE_OPTS[k]] = v
+              else
+                raise ArgumentError, "Argument '#{k}' is not valid"
               end
-
-              xml_data << "/>"
-            else
-              raise StandardError, "#{arg.class.to_s} of #{arg.to_s} is not of Hash Type"
             end
-          end
-          xml_data << "</TableSchema>"
-          Response::TableResponse.new(post(request.create, xml_data))
-        rescue Net::ProtocolError => e
-          if e.to_s.include?("TableExistsException")
-            raise TableExistsError, "Table '#{name}' already exists"
+            table_structure["ColumnSchema"] << resolved_column
+
           else
-            raise TableFailCreateError, e.message
+            raise ArgumentError, "Columns can only be defined by a String or Hash"
           end
+        end
+
+        # JSON, activate!
+        json_structure = table_structure.to_json
+
+        request = Request::TableRequest.new(name)
+        response = post_response(request.create, json_structure)
+
+        case response
+        when Net::HTTPCreated
+          Response::TableResponse.new(json_structure, :show).parse
+        else
+          raise TableCreationError, "Error while creating table #{name}:\n" + response.body
         end
       end
 
@@ -63,16 +87,9 @@ module Stargate
       end
 
       def delete_table(name, columns = nil)
-        begin
-          request = Request::TableRequest.new(name)
-          Response::TableResponse.new(delete(request.delete(columns)))
-        rescue Net::ProtocolError => e
-          if e.to_s.include?("TableNotFoundException")
-            raise TableNotFoundError, "Table '#{name}' not exists"
-          elsif e.to_s.include?("TableNotDisabledException")
-            raise TableNotDisabledError, "Table '#{name}' not disabled"
-          end
-        end
+        request = Request::TableRequest.new(name)
+        response = delete_response(request.delete(columns))
+        Response::TableResponse.new(response, :delete).parse
       end
 
       def destroy_table(name, columns = nil)
@@ -87,7 +104,27 @@ module Stargate
         warn "[DEPRECATION] Explicitly disabling tables isn't required anymore. HBase Stargate will enable/disable as needed."
       end
 
-      def table_regions(name, start_row = nil, end_row = nil)
+      def table_regions(name)
+        request = Request::TableRequest.new(name)
+        response = table_response(name, get_response(request.regions))
+        Response::TableResponse.new(response.body, :regions).parse
+      end
+
+    private
+
+      def table_response(name, response)
+        case response
+        when Net::HTTPOK
+          response
+        when Net::HTTPNotFound
+          raise TableNotFoundError, "Table '#{name}' does not exist"
+        else
+          if response.body.include?("org.apache.hadoop.hbase.TableNotFoundException")
+            raise TableNotFoundError, "Table '#{name}' does not exist"
+          else
+            raise TableError, "Unknown error occurred while accessing table '#{name}'"
+          end
+        end
       end
 
     end

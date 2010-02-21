@@ -2,3 +2,4 @@
 --format specdoc
 --loadby mtime
 --reverse
+--debugger

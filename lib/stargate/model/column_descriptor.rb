@@ -1,5 +1,6 @@
 module Stargate
   module Model
+
     module CompressionType
       NONE = "NONE"
       RECORD = "RECORD"
@@ -15,18 +16,19 @@ module Stargate
     end
 
     class ColumnDescriptor < Record
-      AVAILABLE_OPTS = {  :name => "name", :max_versions => "VERSIONS", :versions => "VERSIONS",
+      AVAILABLE_OPTS = {  :name => "name", :versions => "VERSIONS",
                           :compression => "COMPRESSION", :in_memory => "IN_MEMORY",
-                          :block_cache => "BLOCKCACHE", :blockcache => "BLOCKCACHE",
+                          :blockcache => "BLOCKCACHE", :block_cache => "BLOCKCACHE",
                           :blocksize => "BLOCKSIZE", :length => "LENGTH", :ttl => "TTL",
                           :bloomfilter => "BLOOMFILTER"}
       attr_accessor :name
       attr_accessor :compression
       attr_accessor :bloomfilter
-      attr_accessor :maximum_cell_size
-      attr_accessor :max_versions
-
       attr_accessor :versions
+      attr_accessor :length
+      attr_accessor :in_memory
+      attr_accessor :ttl
+      attr_accessor :blockcache
     end
   end
 end
