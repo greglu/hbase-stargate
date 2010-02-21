@@ -1,7 +1,8 @@
 require File.join(File.dirname(__FILE__), "..", "..", "spec_helper")
 
 describe Stargate::Operation::ScannerOperation do
-  before :all do
+
+  before(:all) do
     url = ENV["STARGATE_URL"].nil? ? "http://localhost:8080" : ENV["STARGATE_URL"]
     @client = Stargate::Client.new(url)
 

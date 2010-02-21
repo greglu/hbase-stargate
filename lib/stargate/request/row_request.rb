@@ -7,27 +7,29 @@ module Stargate
 
       def initialize(table_name, name, timestamp=nil)
         @table_name, @name, @timestamp = CGI.escape(table_name), CGI.escape(name), timestamp
-        path = "/#{@table_name}/#{@name}"
-        super(path)
+        super("/#{@table_name}/#{@name}")
       end
 
       def show(columns = nil, options = { })
-        @path << (columns ? "/#{pack_params(columns)}" : "/")
-        @path << "/#{@timestamp}" if @timestamp
-        @path << "?v=#{options[:version]}" if options[:version]
-        @path
+        params = ""
+        params << (columns ? "/#{pack_params(columns)}" : "/")
+        params << "/#{@timestamp}" if @timestamp
+        params << "?v=#{options[:version]}" if options[:version]
+        @path + params
       end
 
       def create(columns = nil)
-        @path << (columns ? "/#{pack_params(columns)}" : "/")
-        @path << "/#{@timestamp}" if @timestamp
-        @path
+        params = ""
+        params << (columns ? "/#{pack_params(columns)}" : "/")
+        params << "/#{@timestamp}" if @timestamp
+        @path + params
       end
 
       def delete(columns = nil)
-        @path << (columns ? "/#{pack_params(columns)}" : "/")
-        @path << "/#{@timestamp}" if @timestamp
-        @path
+        params = ""
+        params << (columns ? "/#{pack_params(columns)}" : "/")
+        params << "/#{@timestamp}" if @timestamp
+        @path + params
       end
     end
   end

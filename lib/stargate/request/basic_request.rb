@@ -9,8 +9,7 @@ module Stargate
         @path = path
       end
 
-
-      protected
+    protected
 
       def pack_params columns
         if columns.is_a? String
@@ -22,6 +21,7 @@ module Stargate
 
         columns.join(',')
       end
+
     end
   end
 end

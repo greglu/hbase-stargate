@@ -2,40 +2,38 @@ module Stargate
   module Request
     class TableRequest < BasicRequest
       attr_reader :name
-      attr_reader :body
 
       def initialize(name)
-        super("")
         @name = CGI.escape(name) if name
+        super("/#{@name}")
       end
 
       def show
-        @path << "/#{name}/schema"
+        @path + "/schema"
       end
 
       def regions
-        @path << "/#{name}/regions"
+        @path + "/regions"
       end
 
       def create
-        @path << "/#{name}/schema"
+        @path + "/schema"
       end
 
       def update
-        @path << "/#{name}"
+        @path + "/schema"
       end
 
       def enable
-        @path << "/#{name}/enable"
+        @path + "/enable"
       end
 
       def disable
-        @path << "/#{name}/disable"
+        @path + "/disable"
       end
 
-      def delete(columns = nil)
-        warn "[DEPRECATION] the use of the 'columns' argument is deprecated. Please use the delete method without any arguments." if columns
-        @path << "/#{name}/schema"
+      def delete
+        @path + "/schema"
       end
 
     end

@@ -6,19 +6,19 @@ module Stargate
       end
 
       def list_tables
-        @path << "/"
+        @path + "/"
       end
 
       def create_table
-        @path << "/tables"
+        @path + "/tables"
       end
 
       def version
-        @path << "/version"
+        @path + "/version"
       end
 
       def cluster_version
-        @path << "/version/cluster"
+        @path + "/version/cluster"
       end
     end
   end

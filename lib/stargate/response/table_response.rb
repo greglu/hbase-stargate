@@ -26,7 +26,7 @@ module Stargate
           Model::TableDescriptor.new(:name => table["name"], :column_families => column_families)
 
         when :delete
-          raw_data.is_a? Net::HTTPOK
+          verify_success(raw_data)
 
         when :regions
           regions = JSON.parse(raw_data)
