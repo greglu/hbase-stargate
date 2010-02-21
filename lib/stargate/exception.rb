@@ -6,9 +6,11 @@ class Stargate::ConnectionTimeoutError < Stargate::Exception; end
 
 class Stargate::TableNotFoundError < Stargate::Exception; end
 
+class Stargate::TableError < Stargate::Exception; end
+
 class Stargate::TableExistsError < Stargate::Exception; end
 
-class Stargate::TableFailCreateError < Stargate::Exception; end
+class Stargate::TableCreationError < Stargate::Exception; end
 
 class Stargate::TableNotDisabledError < Stargate::Exception; end
 

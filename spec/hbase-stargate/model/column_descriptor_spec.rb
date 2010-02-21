@@ -15,7 +15,7 @@ describe Stargate::Model::ColumnDescriptor do
 
   it "should be have such attributes" do
     column = Stargate::Model::ColumnDescriptor.new({})
-    %w{name compression bloomfilter maximum_cell_size max_versions}.each do |method|
+    %w{name compression bloomfilter versions length in_memory ttl blockcache}.each do |method|
       column.should respond_to(method)
     end
   end

@@ -13,8 +13,7 @@ module Stargate
         @path << "/#{name}/schema"
       end
 
-      def regions(start_row = nil, end_row = nil)
-        #TODO no handle the args!
+      def regions
         @path << "/#{name}/regions"
       end
 
@@ -38,6 +37,7 @@ module Stargate
         warn "[DEPRECATION] the use of the 'columns' argument is deprecated. Please use the delete method without any arguments." if columns
         @path << "/#{name}/schema"
       end
+
     end
   end
 end
