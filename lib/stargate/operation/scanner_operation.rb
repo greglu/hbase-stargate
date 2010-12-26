@@ -11,12 +11,17 @@ module Stargate
       def open_scanner(table_name, options = {})
         raise ArgumentError, "options should be given as a Hash" unless options.instance_of? Hash
         columns = options.delete(:columns)
-        batch = options.delete(:batch) || "50"
+        batch = options.delete(:batch) || "10"
+        start_time = options.delete(:start_time)
+        end_time = options.delete(:end_time)
 
         begin
           request = Request::ScannerRequest.new(table_name)
 
           xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><Scanner batch='#{batch}' "
+          xml_data += "startTime='#{start_time}' " if start_time
+          xml_data += "endTime='#{end_time}' " if end_time
+
           options.each do |key,value|
             if Model::Scanner::AVAILABLE_OPTS.include? key
               xml_data << "#{Model::Scanner::AVAILABLE_OPTS[key]}='#{[value.to_s].flatten.pack('m')}' "
