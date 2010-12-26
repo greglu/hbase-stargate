@@ -1,4 +1,4 @@
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 begin
   require 'jeweler'
@@ -20,7 +20,7 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install jeweler"
 end
 
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_files = FileList['spec/**/*_spec.rb']
-  t.spec_opts = File.open("spec/spec.opts").readlines.map{|x| x.chomp}
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ["-c", "-f progress", "-r ./spec/spec_helper.rb"]
+  t.pattern = 'spec/**/*_spec.rb'
 end
