@@ -18,9 +18,17 @@ module Stargate
           options[:version] ||= 1
 
           request = Request::RowRequest.new(table_name, name, timestamp)
-          row = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse.first
-          row.table_name = table_name
-          row
+          rows = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse
+          if rows.size == 1
+            row = rows.first
+            row.table_name = table_name
+            row
+          else
+            rows.each do |row|
+              row.table_name = table_name
+            end
+            rows
+          end
         rescue Net::ProtocolError => e
           # TODO: Use better handling instead of this.
           if e.to_s.include?("Table")

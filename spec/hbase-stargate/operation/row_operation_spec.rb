@@ -44,6 +44,22 @@ describe Stargate::Operation::RowOperation do
     end
   end
 
+  it "should support globbing of the row key by showing rows 'row', 'row1' and 'row2' but not 'pow1'" do
+    lambda {
+      @client.create_row("test-hbase-stargate", "pow1", nil, { :name => "col1:", :value => "pow1-col1" }).should be_true
+      @client.create_row("test-hbase-stargate", "row", nil, { :name => "col1:", :value => "row-col1" }).should be_true
+    }.should_not raise_error
+    rows = @client.show_row("test-hbase-stargate", "row*")
+    rows.size.should == 3
+    rows.each do |row|
+      row.should.is_a? Stargate::Model::Row
+      row.table_name.should == "test-hbase-stargate"
+      row.columns.each do |col|
+        col.should.is_a? Stargate::Model::Column
+      end
+    end
+  end
+
   it "should delete rows when timestamps are defined" do
     row1 = @client.show_row("test-hbase-stargate", "row1")
     timestamp = row1.columns.map(&:timestamp).uniq.first
