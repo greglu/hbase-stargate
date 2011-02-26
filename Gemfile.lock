@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hbase-stargate (1.5.2)
+    hbase-stargate (1.5.3)
       hbase-stargate
 
 GEM
