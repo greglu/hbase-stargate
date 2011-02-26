@@ -1,0 +1,34 @@
+PATH
+  remote: .
+  specs:
+    hbase-stargate (1.5.2)
+      hbase-stargate
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.2)
+    git (1.2.5)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    json (1.4.6)
+    rake (0.8.7)
+    rspec (2.3.0)
+      rspec-core (~> 2.3.0)
+      rspec-expectations (~> 2.3.0)
+      rspec-mocks (~> 2.3.0)
+    rspec-core (2.3.1)
+    rspec-expectations (2.3.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.3.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hbase-stargate!
+  jeweler
+  json
+  rspec
