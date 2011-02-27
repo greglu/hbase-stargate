@@ -28,7 +28,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hbase-stargate!
   jeweler
   json
   rspec
