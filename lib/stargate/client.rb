@@ -6,8 +6,6 @@ require File.dirname(__FILE__) + '/operation/scanner_operation'
 
 module Stargate
   class Client
-    VERSION = File.read(File.join(File.dirname(__FILE__), "..", "..", "VERSION")).chomp.freeze
-
     include Operation::MetaOperation
     include Operation::TableOperation
     include Operation::RowOperation
@@ -65,8 +63,6 @@ module Stargate
 
     private
 
-      # Part of safe_request was broken up into safe_response because when working with scanners
-      # in Stargate, you need to have access to the response itself, and not just the body.
       def safe_response(&block)
         begin
           yield

@@ -12,7 +12,6 @@ module Stargate
         case @method
         when :list_tables
           if raw_data.to_s.empty? || raw_data == "null" # "null" from json
-            puts "There are no available tables in the HBase"
             return []
           end
 
