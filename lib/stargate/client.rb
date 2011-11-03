@@ -1,8 +1,8 @@
 require 'net/http'
-require File.dirname(__FILE__) + '/operation/meta_operation'
-require File.dirname(__FILE__) + '/operation/table_operation'
-require File.dirname(__FILE__) + '/operation/row_operation'
-require File.dirname(__FILE__) + '/operation/scanner_operation'
+require 'stargate/operation/meta_operation'
+require 'stargate/operation/table_operation'
+require 'stargate/operation/row_operation'
+require 'stargate/operation/scanner_operation'
 
 module Stargate
   class Client
@@ -66,11 +66,10 @@ module Stargate
       def safe_response(&block)
         begin
           yield
-        rescue Errno::ECONNREFUSED
-          raise ConnectionNotEstablishedError, "can't connect to #{@url}"
+        rescue Errno::ECONNREFUSED, SocketError
+          raise ConnectionNotEstablishedError, "Connection problem with Stargate server #{@url}"
         rescue Timeout::Error => e
-          puts e.backtrace.join("\n")
-          raise ConnectionTimeoutError, "execution expired. Maybe query disabled tables"
+          raise ConnectionTimeoutError, "Connection timed out to Stargate server #{@url}"
         end
       end
 

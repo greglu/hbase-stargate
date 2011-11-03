@@ -11,9 +11,9 @@ module Stargate
   end
 end
 
-require File.dirname(__FILE__) + '/model/column'
-require File.dirname(__FILE__) + '/model/column_descriptor'
-require File.dirname(__FILE__) + '/model/region_descriptor'
-require File.dirname(__FILE__) + '/model/row'
-require File.dirname(__FILE__) + '/model/table_descriptor'
-require File.dirname(__FILE__) + '/model/scanner'
+require 'stargate/model/column'
+require 'stargate/model/column_descriptor'
+require 'stargate/model/region_descriptor'
+require 'stargate/model/row'
+require 'stargate/model/table_descriptor'
+require 'stargate/model/scanner'

@@ -35,7 +35,7 @@ module Stargate
             end
           end
           xml_data << "</TableSchema>"
-          Response::TableResponse.new(post(request.create, xml_data))
+          put_response(request.create, xml_data).is_a?(Net::HTTPSuccess)
         rescue Net::ProtocolError => e
           if e.to_s.include?("TableExistsException")
             raise TableExistsError, "Table '#{name}' already exists"

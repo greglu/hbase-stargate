@@ -1,7 +1,7 @@
 module Stargate module Request; end; end
 
-require File.dirname(__FILE__) + '/request/basic_request'
-require File.dirname(__FILE__) + '/request/meta_request'
-require File.dirname(__FILE__) + '/request/table_request'
-require File.dirname(__FILE__) + '/request/row_request'
-require File.dirname(__FILE__) + '/request/scanner_request'
+require 'stargate/request/basic_request'
+require 'stargate/request/meta_request'
+require 'stargate/request/table_request'
+require 'stargate/request/row_request'
+require 'stargate/request/scanner_request'

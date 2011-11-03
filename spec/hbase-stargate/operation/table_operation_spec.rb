@@ -7,16 +7,17 @@ describe Stargate::Operation::TableOperation do
   end
 
   it "should create a table called test-hbase-stargate" do
-    table = @client.create_table('test-hbase-stargate', { :name => 'habbit',
-                                   :max_version => 3,
-                                   :compression => Stargate::Model::CompressionType::NONE,
-                                   :in_memory => false,
-                                   :block_cache => false,
-                                   :ttl => -1,
-                                   :max_cell_size => 2147483647,
-                                   :bloomfilter => false
-                                 })
-    table.should.is_a? Stargate::Model::TableDescriptor
+    @table_options = { :name => 'habbit',
+                       :max_version => 3,
+                       :compression => Stargate::Model::CompressionType::NONE,
+                       :in_memory => false,
+                       :block_cache => false,
+                       :ttl => -1,
+                       :max_cell_size => 2147483647,
+                       :bloomfilter => false
+                     }
+
+    @client.create_table('test-hbase-stargate', @table_options).should be_true
   end
 
   it "should show the table info of 'test-hbase-stargate'" do
@@ -26,7 +27,10 @@ describe Stargate::Operation::TableOperation do
     table.column_families.should respond_to(:each)
     table.column_families.map(&:name).should include("habbit")
     table.column_families.each do |cf|
-      cf.should.is_a? Stargate::Model::ColumnDescriptor
+      cf.should be_a_kind_of Stargate::Model::ColumnDescriptor
+      cf.max_versions.should == 3
+      cf.bloomfilter.should be_false
+      cf.compression.should == "NONE"
     end
   end
 

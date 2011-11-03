@@ -7,6 +7,12 @@ describe Stargate::Operation::MetaOperation do
     @client = Stargate::Client.new(url)
   end
 
+  it "should return ConnectionNotEstablishedError when server cannot be connected to" do
+    lambda {
+      Stargate::Client.new("http://doesntexist.local:8080").list_tables
+    }.should raise_error(Stargate::ConnectionNotEstablishedError)
+  end
+
   it "should return tables" do
     tables = @client.list_tables
     tables.should respond_to(:size)
