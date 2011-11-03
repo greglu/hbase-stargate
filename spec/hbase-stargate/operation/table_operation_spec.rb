@@ -16,7 +16,6 @@ describe Stargate::Operation::TableOperation do
                        :max_cell_size => 2147483647,
                        :bloomfilter => false
                      }
-
     @client.create_table('test-hbase-stargate', @table_options).should be_true
   end
 

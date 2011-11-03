@@ -1,4 +1,4 @@
-require 'net/http'
+require 'patron'
 require 'stargate/operation/meta_operation'
 require 'stargate/operation/table_operation'
 require 'stargate/operation/row_operation'
@@ -19,14 +19,12 @@ module Stargate
         raise "invalid http url: #{url}"
       end
 
+      @connection = Patron::Session.new
+      @connection.base_url = url
+      @connection.timeout = opts[:timeout] unless opts[:timeout].nil?
+
       # Not actually opening the connection yet, just setting up the persistent connection.
-      if opts[:proxy]
-        proxy_address, proxy_port = opts[:proxy].split(':')
-        @connection = Net::HTTP.Proxy(proxy_address, proxy_port).new(@url.host, @url.port)
-      else
-        @connection = Net::HTTP.new(@url.host, @url.port)
-      end
-      @connection.read_timeout = opts[:timeout] if opts[:timeout]
+      @connection.proxy = opts[:proxy] unless opts[:proxy].nil?
     end
 
     def get(path, options = {})
@@ -66,21 +64,19 @@ module Stargate
       def safe_response(&block)
         begin
           yield
-        rescue Errno::ECONNREFUSED, SocketError
-          raise ConnectionNotEstablishedError, "Connection problem with Stargate server #{@url}"
-        rescue Timeout::Error => e
-          raise ConnectionTimeoutError, "Connection timed out to Stargate server #{@url}"
+        rescue => e
+          raise ConnectionNotEstablishedError, "Connection problem with Stargate server #{@url}:\n#{e.message}"
         end
       end
 
       def safe_request(&block)
         response = safe_response{ yield block }
 
-        case response
-        when Net::HTTPSuccess
+        case response.status
+        when 200
           response.body
         else
-          response.error!
+          raise response.status_line
         end
       end
 

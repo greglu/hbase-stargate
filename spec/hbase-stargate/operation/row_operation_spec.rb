@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), "..", "..", "spec_helper")
 describe Stargate::Operation::RowOperation do
   before :all do
     url = ENV["STARGATE_URL"].nil? ? "http://localhost:8080" : ENV["STARGATE_URL"]
+
     @client = Stargate::Client.new(url)
 
     table = @client.create_table("test-hbase-stargate", "col1")

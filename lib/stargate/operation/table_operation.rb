@@ -5,16 +5,15 @@ module Stargate
         begin
           request = Request::TableRequest.new(name)
           Response::TableResponse.new(get(request.show)).parse
-        rescue Net::ProtocolError
+        rescue => e
           raise TableNotFoundError, "Table '#{name}' Not found"
         end
       end
 
       def create_table(name, *args)
-        request = Request::TableRequest.new(name)
-
         raise StandardError, "Table name must be of type String" unless name.instance_of? String
 
+        request = Request::TableRequest.new(name)
         begin
           xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><TableSchema name='#{name}' IS_META='false' IS_ROOT='false'>"
           for arg in args
@@ -35,13 +34,10 @@ module Stargate
             end
           end
           xml_data << "</TableSchema>"
-          put_response(request.create, xml_data).is_a?(Net::HTTPSuccess)
-        rescue Net::ProtocolError => e
-          if e.to_s.include?("TableExistsException")
-            raise TableExistsError, "Table '#{name}' already exists"
-          else
-            raise TableFailCreateError, e.message
-          end
+
+          put_response(request.create, xml_data).status == 201
+        rescue => e
+          raise TableFailCreateError, e.message
         end
       end
 
@@ -53,7 +49,7 @@ module Stargate
         begin
           xml_data = construct_xml_stream(name, *args)
           Response::TableResponse.new(put(request.update, xml_data))
-        rescue Net::ProtocolError => e
+        rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table '#{name}' not exists"
           else
@@ -66,7 +62,7 @@ module Stargate
         begin
           request = Request::TableRequest.new(name)
           Response::TableResponse.new(delete(request.delete(columns)))
-        rescue Net::ProtocolError => e
+        rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table '#{name}' not exists"
           elsif e.to_s.include?("TableNotDisabledException")

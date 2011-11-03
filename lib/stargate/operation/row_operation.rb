@@ -29,7 +29,7 @@ module Stargate
             end
             rows
           end
-        rescue Net::ProtocolError => e
+        rescue => e
           # TODO: Use better handling instead of this.
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
@@ -66,7 +66,7 @@ module Stargate
           xml_data << "</Row></CellSet>"
 
           Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
-        rescue Net::ProtocolError => e
+        rescue => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
           elsif e.to_s.include?("Row")
@@ -81,7 +81,7 @@ module Stargate
         begin
           request = Request::RowRequest.new(table_name, name, timestamp)
           Response::RowResponse.new(delete_response(request.delete(columns)), :delete_row).parse
-        rescue Net::ProtocolError => e
+        rescue => e
           if e.to_s.include?("Table")
             raise TableNotFoundError, "Table '#{table_name}' Not Found"
           elsif e.to_s.include?("Row")

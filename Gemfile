@@ -1,5 +1,7 @@
 source :rubygems
 
+gem "patron"
+
 platforms :ruby do
   gem "yajl-ruby"
 end

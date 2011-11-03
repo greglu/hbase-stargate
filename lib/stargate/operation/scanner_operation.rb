@@ -43,7 +43,7 @@ module Stargate
           scanner.table_name = table_name
           scanner.batch_size = batch
           scanner
-        rescue Net::ProtocolError => e
+        rescue => e
           raise StandardError, e.to_s
         end
       end
@@ -56,7 +56,7 @@ module Stargate
           rows = []
           begin
             # Loop until we've reached the limit, or the scanner was exhausted (HTTP 204 returned)
-            until (limit && rows.size >= limit) || (response = get_response(request_url)).code == "204"
+            until (limit && rows.size >= limit) || (response = get_response(request_url)).status == 204
               rows.concat Response::ScannerResponse.new(response.body, :get_rows).parse
 
               rows.each do |row|

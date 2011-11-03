@@ -22,8 +22,8 @@ module Stargate
       end
 
       def verify_success(response)
-        case response
-        when Net::HTTPSuccess
+        case response.status
+        when 200
           true
         else
           false

@@ -8,6 +8,7 @@ GEM
       rbx-require-relative (> 0.0.4)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
+    patron (0.4.16)
     rbx-require-relative (0.0.5)
     rspec (2.3.0)
       rspec-core (~> 2.3.0)
@@ -39,6 +40,7 @@ PLATFORMS
 
 DEPENDENCIES
   json
+  patron
   rspec
   ruby-debug
   ruby-debug19
