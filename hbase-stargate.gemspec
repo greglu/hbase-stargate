@@ -16,10 +16,12 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.required_rubygems_version = ">= 1.3.6"
 
-  s.files = Dir.glob("lib/**/*") + %w(LICENSE README.textile Rakefile)
+  s.files = Dir.glob("lib/**/*") + %w(LICENSE README.textile Rakefile hbase-stargate.gemspec)
   s.test_files = Dir.glob("spec/**/*")
   s.require_paths = ["lib"]
 
-  s.add_dependency(%q<json>, [">= 0"])
+  s.add_dependency(%q<yajl-ruby>, [">= 0"])
+  s.add_dependency(%q<patron>, [">= 0"])
+
   s.add_development_dependency "rspec"
 end
