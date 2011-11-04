@@ -1,3 +1,7 @@
+v1.6.0 November 4, 2011
+ * Implemented HTTP access with Patron (https://github.com/toland/patron) instead of net/http.
+ * Checked that the library works against HBase 0.90.4.
+
 v1.5.0 January 17, 2010
  * Renamed the project from hbase-ruby to hbase-stargate and it can be found at: http://github.com/greglu/hbase-stargate
 

@@ -69,7 +69,7 @@ module Stargate
 
           # Prune the last few rows if the limit was passed.
           (limit) ? rows.slice(0, limit) : rows
-        rescue StandardError => e
+        rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table #{table_name} Not Found!"
           else
@@ -82,7 +82,7 @@ module Stargate
         begin
           request = Request::ScannerRequest.new(scanner.table_name)
           Response::ScannerResponse.new(delete_response(request.close(scanner)), :close_scanner).parse
-        rescue StandardError => e
+        rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table #{table_name} Not Found!"
           else

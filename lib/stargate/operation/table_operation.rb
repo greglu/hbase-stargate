@@ -42,6 +42,8 @@ module Stargate
       end
 
       def alter_table(name, *args)
+        raise NotImplementedError, "Altering the table is not supported yet"
+
         raise StandardError, "Table name must be of type String" unless name.instance_of? String
 
         request = Request::TableRequest.new(name)

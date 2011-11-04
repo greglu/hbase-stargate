@@ -65,7 +65,7 @@ module Stargate
         begin
           yield
         rescue => e
-          raise ConnectionNotEstablishedError, "Connection problem with Stargate server #{@url}:\n#{e.message}"
+          raise ConnectionNotEstablishedError, "Connection problem with HBase rest server #{@url}:\n#{e.message}"
         end
       end
 

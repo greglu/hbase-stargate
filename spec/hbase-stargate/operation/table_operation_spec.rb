@@ -33,6 +33,12 @@ describe Stargate::Operation::TableOperation do
     end
   end
 
+  it "should throw an error when trying to run alter_table" do
+    lambda {
+      @client.alter_table("test-hbase-stargate")
+    }.should raise_error(NotImplementedError)
+  end
+
   it "should delete the table 'test-hbase-stargate'" do
     lambda {
       table = @client.destroy_table("test-hbase-stargate")

@@ -49,7 +49,7 @@ module Stargate
             elsif columns.instance_of? Hash
               data = [columns]
             else
-              raise StandardError, "Only Array or Hash data accepted"
+              raise ArgumentError, "Column data should be given as an Array or Hash"
             end
           end
 

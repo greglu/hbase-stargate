@@ -12,6 +12,5 @@ end
 
 group :test do
   gem "rspec"
-  gem 'ruby-debug', :platforms => :ruby_18
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  # gem 'ruby-debug19', :require => 'ruby-debug'
 end
