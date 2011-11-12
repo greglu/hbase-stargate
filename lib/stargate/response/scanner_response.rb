@@ -15,7 +15,7 @@ module Stargate
           when 201
             Stargate::Model::Scanner.new(:scanner_url => raw_data.headers["Location"])
           when 404
-            raise TableNotFoundError, "Table #{table_name} Not Found!"
+            raise TableNotFoundError, "Table Not Found: #{raw_data.to_s}"
           else
             raise StandardError, "Unable to open scanner. Received the following message: #{raw_data.status_line}"
           end

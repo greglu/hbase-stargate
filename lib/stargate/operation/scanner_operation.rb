@@ -11,7 +11,7 @@ module Stargate
       def open_scanner(table_name, options = {})
         raise ArgumentError, "options should be given as a Hash" unless options.instance_of? Hash
         columns = options.delete(:columns)
-        batch = options.delete(:batch) || "10"
+        batch = options.delete(:batch) || "1000"
         start_time = options.delete(:start_time)
         end_time = options.delete(:end_time)
 
@@ -48,27 +48,24 @@ module Stargate
         end
       end
 
-      def get_rows(scanner, limit = nil)
+      def each_row(scanner, &block)
         begin
           request = Request::ScannerRequest.new(scanner.table_name)
           request_url = request.get_rows(scanner) # The url to the scanner is the same for each batch
 
-          rows = []
           begin
             # Loop until we've reached the limit, or the scanner was exhausted (HTTP 204 returned)
-            until (limit && rows.size >= limit) || (response = get_response(request_url)).status == 204
-              rows.concat Response::ScannerResponse.new(response.body, :get_rows).parse
+            until (response = get_response(request_url)).status == 204
+              rows = Response::ScannerResponse.new(response.body, :get_rows).parse
 
               rows.each do |row|
                 row.table_name = scanner.table_name
+                block.call(row)
               end
             end
-          rescue Exception => e
-            raise Stargate::ScannerError, "Scanner failed while getting rows. #{e.message}"
+          rescue => e
+            raise Stargate::ScannerError, "Scanner iteration failed with the following error:\n#{e.message}"
           end
-
-          # Prune the last few rows if the limit was passed.
-          (limit) ? rows.slice(0, limit) : rows
         rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table #{table_name} Not Found!"
@@ -76,6 +73,15 @@ module Stargate
             raise StandardError, e.to_s
           end
         end
+      end
+
+      def get_rows(scanner, limit = nil)
+        rows = []
+        each_row(scanner) do |row|
+          break if !limit.nil? && rows.size >= limit
+          rows << row
+        end
+        return rows
       end
 
       def close_scanner(scanner)
