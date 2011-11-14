@@ -1,20 +1,15 @@
 module Stargate
   module Operation
     module RowOperation
-      Converter = {
-        '&' => '&amp;',
-        '<' => '&lt;',
-        '>' => '&gt;',
-        "'" => '&apos;',
-        '"' => '&quot;'
-      }
+
+      CONVERTER = { '&' => '&amp;', '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;' }.freeze
 
       def row_timestamps(table_name, name)
         raise NotImplementedError, "Currently not supported in Stargate client"
       end
 
       def show_row(table_name, name, timestamp = nil, columns = nil, options = { })
-        begin
+        handle_exception(table_name, name) do
           options[:version] ||= 1
 
           request = Request::RowRequest.new(table_name, name, timestamp)
@@ -29,18 +24,11 @@ module Stargate
             end
             rows
           end
-        rescue => e
-          # TODO: Use better handling instead of this.
-          if e.to_s.include?("Table")
-            raise TableNotFoundError, "Table '#{table_name}' Not Found"
-          elsif e.to_s.include?("404")
-            raise RowNotFoundError, "Row '#{name}' Not Found"
-          end
         end
       end
 
       def create_row(table_name, name, timestamp = nil, columns = nil)
-        begin
+        handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           data = []
           if columns
@@ -56,7 +44,7 @@ module Stargate
           xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><CellSet>"
           xml_data << "<Row key='#{[name].pack('m') rescue ''}'>"
           data.each do |d|
-            escape_name = d[:name].gsub(/[&<>'"]/) { |match| Converter[match] }
+            escape_name = d[:name].gsub(/[&<>'"]/) { |match| CONVERTER[match] }
             xml_data << "<Cell "
             xml_data << "timestamp='#{timestamp}' " if timestamp
             xml_data << "column='#{[escape_name].pack('m') rescue ''}'>"
@@ -66,29 +54,32 @@ module Stargate
           xml_data << "</Row></CellSet>"
 
           Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
-        rescue => e
-          if e.to_s.include?("Table")
-            raise TableNotFoundError, "Table '#{table_name}' Not Found"
-          elsif e.to_s.include?("Row")
-            raise RowNotFoundError, "Row '#{name}' Not Found"
-          else
-            raise StandardError, "Error encountered while trying to create row: #{e.message}"
-          end
         end
       end
 
       def delete_row(table_name, name, timestamp = nil, columns = nil)
-        begin
+        handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           Response::RowResponse.new(delete_response(request.delete(columns)), :delete_row).parse
-        rescue => e
-          if e.to_s.include?("Table")
-            raise TableNotFoundError, "Table '#{table_name}' Not Found"
-          elsif e.to_s.include?("Row")
-            raise RowNotFoundError, "Row '#{name}' Not Found"
-          end
         end
       end
+
+      private
+
+        def handle_exception(table_name, row = nil)
+          begin
+            yield
+          rescue => e
+            if e.to_s.include?("Table")
+              raise TableNotFoundError, "Table '#{table_name}' not found"
+            elsif !row.nil? && e.to_s.include?("404 Not Found")
+              raise RowNotFoundError, "Row '#{row}' not found"
+            else
+              raise StandardError, "Following error encountered: #{e.message}"
+            end
+          end
+        end
+
     end
   end
 end

@@ -33,10 +33,13 @@ module Stargate
           end
 
           model_rows
-        when :create_row
-          verify_success(raw_data)
-        when :delete_row
-          verify_success(raw_data)
+        when :create_row, :delete_row
+          case raw_data.status
+          when 404, 500
+            raise raw_data.status_line
+          else
+            verify_success(raw_data)
+          end
         else
           puts "method '#{@method}' not supported yet"
         end

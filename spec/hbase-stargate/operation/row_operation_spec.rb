@@ -9,10 +9,32 @@ describe Stargate::Operation::RowOperation do
     table = @client.create_table("test-hbase-stargate", "col1")
   end
 
+  it "should raise errors when the table doesn't exist" do
+    lambda {
+      @client.show_row("non-existant-table", "non-existant-row")
+    }.should raise_error(Stargate::TableNotFoundError)
+
+    lambda {
+      @client.create_row("non-existant-table", "non-existant-row", nil, {:name => "col1:", :value => "row1-col1"})
+    }.should raise_error(Stargate::TableNotFoundError)
+
+    lambda {
+      @client.delete_row("non-existant-table", "non-existant-row")
+    }.should raise_error(Stargate::TableNotFoundError)
+  end
+
   it "should create a row called 'row1'" do
     lambda {
       @client.create_row("test-hbase-stargate", "row1", nil, { :name => "col1:", :value => "row1-col1" }).should be_true
     }.should_not raise_error
+
+    lambda {
+      @client.show_row("test-hbase-stargate", "row1")["col1:"].value.should == "row1-col1"
+    }.should_not raise_error
+
+    lambda {
+      row = @client.show_row("test-hbase-stargate", "nonexistant-row")
+    }.should raise_error(Stargate::RowNotFoundError)
   end
 
   it "should create a row named 'row2' with timestamp value" do
