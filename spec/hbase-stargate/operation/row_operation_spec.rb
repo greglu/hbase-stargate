@@ -18,18 +18,30 @@ describe Stargate::Operation::RowOperation do
   it "should create a row named 'row2' with timestamp value" do
     timestamp = (Time.now - (5*60)).to_i
     lambda {
-      @client.create_row("test-hbase-stargate", "row2", timestamp, { :name => "col1:cell1", :value => "row2-col1-cell1" }).should be_true
+      @client.create_row("test-hbase-stargate", "row2", timestamp, [{ :name => "col1:cell1", :value => "row2-col1-cell1" }, { :name => "col1:cell2", :value => "row2-col1-cell2" }]).should be_true
     }.should_not raise_error
 
     row = @client.show_row("test-hbase-stargate", "row2")
     row.should be_a_kind_of(Stargate::Model::Row)
     row.name.should == "row2"
 
+    # Checking the columns using the old Array method
     columns = row.columns
-    columns.size.should == 1
-    columns.first.name.should == "col1:cell1"
-    columns.first.value.should == "row2-col1-cell1"
-    columns.first.timestamp.should == timestamp
+    columns.size.should == 2
+    columns[0].name.should == "col1:cell1"
+    columns[0].value.should == "row2-col1-cell1"
+    columns[0].timestamp.should == timestamp
+    columns[1].name.should == "col1:cell2"
+    columns[1].value.should == "row2-col1-cell2"
+    columns[1].timestamp.should == timestamp
+
+    # Checking the columns using the hashmap method
+    row["col1:cell1"].should be_a_kind_of(Stargate::Model::Column)
+    row["col1:cell1"].value.should == "row2-col1-cell1"
+    row["col1:cell1"].timestamp.should == timestamp
+    row["col1:cell2"].should be_a_kind_of(Stargate::Model::Column)
+    row["col1:cell2"].value.should == "row2-col1-cell2"
+    row["col1:cell2"].timestamp.should == timestamp
   end
 
   it "should show the rows 'row1'" do
