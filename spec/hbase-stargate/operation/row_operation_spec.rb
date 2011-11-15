@@ -1,15 +1,41 @@
 require File.join(File.dirname(__FILE__), "..", "..", "spec_helper")
 
 describe Stargate::Operation::RowOperation do
+
   before :all do
     url = ENV["STARGATE_URL"].nil? ? "http://localhost:8080" : ENV["STARGATE_URL"]
 
     @client = Stargate::Client.new(url)
+    @table_name = "test-hbase-stargate"
 
-    table = @client.create_table("test-hbase-stargate", "col1")
+    table = @client.create_table(@table_name, "col1")
   end
 
-  it "should raise errors when the table doesn't exist" do
+  after :all do
+    table = @client.destroy_table(@table_name)
+  end
+
+  before :each do
+    # Clear the table of any current records
+    scanner = @client.open_scanner("test-hbase-stargate")
+    begin
+      @client.each_row(scanner) do |row|
+        @client.delete_row(@table_name, row.name)
+      end
+    ensure
+      @client.close_scanner(scanner)
+    end
+  end
+
+  it "should raise errors when the table or row doesn't exist" do
+    lambda {
+      @client.set("non-existant-table", "nonexistant-row", {"col1" => "row1-col1"})
+    }.should raise_error(Stargate::TableNotFoundError)
+
+    lambda {
+      @client.delete_row("non-existant-table", "non-existant-row")
+    }.should raise_error(Stargate::TableNotFoundError)
+
     lambda {
       @client.show_row("non-existant-table", "non-existant-row")
     }.should raise_error(Stargate::TableNotFoundError)
@@ -19,31 +45,77 @@ describe Stargate::Operation::RowOperation do
     }.should raise_error(Stargate::TableNotFoundError)
 
     lambda {
-      @client.delete_row("non-existant-table", "non-existant-row")
-    }.should raise_error(Stargate::TableNotFoundError)
-  end
-
-  it "should create a row called 'row1'" do
-    lambda {
-      @client.create_row("test-hbase-stargate", "row1", nil, { :name => "col1:", :value => "row1-col1" }).should be_true
-    }.should_not raise_error
-
-    lambda {
-      @client.show_row("test-hbase-stargate", "row1")["col1:"].value.should == "row1-col1"
-    }.should_not raise_error
-
-    lambda {
-      row = @client.show_row("test-hbase-stargate", "nonexistant-row")
+      @client.show_row(@table_name, "nonexistant-row")
     }.should raise_error(Stargate::RowNotFoundError)
   end
 
-  it "should create a row named 'row2' with timestamp value" do
-    timestamp = (Time.now - (5*60)).to_i
-    lambda {
-      @client.create_row("test-hbase-stargate", "row2", timestamp, [{ :name => "col1:cell1", :value => "row2-col1-cell1" }, { :name => "col1:cell2", :value => "row2-col1-cell2" }]).should be_true
-    }.should_not raise_error
+  it "should create and read a row called 'row1'" do
+    # New API
+    @client.set(@table_name, "row1", {"col1:cell1" => "row1-col1"}).should be_true
+    @client.show_row(@table_name, "row1")["col1:cell1"].value.should == "row1-col1"
+    # @client.get(@table_name, "row1")["col1:cell1"].value.should == "row1-col1"
 
-    row = @client.show_row("test-hbase-stargate", "row2")
+    # Old API
+    @client.create_row(@table_name, "row2", nil, {:name => "col1:cell1", :value => "row2-col1"}).should be_true
+    @client.show_row(@table_name, "row2")["col1:cell1"].value.should == "row2-col1"
+  end
+
+  it "should be able to store multiple columns and use timestamps" do
+    # timestamp = (Time.now - (5*60)).to_i
+
+    @client.set(@table_name, "new-set-row1", {"col1:cell1" => "col1-cell1-value", "col1:cell2" => "col1-cell2-value" }).should be_true
+
+    @client.set(@table_name, "new-set-row2", {"col1:cell1" => "col1-cell1-value", "col1:cell2" => "col1-cell2-value" }).should be_true
+
+    row1 = @client.show_row(@table_name, "new-set-row1")
+    row2 = @client.show_row(@table_name, "new-set-row2")
+
+    [row1, row2].each do |row|
+      row["col1:cell1"].value.should == "col1-cell1-value"
+      row["col1:cell2"].value.should == "col1-cell2-value"
+    end
+
+    # row2["col1:cell1"].timestamp.should == timestamp
+    # row2["col1:cell2"].timestamp.should == timestamp
+  end
+
+  it "should be able to get versions" do
+    # Save 5 different versions
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-value-version1" }).should be_true
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-value-version2" }).should be_true
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-value-version3" }).should be_true
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-value-version4" }).should be_true
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-value-version5" }).should be_true
+
+    # Retrieving only 2 versions out of the maximum of 3 stored, and making sure they're returned in the right order
+    row1 = @client.show_row(@table_name, "row1", nil, nil, :version => 2)
+    row1.name.should == "row1"
+    row1.columns.size.should == 1
+    column = row1.columns.first
+    column.name.should == "col1:cell1"
+    column.value.should == "col1-cell1-value-version5"
+    column.versions.size.should == 1
+    column.versions[0].value.should == "col1-cell1-value-version4"
+
+    row1 = @client.show_row(@table_name, "row1", nil, nil, :version => 3)
+    row1.name.should == "row1"
+    row1.columns.size.should == 1
+    column = row1.columns.first
+    column.name.should == "col1:cell1"
+    column.value.should == "col1-cell1-value-version5"
+    column.versions.size.should == 2
+    column.versions[0].value.should == "col1-cell1-value-version4"
+    column.versions[1].value.should == "col1-cell1-value-version3"
+  end
+
+  it "should create a row named 'row2' with timestamp value" do
+    # TODO: Figure out why the hell this sleep is needed for the test to pass
+    sleep 1
+
+    timestamp = Time.now.to_i*1000
+    @client.create_row(@table_name, "row2", timestamp, [{ :name => "col1:cell1", :value => "row2-col1-cell1" }, { :name => "col1:cell2", :value => "row2-col1-cell2" }]).should be_true
+
+    row = @client.show_row(@table_name, "row2")
     row.should be_a_kind_of(Stargate::Model::Row)
     row.name.should == "row2"
 
@@ -66,61 +138,65 @@ describe Stargate::Operation::RowOperation do
     row["col1:cell2"].timestamp.should == timestamp
   end
 
-  it "should show the rows 'row1'" do
-    row = @client.show_row("test-hbase-stargate", "row1")
-    row.should.is_a? Stargate::Model::Row
-    row.table_name.should == "test-hbase-stargate"
-    row.name.should == "row1"
-    row.columns.size.should == 1
-    row.columns.each do |col|
-      col.should.is_a? Stargate::Model::Column
-      col.name.should == "col1:"
-      col.value.should == "row1-col1"
-    end
-  end
-
   it "should support globbing of the row key by showing rows 'row', 'row1' and 'row2' but not 'pow1'" do
-    lambda {
-      @client.create_row("test-hbase-stargate", "pow1", nil, { :name => "col1:", :value => "pow1-col1" }).should be_true
-      @client.create_row("test-hbase-stargate", "row", nil, { :name => "col1:", :value => "row-col1" }).should be_true
-    }.should_not raise_error
-    rows = @client.show_row("test-hbase-stargate", "row*")
+    @client.create_row(@table_name, "pow1", nil, { :name => "col1:", :value => "pow1-col1" }).should be_true
+    @client.create_row(@table_name, "row1", nil, { :name => "col1:", :value => "row-col1" }).should be_true
+    @client.create_row(@table_name, "row2", nil, { :name => "col1:", :value => "row-col1" }).should be_true
+    @client.create_row(@table_name, "row3", nil, { :name => "col1:", :value => "row-col1" }).should be_true
+
+    rows = @client.show_row(@table_name, "row*")
     rows.size.should == 3
+    (rows.map(&:name) - ["row1", "row2", "row3"]).should be_empty
+
     rows.each do |row|
-      row.should.is_a? Stargate::Model::Row
-      row.table_name.should == "test-hbase-stargate"
-      row.columns.each do |col|
-        col.should.is_a? Stargate::Model::Column
-      end
+      row.should be_a_kind_of(Stargate::Model::Row)
+      row.table_name.should == @table_name
+      row.columns.size.should == 1
+      row["col1:"].should be_a_kind_of(Stargate::Model::Column)
+      row["col1:"].value.should == "row-col1"
     end
   end
 
   it "should delete rows when timestamps are defined" do
-    row1 = @client.show_row("test-hbase-stargate", "row1")
-    timestamp = row1.columns.map(&:timestamp).uniq.first
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-version1", "col1:cell2" => "col1-cell2-version1" }).should be_true
+    sleep 1
+    @client.set(@table_name, "row1", {"col1:cell1" => "col1-cell1-version2", "col1:cell2" => "col1-cell2-version2" }).should be_true
+    
+    row1 = @client.show_row(@table_name, "row1", nil, nil, :version => 3)
+
+    row1["col1:cell1"].value.should == "col1-cell1-version2"
+    row1["col1:cell1"].versions.size.should == 1
+
+    newer_timestamp = row1["col1:cell1"].timestamp
+    older_timestamp = row1["col1:cell1"].versions.first.timestamp
 
     lambda {
-      @client.delete_row('test-hbase-stargate', 'row1', timestamp).should be_true
+      @client.delete_row(@table_name, 'row1', older_timestamp).should be_true
+    }.should_not raise_error
+
+    row1 = @client.show_row(@table_name, "row1", nil, nil, :version => 3)
+    row1["col1:cell1"].timestamp.should == newer_timestamp
+    
+    lambda {
+      @client.delete_row(@table_name, 'row1', newer_timestamp).should be_true
     }.should_not raise_error
 
     lambda {
-      @client.show_row('test-hbase-stargate', 'row1')
-    }.should raise_error
+      @client.show_row(@table_name, 'row1')
+    }.should raise_error(Stargate::RowNotFoundError)
   end
 
   it "should delete rows without a timestamp provided" do
-    row2 = @client.show_row("test-hbase-stargate", "row2")
+    @client.set(@table_name, "row2", {"col1:cell1" => "col1-cell1-value", "col1:cell2" => "col1-cell2-value" }).should be_true
+    row2 = @client.show_row(@table_name, "row2")
 
     lambda {
-      @client.delete_row('test-hbase-stargate', 'row2').should be_true
+      @client.delete_row(@table_name, 'row2').should be_true
     }.should_not raise_error
 
     lambda {
-      @client.show_row('test-hbase-stargate', 'row2')
-    }.should raise_error
+      @client.show_row(@table_name, 'row2')
+    }.should raise_error(Stargate::RowNotFoundError)
   end
 
-  after :all do
-    table = @client.destroy_table("test-hbase-stargate")
-  end
 end

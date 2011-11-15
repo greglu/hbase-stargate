@@ -4,11 +4,35 @@ module Stargate
 
       CONVERTER = { '&' => '&amp;', '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;' }.freeze
 
-      def row_timestamps(table_name, name)
-        raise NotImplementedError, "Currently not supported in Stargate client"
+      def set(table_name, row, columns, timestamp = nil)
+        request = Request::RowRequest.new(table_name, row, timestamp)
+
+        cells = []
+        columns.each do |name, value|
+          escaped_name = name.gsub(/[&<>'"]/) { |match| CONVERTER[match] }
+          cell = {}
+          cell["@column"] = [escaped_name].pack('m') rescue ''
+          cell["$"] = [value].pack("m") rescue ''
+          cell["@timestamp"] = timestamp*1000 unless timestamp.nil?
+          cells << cell
+        end
+
+        json_data = Yajl::Encoder.encode({"Row" => {"@key" => [row].pack('m'), "Cell" => cells}})
+
+        handle_exception(table_name, row) do
+          response = post_response(request.create(columns.keys), json_data, {'Content-Type' => 'application/json'})
+          Response::RowResponse.new(response, :create_row).parse
+        end
       end
 
-      def show_row(table_name, name, timestamp = nil, columns = nil, options = { })
+      # def get(table_name, rows, options = {})
+      #   request = Request::RowRequest.new(table_name, name, options.delete(:timestamp))
+      #   options[:version] ||= 1
+      #
+      #   results = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse
+      # end
+
+      def show_row(table_name, name, timestamp = nil, columns = nil, options = {})
         handle_exception(table_name, name) do
           options[:version] ||= 1
 
@@ -60,7 +84,8 @@ module Stargate
       def delete_row(table_name, name, timestamp = nil, columns = nil)
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
-          Response::RowResponse.new(delete_response(request.delete(columns)), :delete_row).parse
+          response = delete_response(request.delete(columns))
+          Response::RowResponse.new(response, :delete_row).parse
         end
       end
 

@@ -24,9 +24,13 @@ module Stargate
               name = col["column"].strip.unpack('m').first
               value = col["$"].strip.unpack('m').first rescue nil
               timestamp = col["timestamp"].to_i
+              column = Stargate::Model::Column.new(:name => name, :value => value, :timestamp => timestamp)
 
-              columns_map.delete(name) if columns_map.has_key?(name)
-              columns_map[name] = Stargate::Model::Column.new(:name => name, :value => value, :timestamp => timestamp)
+              if columns_map.has_key?(name)
+                columns_map[name].versions << column
+              else
+                columns_map[name] = column
+              end
             end
 
             model_rows << Stargate::Model::Row.new(:name => rname, :total_count => count, :columns_map => columns_map)
