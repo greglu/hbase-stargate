@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Stargate
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (S)</a> &raquo; 
+    
+    
+    <span class="title">Stargate</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Stargate
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/stargate.rb<span class="defines">,<br />
+  lib/stargate/model.rb,<br /> lib/stargate/client.rb,<br /> lib/stargate/request.rb,<br /> lib/stargate/version.rb,<br /> lib/stargate/response.rb,<br /> lib/stargate/model/row.rb,<br /> lib/stargate/model/column.rb,<br /> lib/stargate/model/scanner.rb,<br /> lib/stargate/request/row_request.rb,<br /> lib/stargate/request/meta_request.rb,<br /> lib/stargate/request/table_request.rb,<br /> lib/stargate/response/row_response.rb,<br /> lib/stargate/request/basic_request.rb,<br /> lib/stargate/model/table_descriptor.rb,<br /> lib/stargate/response/meta_response.rb,<br /> lib/stargate/response/basic_response.rb,<br /> lib/stargate/operation/row_operation.rb,<br /> lib/stargate/model/region_descriptor.rb,<br /> lib/stargate/request/scanner_request.rb,<br /> lib/stargate/response/table_response.rb,<br /> lib/stargate/model/column_descriptor.rb,<br /> lib/stargate/operation/meta_operation.rb,<br /> lib/stargate/response/scanner_response.rb,<br /> lib/stargate/operation/table_operation.rb,<br /> lib/stargate/operation/scanner_operation.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Stargate/Model.html" title="Stargate::Model (module)">Model</a></span>, <span class='object_link'><a href="Stargate/Operation.html" title="Stargate::Operation (module)">Operation</a></span>, <span class='object_link'><a href="Stargate/Request.html" title="Stargate::Request (module)">Request</a></span>, <span class='object_link'><a href="Stargate/Response.html" title="Stargate::Response (module)">Response</a></span>
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Stargate/Client.html" title="Stargate::Client (class)">Client</a></span>, <span class='object_link'><a href="Stargate/ConnectionNotEstablishedError.html" title="Stargate::ConnectionNotEstablishedError (class)">ConnectionNotEstablishedError</a></span>, <span class='object_link'><a href="Stargate/ConnectionTimeoutError.html" title="Stargate::ConnectionTimeoutError (class)">ConnectionTimeoutError</a></span>, <span class='object_link'><a href="Stargate/Exception.html" title="Stargate::Exception (class)">Exception</a></span>, <span class='object_link'><a href="Stargate/RowNotFoundError.html" title="Stargate::RowNotFoundError (class)">RowNotFoundError</a></span>, <span class='object_link'><a href="Stargate/ScannerError.html" title="Stargate::ScannerError (class)">ScannerError</a></span>, <span class='object_link'><a href="Stargate/TableExistsError.html" title="Stargate::TableExistsError (class)">TableExistsError</a></span>, <span class='object_link'><a href="Stargate/TableFailCreateError.html" title="Stargate::TableFailCreateError (class)">TableFailCreateError</a></span>, <span class='object_link'><a href="Stargate/TableFailDisableError.html" title="Stargate::TableFailDisableError (class)">TableFailDisableError</a></span>, <span class='object_link'><a href="Stargate/TableFailEnableError.html" title="Stargate::TableFailEnableError (class)">TableFailEnableError</a></span>, <span class='object_link'><a href="Stargate/TableNotDisabledError.html" title="Stargate::TableNotDisabledError (class)">TableNotDisabledError</a></span>, <span class='object_link'><a href="Stargate/TableNotFoundError.html" title="Stargate::TableNotFoundError (class)">TableNotFoundError</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.6.1</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:11 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

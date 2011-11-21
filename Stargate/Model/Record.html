@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Stargate::Model::Record
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Stargate.html" title="Stargate (module)">Stargate</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Model.html" title="Stargate::Model (module)">Model</a></span></span>
+     &raquo; 
+    <span class="title">Record</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Stargate::Model::Record
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Stargate::Model::Record</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/stargate/model.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Column.html" title="Stargate::Model::Column (class)">Column</a></span>, <span class='object_link'><a href="ColumnDescriptor.html" title="Stargate::Model::ColumnDescriptor (class)">ColumnDescriptor</a></span>, <span class='object_link'><a href="Region.html" title="Stargate::Model::Region (class)">Region</a></span>, <span class='object_link'><a href="RegionDescriptor.html" title="Stargate::Model::RegionDescriptor (class)">RegionDescriptor</a></span>, <span class='object_link'><a href="Row.html" title="Stargate::Model::Row (class)">Row</a></span>, <span class='object_link'><a href="Scanner.html" title="Stargate::Model::Scanner (class)">Scanner</a></span>, <span class='object_link'><a href="TableDescriptor.html" title="Stargate::Model::TableDescriptor (class)">TableDescriptor</a></span></p>
+</div>
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Record) <strong>initialize</strong>(params) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Record.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Stargate::Model::Record (class)">Record</a></span></tt>) <strong>initialize</strong>(params) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Record
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/model.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id params'>params</span><span class='rparen'>)</span>
+  <span class='id params'>params</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='comma'>,</span> <span class='id value'>value</span><span class='op'>|</span>
+    <span class='id name'>name</span> <span class='op'>=</span> <span class='id key'>key</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='id instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id value'>value</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:11 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

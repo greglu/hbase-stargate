@@ -1,0 +1,875 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Stargate::Operation::TableOperation
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (T)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Stargate.html" title="Stargate (module)">Stargate</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Operation.html" title="Stargate::Operation (module)">Operation</a></span></span>
+     &raquo; 
+    <span class="title">TableOperation</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Stargate::Operation::TableOperation
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../Client.html" title="Stargate::Client (class)">Client</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/stargate/operation/table_operation.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alter_table-instance_method" title="#alter_table (instance method)">- (Object) <strong>alter_table</strong>(name, *args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Will alter the table of the given name.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_table-instance_method" title="#create_table (instance method)">- (true, false) <strong>create_table</strong>(name, *args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Create a table in HBase.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_table-instance_method" title="#delete_table (instance method)">- (Object) <strong>delete_table</strong>(name, columns = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Delete the table with the given name and optionally choose certain columns
+to delete.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy_table-instance_method" title="#destroy_table (instance method)">- (Object) <strong>destroy_table</strong>(name, columns = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Delete the table with the given name and optionally choose certain columns
+to delete.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_table-instance_method" title="#show_table (instance method)">- (Model::TableDescriptor) <strong>show_table</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Get the TableDescriptor object for the table of the given name.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table_regions-instance_method" title="#table_regions (instance method)">- (Object) <strong>table_regions</strong>(name, start_row = nil, end_row = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+List of table regions.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="alter_table-instance_method">
+  
+    - (<tt>Object</tt>) <strong>alter_table</strong>(name, *args) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Will alter the table of the given name. Not currently implemented.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>NotImplementedError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id alter_table'>alter_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id args'>args</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Altering the table is not supported yet</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id raise'>raise</span> <span class='const'>StandardError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table name must be of type String</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id name'>name</span><span class='period'>.</span><span class='id instance_of?'>instance_of?</span> <span class='const'>String</span>
+
+  <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>TableRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+
+  <span class='kw'>begin</span>
+    <span class='id xml_data'>xml_data</span> <span class='op'>=</span> <span class='id construct_xml_stream'>construct_xml_stream</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id args'>args</span><span class='rparen'>)</span>
+    <span class='const'>Response</span><span class='op'>::</span><span class='const'>TableResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id rest_put'>rest_put</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id update'>update</span><span class='comma'>,</span> <span class='id xml_data'>xml_data</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='kw'>if</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableNotFoundException</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>TableNotFoundError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table '</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' not exists</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id raise'>raise</span> <span class='const'>TableFailCreateError</span><span class='comma'>,</span> <span class='id e'>e</span><span class='period'>.</span><span class='id message'>message</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_table-instance_method">
+  
+    - (<tt>true</tt>, <tt>false</tt>) <strong>create_table</strong>(name, *args) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Create a table in HBase. Pass in one or more arguments after the table name
+to configure the column families that should be created. The arguments can
+be a mix of String (no options) or a Hash with options specified from the
+key names of the <span class='object_link'><a href="../Model/ColumnDescriptor.html#AVAILABLE_OPTS-constant" title="Stargate::Model::ColumnDescriptor::AVAILABLE_OPTS (constant)">Model::ColumnDescriptor::AVAILABLE_OPTS</a></span> hash.
+</p>
+<p>
+Example:
+</p>
+<pre class="code">
+ <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id table_options'>table_options</span> <span class='op'>=</span> <span class='lbrace'>{</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>columnfamily1</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+         <span class='symbol'>:max_version</span> <span class='op'>=&gt;</span> <span class='int'>3</span><span class='comma'>,</span>
+         <span class='symbol'>:compression</span> <span class='op'>=&gt;</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Model</span><span class='op'>::</span><span class='const'>CompressionType</span><span class='op'>::</span><span class='const'>NONE</span><span class='comma'>,</span>
+         <span class='symbol'>:in_memory</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+         <span class='symbol'>:block_cache</span> <span class='op'>=&gt;</span> <span class='kw'>false</span><span class='comma'>,</span>
+         <span class='symbol'>:ttl</span> <span class='op'>=&gt;</span> <span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span>
+         <span class='symbol'>:max_cell_size</span> <span class='op'>=&gt;</span> <span class='int'>2147483647</span><span class='comma'>,</span>
+         <span class='symbol'>:bloomfilter</span> <span class='op'>=&gt;</span> <span class='kw'>false</span>
+       <span class='rbrace'>}</span>
+ <span class='id client'>client</span><span class='period'>.</span><span class='id create_table'>create_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test-hbase-stargate</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id table_options'>table_options</span><span class='rparen'>)</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+initial column family
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>true</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+whether or not the table was created
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../Model/ColumnDescriptor.html#AVAILABLE_OPTS-constant" title="Stargate::Model::ColumnDescriptor::AVAILABLE_OPTS (constant)">Model::ColumnDescriptor::AVAILABLE_OPTS</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id create_table'>create_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id args'>args</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table name must be of type String</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id name'>name</span><span class='period'>.</span><span class='id instance_of?'>instance_of?</span> <span class='const'>String</span>
+
+  <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>TableRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id xml_data'>xml_data</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;?xml version='1.0' encoding='UTF-8' standalone='yes'?&gt;&lt;TableSchema name='</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' IS_META='false' IS_ROOT='false'&gt;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>for</span> <span class='id arg'>arg</span> <span class='kw'>in</span> <span class='id args'>args</span>
+      <span class='kw'>if</span> <span class='id arg'>arg</span><span class='period'>.</span><span class='id instance_of?'>instance_of?</span> <span class='const'>String</span>
+        <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;ColumnSchema name='</span><span class='embexpr_beg'>#{</span><span class='id arg'>arg</span><span class='rbrace'>}</span><span class='tstring_content'>' /&gt;</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>elsif</span> <span class='id arg'>arg</span><span class='period'>.</span><span class='id instance_of?'>instance_of?</span> <span class='const'>Hash</span>
+        <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;ColumnSchema </span><span class='tstring_end'>&quot;</span></span>
+
+        <span class='id arg'>arg</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id k'>k</span><span class='comma'>,</span><span class='id v'>v</span><span class='op'>|</span>
+          <span class='kw'>if</span> <span class='const'>Model</span><span class='op'>::</span><span class='const'>ColumnDescriptor</span><span class='op'>::</span><span class='const'>AVAILABLE_OPTS</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id k'>k</span>
+            <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Model</span><span class='op'>::</span><span class='const'>ColumnDescriptor</span><span class='op'>::</span><span class='const'>AVAILABLE_OPTS</span><span class='lbracket'>[</span><span class='id k'>k</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>='</span><span class='embexpr_beg'>#{</span><span class='id v'>v</span><span class='rbrace'>}</span><span class='tstring_content'>' </span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+        <span class='kw'>end</span>
+
+        <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/&gt;</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>else</span>
+        <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id arg'>arg</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'> of </span><span class='embexpr_beg'>#{</span><span class='id arg'>arg</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'> is not of Hash Type</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;/TableSchema&gt;</span><span class='tstring_end'>&quot;</span></span>
+
+    <span class='id rest_put_response'>rest_put_response</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id create'>create</span><span class='comma'>,</span> <span class='id xml_data'>xml_data</span><span class='rparen'>)</span><span class='period'>.</span><span class='id status'>status</span> <span class='op'>==</span> <span class='int'>201</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='id raise'>raise</span> <span class='const'>TableFailCreateError</span><span class='comma'>,</span> <span class='id e'>e</span><span class='period'>.</span><span class='id message'>message</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete_table-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete_table</strong>(name, columns = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Delete the table with the given name and optionally choose certain columns
+to delete
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>[Deprecated]</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+list of column names
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id delete_table'>delete_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id columns'>columns</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>TableRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+    <span class='const'>Response</span><span class='op'>::</span><span class='const'>TableResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id rest_delete'>rest_delete</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='id columns'>columns</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='kw'>if</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableNotFoundException</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>TableNotFoundError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table '</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' not exists</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>elsif</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableNotDisabledException</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>TableNotDisabledError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table '</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' not disabled</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="destroy_table-instance_method">
+  
+    - (<tt>Object</tt>) <strong>destroy_table</strong>(name, columns = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Delete the table with the given name and optionally choose certain columns
+to delete
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>[Deprecated]</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+list of column names
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id destroy_table'>destroy_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id columns'>columns</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id delete_table'>delete_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id columns'>columns</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_table-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Model/TableDescriptor.html" title="Stargate::Model::TableDescriptor (class)">Model::TableDescriptor</a></span></tt>) <strong>show_table</strong>(name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Get the TableDescriptor object for the table of the given name
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/TableDescriptor.html" title="Stargate::Model::TableDescriptor (class)">Model::TableDescriptor</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+TableDescriptor object corresponding to the table
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11
+12
+13
+14
+15
+16</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id show_table'>show_table</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>TableRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+    <span class='const'>Response</span><span class='op'>::</span><span class='const'>TableResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id rest_get'>rest_get</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id show'>show</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id parse'>parse</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='id raise'>raise</span> <span class='const'>TableNotFoundError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table '</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' Not found</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="table_regions-instance_method">
+  
+    - (<tt>Object</tt>) <strong>table_regions</strong>(name, start_row = nil, end_row = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+List of table regions
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>NotImplementedError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/table_operation.rb', line 116</span>
+
+<span class='kw'>def</span> <span class='id table_regions'>table_regions</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id start_row'>start_row</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id end_row'>end_row</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>NotImplementedError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Getting the table regions is not supported yet</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:15 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

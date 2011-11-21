@@ -1,0 +1,791 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Module: Stargate::Operation::ScannerOperation
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Stargate.html" title="Stargate (module)">Stargate</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Operation.html" title="Stargate::Operation (module)">Operation</a></span></span>
+     &raquo; 
+    <span class="title">ScannerOperation</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Stargate::Operation::ScannerOperation
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="../Client.html" title="Stargate::Client (class)">Client</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/stargate/operation/scanner_operation.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_scanner-instance_method" title="#close_scanner (instance method)">- (Object) <strong>close_scanner</strong>(scanner) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Close a <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span> object.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#each_row-instance_method" title="#each_row (instance method)">- (Object) <strong>each_row</strong>(scanner) {|Model::Row| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Execute a given block on each row returned by the <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span>.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_rows-instance_method" title="#get_rows (instance method)">- (Array&lt;Model::Row&gt;) <strong>get_rows</strong>(scanner, limit = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Get a list of rows from a given <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span> that was previously
+created by the <span class='object_link'><a href="#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span> method.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_scanner-instance_method" title="#open_scanner (instance method)">- (Model::Scanner) <strong>open_scanner</strong>(table_name, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Create a scanner for the given table along with options defined in the
+<span class='object_link'><a href="../Model/Scanner.html#AVAILABLE_OPTS-constant" title="Stargate::Model::Scanner::AVAILABLE_OPTS (constant)">Model::Scanner::AVAILABLE_OPTS</a></span> hash.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="close_scanner-instance_method">
+  
+    - (<tt>Object</tt>) <strong>close_scanner</strong>(scanner) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Close a <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span> object
+</p>
+<p>
+Example:
+</p>
+<pre class="code">
+ <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-hbase-stargate</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id client'>client</span><span class='period'>.</span><span class='id each_row'>each_row</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id row'>row</span><span class='op'>|</span>
+   <span class='id puts'>puts</span> <span class='id row'>row</span><span class='period'>.</span><span class='id name'>name</span>
+ <span class='kw'>end</span>
+ <span class='id client'>client</span><span class='period'>.</span><span class='id close_scanner'>close_scanner</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scanner</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Scanner object that was previously open
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span></li>
+    
+      <li><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/scanner_operation.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='id close_scanner'>close_scanner</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>ScannerRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='period'>.</span><span class='id table_name'>table_name</span><span class='rparen'>)</span>
+    <span class='const'>Response</span><span class='op'>::</span><span class='const'>ScannerResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id rest_delete_response'>rest_delete_response</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id close'>close</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:close_scanner</span><span class='rparen'>)</span><span class='period'>.</span><span class='id parse'>parse</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='kw'>if</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableNotFoundException</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>TableNotFoundError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table </span><span class='embexpr_beg'>#{</span><span class='id table_name'>table_name</span><span class='rbrace'>}</span><span class='tstring_content'> Not Found!</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id raise'>raise</span> <span class='const'>StandardError</span><span class='comma'>,</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="each_row-instance_method">
+  
+    - (<tt>Object</tt>) <strong>each_row</strong>(scanner) {|Model::Row| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Execute a given block on each row returned by the <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span>. This
+will only store a batch size (defined during scanner creation) number of
+records and keep requesting more until a break or limit is reached. This
+means that it&#8217;s safe to run this method against the whole dataset
+(assuming that each row encountered isn&#8217;t being stored elsewhere).
+</p>
+<p>
+Example:
+</p>
+<pre class="code">
+ <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-hbase-stargate</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id client'>client</span><span class='period'>.</span><span class='id each_row'>each_row</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id row'>row</span><span class='op'>|</span>
+   <span class='id puts'>puts</span> <span class='id row'>row</span><span class='period'>.</span><span class='id name'>name</span>
+ <span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scanner</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Scanner object that was previously open
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/Row.html" title="Stargate::Model::Row (class)">Model::Row</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+code to run against each row
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span></li>
+    
+      <li><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/scanner_operation.rb', line 73</span>
+
+<span class='kw'>def</span> <span class='id each_row'>each_row</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>ScannerRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='period'>.</span><span class='id table_name'>table_name</span><span class='rparen'>)</span>
+    <span class='id request_url'>request_url</span> <span class='op'>=</span> <span class='id request'>request</span><span class='period'>.</span><span class='id get_rows'>get_rows</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span> <span class='comment'># The url to the scanner is the same for each batch
+</span>
+    <span class='kw'>begin</span>
+      <span class='comment'># Loop until we've reached the limit, or the scanner was exhausted (HTTP 204 returned)
+</span>      <span class='kw'>until</span> <span class='lparen'>(</span><span class='id response'>response</span> <span class='op'>=</span> <span class='id rest_get_response'>rest_get_response</span><span class='lparen'>(</span><span class='id request_url'>request_url</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id status'>status</span> <span class='op'>==</span> <span class='int'>204</span>
+        <span class='id rows'>rows</span> <span class='op'>=</span> <span class='const'>Response</span><span class='op'>::</span><span class='const'>ScannerResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id response'>response</span><span class='period'>.</span><span class='id body'>body</span><span class='comma'>,</span> <span class='symbol'>:get_rows</span><span class='rparen'>)</span><span class='period'>.</span><span class='id parse'>parse</span>
+
+        <span class='id rows'>rows</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id row'>row</span><span class='op'>|</span>
+          <span class='id row'>row</span><span class='period'>.</span><span class='id table_name'>table_name</span> <span class='op'>=</span> <span class='id scanner'>scanner</span><span class='period'>.</span><span class='id table_name'>table_name</span>
+          <span class='id block'>block</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='id row'>row</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+      <span class='id raise'>raise</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>ScannerError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Scanner iteration failed with the following error:\n</span><span class='embexpr_beg'>#{</span><span class='id e'>e</span><span class='period'>.</span><span class='id message'>message</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='kw'>if</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>TableNotFoundException</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>TableNotFoundError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Table </span><span class='embexpr_beg'>#{</span><span class='id table_name'>table_name</span><span class='rbrace'>}</span><span class='tstring_content'> Not Found!</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id raise'>raise</span> <span class='const'>StandardError</span><span class='comma'>,</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_rows-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../Model/Row.html" title="Stargate::Model::Row (class)">Model::Row</a></span>&gt;</tt>) <strong>get_rows</strong>(scanner, limit = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Get a list of rows from a given <span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span> that was previously
+created by the <span class='object_link'><a href="#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span> method. If a limit is given, then this
+method will only retrieve that amount, otherwise it will keep getting rows
+until the scanner is exhausted (i.e. there no more records).
+</p>
+<p>
+Example:
+</p>
+<pre class="code">
+ <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-hbase-stargate</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id rows'>rows</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id get_rows'>get_rows</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='comma'>,</span> <span class='int'>10</span><span class='rparen'>)</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scanner</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Scanner object that was previously open
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>limit</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+return this maximum number of records, or return all if nil
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../Model/Row.html" title="Stargate::Model::Row (class)">Model::Row</a></span>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+list of row records
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span></li>
+    
+      <li><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/scanner_operation.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id get_rows'>get_rows</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='comma'>,</span> <span class='id limit'>limit</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id rows'>rows</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id each_row'>each_row</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id row'>row</span><span class='op'>|</span>
+    <span class='kw'>break</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id limit'>limit</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id rows'>rows</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;=</span> <span class='id limit'>limit</span>
+    <span class='id rows'>rows</span> <span class='op'>&lt;&lt;</span> <span class='id row'>row</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id rows'>rows</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="open_scanner-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></tt>) <strong>open_scanner</strong>(table_name, options = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Create a scanner for the given table along with options defined in the
+<span class='object_link'><a href="../Model/Scanner.html#AVAILABLE_OPTS-constant" title="Stargate::Model::Scanner::AVAILABLE_OPTS (constant)">Model::Scanner::AVAILABLE_OPTS</a></span> hash.
+</p>
+<p>
+Example:
+</p>
+<pre class="code">
+ <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+ <span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>test-hbase-stargate</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:batch_size</span> <span class='op'>=&gt;</span> <span class='int'>1000</span><span class='comma'>,</span> <span class='symbol'>:start_row</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>row1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:end_row</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>row2</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>table_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the table name
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+options for the scanner
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Model/Scanner.html" title="Stargate::Model::Scanner (class)">Model::Scanner</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+object representing the scanner
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../Model/Scanner.html#AVAILABLE_OPTS-constant" title="Stargate::Model::Scanner::AVAILABLE_OPTS (constant)">Model::Scanner::AVAILABLE_OPTS</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/operation/scanner_operation.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='id table_name'>table_name</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>options should be given as a Hash</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id options'>options</span><span class='period'>.</span><span class='id instance_of?'>instance_of?</span> <span class='const'>Hash</span>
+  <span class='id columns'>columns</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:columns</span><span class='rparen'>)</span>
+  <span class='id batch'>batch</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:batch</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>100</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id start_time'>start_time</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:start_time</span><span class='rparen'>)</span>
+  <span class='id start_time'>start_time</span> <span class='op'>=</span> <span class='id start_time'>start_time</span><span class='op'>*</span><span class='int'>1000</span> <span class='kw'>unless</span> <span class='id start_time'>start_time</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id end_time'>end_time</span> <span class='op'>=</span> <span class='id options'>options</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:end_time</span><span class='rparen'>)</span>
+  <span class='id end_time'>end_time</span> <span class='op'>=</span> <span class='id end_time'>end_time</span><span class='op'>*</span><span class='int'>1000</span> <span class='kw'>unless</span> <span class='id end_time'>end_time</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+
+  <span class='kw'>begin</span>
+    <span class='id request'>request</span> <span class='op'>=</span> <span class='const'>Request</span><span class='op'>::</span><span class='const'>ScannerRequest</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id table_name'>table_name</span><span class='rparen'>)</span>
+
+    <span class='id xml_data'>xml_data</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;?xml version='1.0' encoding='UTF-8' standalone='yes'?&gt;&lt;Scanner batch='</span><span class='embexpr_beg'>#{</span><span class='id batch'>batch</span><span class='rbrace'>}</span><span class='tstring_content'>' </span><span class='tstring_end'>&quot;</span></span>
+    <span class='id xml_data'>xml_data</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>startTime='</span><span class='embexpr_beg'>#{</span><span class='id start_time'>start_time</span><span class='rbrace'>}</span><span class='tstring_content'>' </span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id start_time'>start_time</span>
+    <span class='id xml_data'>xml_data</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>endTime='</span><span class='embexpr_beg'>#{</span><span class='id end_time'>end_time</span><span class='rbrace'>}</span><span class='tstring_content'>' </span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id end_time'>end_time</span>
+
+    <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='comma'>,</span><span class='id value'>value</span><span class='op'>|</span>
+      <span class='kw'>if</span> <span class='const'>Model</span><span class='op'>::</span><span class='const'>Scanner</span><span class='op'>::</span><span class='const'>AVAILABLE_OPTS</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id key'>key</span>
+        <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Model</span><span class='op'>::</span><span class='const'>Scanner</span><span class='op'>::</span><span class='const'>AVAILABLE_OPTS</span><span class='lbracket'>[</span><span class='id key'>key</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'>='</span><span class='embexpr_beg'>#{</span><span class='const'>Base64</span><span class='period'>.</span><span class='id encode64'>encode64</span><span class='lparen'>(</span><span class='id value'>value</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>' </span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>else</span>
+        <span class='id warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[open_scanner] Received invalid option key :</span><span class='embexpr_beg'>#{</span><span class='id key'>key</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='id columns'>columns</span>
+      <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+      <span class='lbracket'>[</span><span class='id columns'>columns</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id flatten'>flatten</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id col'>col</span><span class='op'>|</span>
+        <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;column&gt;</span><span class='embexpr_beg'>#{</span><span class='const'>Base64</span><span class='period'>.</span><span class='id encode64'>encode64</span><span class='lparen'>(</span><span class='id col'>col</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>&lt;/column&gt;</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+      <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&lt;/Scanner&gt;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id xml_data'>xml_data</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/&gt;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+
+    <span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='const'>Response</span><span class='op'>::</span><span class='const'>ScannerResponse</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id rest_post_response'>rest_post_response</span><span class='lparen'>(</span><span class='id request'>request</span><span class='period'>.</span><span class='id open'>open</span><span class='comma'>,</span> <span class='id xml_data'>xml_data</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='symbol'>:open_scanner</span><span class='rparen'>)</span><span class='period'>.</span><span class='id parse'>parse</span>
+    <span class='id scanner'>scanner</span><span class='period'>.</span><span class='id table_name'>table_name</span> <span class='op'>=</span> <span class='id table_name'>table_name</span>
+    <span class='id scanner'>scanner</span><span class='period'>.</span><span class='id batch_size'>batch_size</span> <span class='op'>=</span> <span class='id batch'>batch</span>
+    <span class='id scanner'>scanner</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='id raise'>raise</span> <span class='const'>StandardError</span><span class='comma'>,</span> <span class='id e'>e</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:15 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

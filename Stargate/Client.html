@@ -1,0 +1,838 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Stargate::Client
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Stargate.html" title="Stargate (module)">Stargate</a></span></span>
+     &raquo; 
+    <span class="title">Client</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Stargate::Client
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Stargate::Client</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="Operation/MetaOperation.html" title="Stargate::Operation::MetaOperation (module)">Operation::MetaOperation</a></span>, <span class='object_link'><a href="Operation/RowOperation.html" title="Stargate::Operation::RowOperation (module)">Operation::RowOperation</a></span>, <span class='object_link'><a href="Operation/ScannerOperation.html" title="Stargate::Operation::ScannerOperation (module)">Operation::ScannerOperation</a></span>, <span class='object_link'><a href="Operation/TableOperation.html" title="Stargate::Operation::TableOperation (module)">Operation::TableOperation</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/stargate/client.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="Operation/RowOperation.html" title="Stargate::Operation::RowOperation (module)">Operation::RowOperation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Operation/RowOperation.html#CONVERTER-constant" title="Stargate::Operation::RowOperation::CONVERTER (constant)">CONVERTER</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#connection-instance_method" title="#connection (instance method)">- (Object) <strong>connection</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute connection.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#url-instance_method" title="#url (instance method)">- (Object) <strong>url</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute url.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Client) <strong>initialize</strong>(url = &quot;http://localhost:8080&quot;, opts = {}) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Client.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_delete-instance_method" title="#rest_delete (instance method)">- (Object) <strong>rest_delete</strong>(path, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_delete_response-instance_method" title="#rest_delete_response (instance method)">- (Object) <strong>rest_delete_response</strong>(path, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_get-instance_method" title="#rest_get (instance method)">- (Object) <strong>rest_get</strong>(path, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_get_response-instance_method" title="#rest_get_response (instance method)">- (Object) <strong>rest_get_response</strong>(path, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_post-instance_method" title="#rest_post (instance method)">- (Object) <strong>rest_post</strong>(path, data = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_post_response-instance_method" title="#rest_post_response (instance method)">- (Object) <strong>rest_post_response</strong>(path, data = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_put-instance_method" title="#rest_put (instance method)">- (Object) <strong>rest_put</strong>(path, data = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rest_put_response-instance_method" title="#rest_put_response (instance method)">- (Object) <strong>rest_put_response</strong>(path, data = nil, options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Operation/ScannerOperation.html" title="Stargate::Operation::ScannerOperation (module)">Operation::ScannerOperation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Operation/ScannerOperation.html#close_scanner-instance_method" title="Stargate::Operation::ScannerOperation#close_scanner (method)">#close_scanner</a></span>, <span class='object_link'><a href="Operation/ScannerOperation.html#each_row-instance_method" title="Stargate::Operation::ScannerOperation#each_row (method)">#each_row</a></span>, <span class='object_link'><a href="Operation/ScannerOperation.html#get_rows-instance_method" title="Stargate::Operation::ScannerOperation#get_rows (method)">#get_rows</a></span>, <span class='object_link'><a href="Operation/ScannerOperation.html#open_scanner-instance_method" title="Stargate::Operation::ScannerOperation#open_scanner (method)">#open_scanner</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Operation/RowOperation.html" title="Stargate::Operation::RowOperation (module)">Operation::RowOperation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Operation/RowOperation.html#create_row-instance_method" title="Stargate::Operation::RowOperation#create_row (method)">#create_row</a></span>, <span class='object_link'><a href="Operation/RowOperation.html#delete_row-instance_method" title="Stargate::Operation::RowOperation#delete_row (method)">#delete_row</a></span>, <span class='object_link'><a href="Operation/RowOperation.html#get-instance_method" title="Stargate::Operation::RowOperation#get (method)">#get</a></span>, <span class='object_link'><a href="Operation/RowOperation.html#multi_get-instance_method" title="Stargate::Operation::RowOperation#multi_get (method)">#multi_get</a></span>, <span class='object_link'><a href="Operation/RowOperation.html#set-instance_method" title="Stargate::Operation::RowOperation#set (method)">#set</a></span>, <span class='object_link'><a href="Operation/RowOperation.html#show_row-instance_method" title="Stargate::Operation::RowOperation#show_row (method)">#show_row</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Operation/TableOperation.html" title="Stargate::Operation::TableOperation (module)">Operation::TableOperation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Operation/TableOperation.html#alter_table-instance_method" title="Stargate::Operation::TableOperation#alter_table (method)">#alter_table</a></span>, <span class='object_link'><a href="Operation/TableOperation.html#create_table-instance_method" title="Stargate::Operation::TableOperation#create_table (method)">#create_table</a></span>, <span class='object_link'><a href="Operation/TableOperation.html#delete_table-instance_method" title="Stargate::Operation::TableOperation#delete_table (method)">#delete_table</a></span>, <span class='object_link'><a href="Operation/TableOperation.html#destroy_table-instance_method" title="Stargate::Operation::TableOperation#destroy_table (method)">#destroy_table</a></span>, <span class='object_link'><a href="Operation/TableOperation.html#show_table-instance_method" title="Stargate::Operation::TableOperation#show_table (method)">#show_table</a></span>, <span class='object_link'><a href="Operation/TableOperation.html#table_regions-instance_method" title="Stargate::Operation::TableOperation#table_regions (method)">#table_regions</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Operation/MetaOperation.html" title="Stargate::Operation::MetaOperation (module)">Operation::MetaOperation</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Operation/MetaOperation.html#cluster_version-instance_method" title="Stargate::Operation::MetaOperation#cluster_version (method)">#cluster_version</a></span>, <span class='object_link'><a href="Operation/MetaOperation.html#list_tables-instance_method" title="Stargate::Operation::MetaOperation#list_tables (method)">#list_tables</a></span>, <span class='object_link'><a href="Operation/MetaOperation.html#version-instance_method" title="Stargate::Operation::MetaOperation#version (method)">#version</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Stargate::Client (class)">Client</a></span></tt>) <strong>initialize</strong>(url = &quot;http://localhost:8080&quot;, opts = {}) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Client
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span><span class='lparen'>(</span><span class='id url'>url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@url</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id parse'>parse</span><span class='lparen'>(</span><span class='id url'>url</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='ivar'>@url</span><span class='period'>.</span><span class='id kind_of?'>kind_of?</span> <span class='const'>URI</span><span class='op'>::</span><span class='const'>HTTP</span>
+    <span class='id raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>invalid http url: </span><span class='embexpr_beg'>#{</span><span class='id url'>url</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='ivar'>@connection</span> <span class='op'>=</span> <span class='const'>Patron</span><span class='op'>::</span><span class='const'>Session</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='ivar'>@connection</span><span class='period'>.</span><span class='id base_url'>base_url</span> <span class='op'>=</span> <span class='id url'>url</span>
+  <span class='ivar'>@connection</span><span class='period'>.</span><span class='id timeout'>timeout</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:timeout</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+
+  <span class='comment'># Not actually opening the connection yet, just setting up the persistent connection.
+</span>  <span class='ivar'>@connection</span><span class='period'>.</span><span class='id proxy'>proxy</span> <span class='op'>=</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:proxy</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:proxy</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="connection-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="connection-instance_method">
+  
+    - (<tt>Object</tt>) <strong>connection</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute connection
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id connection'>connection</span>
+  <span class='ivar'>@connection</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="url-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="url-instance_method">
+  
+    - (<tt>Object</tt>) <strong>url</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute url
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id url'>url</span>
+  <span class='ivar'>@url</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="rest_delete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_delete</strong>(path, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 47</span>
+
+<span class='kw'>def</span> <span class='id rest_delete'>rest_delete</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_request'>safe_request</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_delete_response-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_delete_response</strong>(path, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id rest_delete_response'>rest_delete_response</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_response'>safe_response</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id delete'>delete</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_get-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_get</strong>(path, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 31</span>
+
+<span class='kw'>def</span> <span class='id rest_get'>rest_get</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_request'>safe_request</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id get'>get</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Accept</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_get_response-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_get_response</strong>(path, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 35</span>
+
+<span class='kw'>def</span> <span class='id rest_get_response'>rest_get_response</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_response'>safe_response</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id get'>get</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Accept</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_post-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_post</strong>(path, data = nil, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='id rest_post'>rest_post</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_request'>safe_request</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>text/xml</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_post_response-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_post_response</strong>(path, data = nil, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='id rest_post_response'>rest_post_response</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_response'>safe_response</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>text/xml</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_put-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_put</strong>(path, data = nil, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 55</span>
+
+<span class='kw'>def</span> <span class='id rest_put'>rest_put</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_request'>safe_request</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id put'>put</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>text/xml</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="rest_put_response-instance_method">
+  
+    - (<tt>Object</tt>) <strong>rest_put_response</strong>(path, data = nil, options = {}) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/client.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='id rest_put_response'>rest_put_response</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id safe_response'>safe_response</span> <span class='lbrace'>{</span> <span class='ivar'>@connection</span><span class='period'>.</span><span class='id put'>put</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='period'>.</span><span class='id path'>path</span> <span class='op'>+</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id data'>data</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>text/xml</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id merge'>merge</span><span class='lparen'>(</span><span class='id options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:11 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

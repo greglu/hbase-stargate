@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>hbase-stargate</h1>
+<p>A Ruby client for HBase (http://hadoop.apache.org/hbase) that works with the <span class="caps">REST</span> (previously known as Stargate) interface. The RESTful web service front end for HBase can serve up a number of formats including <span class="caps">XML</span>, <span class="caps">JSON</span>, and protobufs.</p>
+<p>This project is based off the work of Dingding Ye &lt;yedingding@gmail.com&gt; at http://github.com/sishen/hbase-ruby</p>
+<h2>Installation</h2>
+<pre class="code">$ gem install hbase-stargate</pre>
+<p>To work with this gem in your Rails application, add this to the environment.rb file:
+<pre class="code"><span class='id config'>config</span><span class='period'>.</span><span class='id gem'>gem</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hbase-stargate</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:lib</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stargate</span><span class='tstring_end'>&quot;</span></span></pre></p>
+<p>To build the gem yourself:
+<pre class="code">$ rake build</pre></p>
+<h2>Getting Started</h2>
+<ol>
+	<li>Download and unpack the most recent release of HBase from http://hadoop.apache.org/hbase/releases.html#Download</li>
+	<li>Edit <hbase-dir>/conf/hbase-env.sh and uncomment/modify the following line to correspond to your Java home path:
+export JAVA_HOME=/usr/lib/jvm/java-6-sun</li>
+	<li>Start up HBase:
+$ <hbase-dir>/bin/start-hbase.sh</li>
+	<li>Start up Stargate (append &#8220;-p 1234&#8221; at the end if you want to change the port):
+$ <hbase-dir>/bin/hbase rest start</li>
+</ol>
+<h2>Usage</h2>
+<p>Here are some examples:</p>
+<pre class="code">
+<span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>stargate</span><span class='tstring_end'>'</span></span>
+
+<span class='comment'># Direct connection
+</span><span class='comment'># client = Stargate::Client.new(&quot;http://localhost:8080&quot;) # this url is the default for stargate.
+</span><span class='comment'># Connection through a proxy
+</span><span class='id client'>client</span> <span class='op'>=</span> <span class='const'>Stargate</span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:8080</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:proxy</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>10.2.3.4:8080</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='rparen'>)</span> 
+
+<span class='comment'># Table Operation
+</span><span class='id tables'>tables</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id list_tables'>list_tables</span>                              <span class='comment'># list available tables
+</span><span class='id table'>table</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id create_table'>create_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>habbit</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>           <span class='comment'># create a table whose column_family is habbit
+</span><span class='id table'>table</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id show_table'>show_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>                       <span class='comment'># show the meta info of table users 
+</span><span class='id client'>client</span><span class='period'>.</span><span class='id delete_table'>delete_table</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>                             <span class='comment'># delete 'users' table
+</span>
+<span class='comment'># Row Operation
+</span><span class='id row'>row</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id show_row'>show_row</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sishen</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>                 <span class='comment'># show the data of row 'sishen' in table 'users'
+</span><span class='id row2'>row2</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id create_row'>create_row</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sishen</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span><span class='period'>.</span><span class='id to_i'>to_i</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>habbit:football</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:value</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>i like football</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># create the row 'sishen' with the data in the table 'users'
+</span><span class='id client'>client</span><span class='period'>.</span><span class='id delete_row'>delete_row</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sishen</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>habbit:football</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>  <span class='comment'># delete the row 'sishen' of table 'users' with the optional column 'habbit:football'
+</span>
+<span class='comment'># Scanner Operation (see spec/stargate-client/operation/scanner_operation_spec.rb for more examples)
+</span><span class='id scanner'>scanner</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id open_scanner'>open_scanner</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>users</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:start_row</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>row2</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:batch</span> <span class='op'>=&gt;</span> <span class='int'>5</span><span class='comma'>,</span> <span class='symbol'>:columns</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>habbit:</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='comment'># See more options from Stargate::Model::Scanner.AVAILABLE_OPTS
+</span><span class='id rows'>rows</span> <span class='op'>=</span> <span class='id client'>client</span><span class='period'>.</span><span class='id get_rows'>get_rows</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span>
+<span class='id client'>client</span><span class='period'>.</span><span class='id close_scanner'>close_scanner</span><span class='lparen'>(</span><span class='id scanner'>scanner</span><span class='rparen'>)</span>
+</pre>
+<h2>Testing</h2>
+<p>Run the specs with the following rake task:</p>
+<p>$ rake spec</p>
+<p>or pass it the <span class="caps">URL</span> to the HBase Stargate server as an argument:</p>
+<p>$ rake spec STARGATE_URL=http://localhost:8080</p>
+<h2>Copyright</h2>
+<p>Copyright &#169; 2008 Openplaces.org
+Distributed under <span class="caps">MIT</span> License</p></div></div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:11 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

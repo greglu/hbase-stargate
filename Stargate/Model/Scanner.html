@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Stargate::Model::Scanner
+  
+    &mdash; Documentation by YARD 0.7.3
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Stargate.html" title="Stargate (module)">Stargate</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Model.html" title="Stargate::Model (module)">Model</a></span></span>
+     &raquo; 
+    <span class="title">Scanner</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Stargate::Model::Scanner
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Record.html" title="Stargate::Model::Record (class)">Record</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Record.html" title="Stargate::Model::Record (class)">Record</a></span></li>
+          
+            <li class="next">Stargate::Model::Scanner</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/stargate/model/scanner.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="AVAILABLE_OPTS-constant" class="">AVAILABLE_OPTS =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>  <span class='symbol'>:start_row</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>startRow</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:end_row</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>endRow</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='symbol'>:start_time</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>startTime</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:end_time</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>endTime</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='symbol'>:batch</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>batch</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#batch_size-instance_method" title="#batch_size (instance method)">- (Object) <strong>batch_size</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute batch_size.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#scanner_url-instance_method" title="#scanner_url (instance method)">- (Object) <strong>scanner_url</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute scanner_url.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#table_name-instance_method" title="#table_name (instance method)">- (Object) <strong>table_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute table_name.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Record.html" title="Stargate::Model::Record (class)">Record</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Record.html#initialize-instance_method" title="Stargate::Model::Record#initialize (method)">#initialize</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Record.html#initialize-instance_method" title="Stargate::Model::Record#initialize (method)">Stargate::Model::Record</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="batch_size=-instance_method"></span>
+      <span id="batch_size-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="batch_size-instance_method">
+  
+    - (<tt>Object</tt>) <strong>batch_size</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute batch_size
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/model/scanner.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id batch_size'>batch_size</span>
+  <span class='ivar'>@batch_size</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="scanner_url=-instance_method"></span>
+      <span id="scanner_url-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="scanner_url-instance_method">
+  
+    - (<tt>Object</tt>) <strong>scanner_url</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute scanner_url
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/model/scanner.rb', line 9</span>
+
+<span class='kw'>def</span> <span class='id scanner_url'>scanner_url</span>
+  <span class='ivar'>@scanner_url</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="table_name=-instance_method"></span>
+      <span id="table_name-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="table_name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>table_name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute table_name
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/stargate/model/scanner.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id table_name'>table_name</span>
+  <span class='ivar'>@table_name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Nov 21 00:03:13 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
