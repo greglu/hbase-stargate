@@ -4,6 +4,17 @@ module Stargate
 
       CONVERTER = { '&' => '&amp;', '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;' }.freeze
 
+      # Add a row to HBase
+      #
+      # Example:
+      #  client = Stargate::Client.new("http://localhost:8080")
+      #  client.set("test-hbase-stargate", "row1", {"col1:cell1" => "value for column 1, cell 1", "col1:cell2" => "value 2"})
+      #
+      # @param [String] table_name The HBase table name
+      # @param [String] row The row id
+      # @param [Hash] columns hash consisting of the keys as column names and their corresponding values
+      # @param [Integer] timestamp optional timestamp argument. Can be any custom value (in seconds), but HBase uses the time since epoch.
+      # @return [true,false] true or false depending on whether the row was added successfully
       def set(table_name, row, columns, timestamp = nil)
         # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
         timestamp = timestamp*1000 unless timestamp.nil?
@@ -45,10 +56,37 @@ module Stargate
         end
       end
 
+      # Get a row from HBase
+      #
+      # Example:
+      #  client = Stargate::Client.new("http://localhost:8080")
+      #  client.get("test-hbase-stargate", "row1", :timestamp => 1321846232, :columns => ["col1:cell1"], :version => 3)
+      #
+      # @param [String] table_name The HBase table name
+      # @param [String] row The row id
+      # @param [Hash] options the options to retrieve the row with
+      # @option options [Integer] :timestamp A specific timestamp the rows should have
+      # @option options [Array<String>] :columns List of columns to get
+      # @option options [Integer] :versions The number of versions to get back
+      # @return [Model::Row] object corresponding to the requested row, or nil if it could not be found
       def get(table_name, row, options = {})
         multi_get(table_name, row, options)[row]
       end
 
+      # Get a row from HBase
+      #
+      # Example:
+      #  client = Stargate::Client.new("http://localhost:8080")
+      #  row = client.show_row("test-hbase-stargate", "row1", nil, nil, :version => 2)
+      #
+      # @deprecated Use the {#get} method instead
+      # @param [String] table_name The HBase table name
+      # @param [String] name The row id
+      # @param [Integer] timestamp optional timestamp
+      # @param [Array<String>] columns name of the columns to retrieve. Use nil to get them all.
+      # @param [Hash] options the options to retrieve the row with
+      # @option options [Integer] :versions The number of versions to get back
+      # @return [Model::Row] object corresponding to the requested row, or nil if it could not be found
       def show_row(table_name, name, timestamp = nil, columns = nil, options = {})
         handle_exception(table_name, name) do
           options[:version] ||= 1
@@ -68,6 +106,18 @@ module Stargate
         end
       end
 
+      # Add a row to HBase
+      #
+      # Example:
+      #  client = Stargate::Client.new("http://localhost:8080")
+      #  client.create_row("test-hbase-stargate", "row1", nil, [{ :name => "col1:cell1", :value => "row2-col1-cell1" }, { :name => "col1:cell2", :value => "row2-col1-cell2" }])
+      #
+      # @deprecated Use the {#set} method instead
+      # @param [String] table_name The HBase table name
+      # @param [String] name The row id
+      # @param [Integer] timestamp optional timestamp argument. Can be any custom value (in seconds), but HBase uses the time since epoch.
+      # @param [Hash, Array<Hash>] columns
+      # @return [true,false] true or false depending on whether the row was added successfully
       def create_row(table_name, name, timestamp = nil, columns = nil)
         # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
         timestamp = timestamp*1000 unless timestamp.nil?
@@ -101,6 +151,12 @@ module Stargate
         end
       end
 
+      # Delete a row in HBase
+      #
+      # @param [String] table_name The HBase table name
+      # @param [String] name The row id
+      # @param [Integer] timestamp optional timestamp value (deletes all timestamp if not specified)
+      # @param [Array<String>] optional list of specific columns to delete (deletes all columns if not specified)
       def delete_row(table_name, name, timestamp = nil, columns = nil)
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
