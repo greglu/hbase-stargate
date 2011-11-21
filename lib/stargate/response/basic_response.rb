@@ -1,12 +1,8 @@
 begin
-  require 'yajl/json_gem'
+  require 'yajl'
 rescue LoadError => e
-  begin
-    require 'json'
-  rescue LoadError => e
-    puts "[hbase-stargate] json is required. Install it with 'gem install json' (or json-jruby for JRuby)"
-    raise e
-  end
+  puts "[hbase-stargate] yajl-ruby is required. Install it with 'gem install yajl-ruby'"
+  raise e
 end
 
 module Stargate

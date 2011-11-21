@@ -2,7 +2,7 @@ module Stargate
   module Response
     class TableResponse < BasicResponse
       def parse_content(raw_data)
-        table = JSON.parse(raw_data)
+        table = Yajl::Parser.parse(raw_data)
         name = table["name"].strip
 
         column_families = []

@@ -26,7 +26,7 @@ module Stargate
 
           options.each do |key,value|
             if Model::Scanner::AVAILABLE_OPTS.include? key
-              xml_data << "#{Model::Scanner::AVAILABLE_OPTS[key]}='#{[value.to_s].flatten.pack('m')}' "
+              xml_data << "#{Model::Scanner::AVAILABLE_OPTS[key]}='#{Base64.encode64(value.to_s)}' "
             else
               warn "[open_scanner] Received invalid option key :#{key}"
             end
@@ -34,7 +34,7 @@ module Stargate
           if columns
             xml_data << ">"
             [columns].flatten.each do |col|
-              xml_data << "<column>#{[col].flatten.pack('m')}</column>"
+              xml_data << "<column>#{Base64.encode64(col)}</column>"
             end
             xml_data << "</Scanner>"
           else

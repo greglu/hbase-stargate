@@ -1,3 +1,4 @@
+require 'base64'
 require 'patron'
 require 'stargate/operation/meta_operation'
 require 'stargate/operation/table_operation'

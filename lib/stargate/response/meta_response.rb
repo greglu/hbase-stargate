@@ -16,7 +16,7 @@ module Stargate
           end
 
           tables = []
-          doc = JSON.parse(raw_data)
+          doc = Yajl::Parser.parse(raw_data)
 
           doc["table"].each do |table|
             name = table["name"].strip rescue nil

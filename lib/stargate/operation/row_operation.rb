@@ -12,14 +12,14 @@ module Stargate
         columns.each do |name, value|
           escaped_name = name.gsub(/[&<>'"]/) { |match| CONVERTER[match] }
           cell = {}
-          cell["@column"] = [escaped_name].pack('m') rescue ''
+          cell["@column"] = Base64.encode64(escaped_name) rescue ''
           cell["@timestamp"] = timestamp unless timestamp.nil?
-          cell["$"] = [value].pack("m") rescue ''
+          cell["$"] = Base64.encode64(value) rescue ''
           cells << cell
         end
 
         request = Request::RowRequest.new(table_name, row, timestamp)
-        json_data = Yajl::Encoder.encode({"Row" => {"@key" => [row].pack('m'), "Cell" => cells}})
+        json_data = Yajl::Encoder.encode({"Row" => {"@key" => Base64.encode64(row), "Cell" => cells}})
 
         handle_exception(table_name, row) do
           response = rest_post_response(request.create(columns.keys), json_data, {'Content-Type' => 'application/json'})
@@ -86,13 +86,13 @@ module Stargate
           end
 
           xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><CellSet>"
-          xml_data << "<Row key='#{[name].pack('m') rescue ''}'>"
+          xml_data << "<Row key='#{Base64.encode64(name) rescue ''}'>"
           data.each do |d|
             escape_name = d[:name].gsub(/[&<>'"]/) { |match| CONVERTER[match] }
             xml_data << "<Cell "
             xml_data << "timestamp='#{timestamp}' " if timestamp
-            xml_data << "column='#{[escape_name].pack('m') rescue ''}'>"
-            xml_data << "#{[d[:value]].pack("m") rescue ''}"
+            xml_data << "column='#{Base64.encode64(escape_name) rescue ''}'>"
+            xml_data << "#{Base64.encode64(d[:value]) rescue ''}"
             xml_data << "</Cell>"
           end
           xml_data << "</Row></CellSet>"

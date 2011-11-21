@@ -11,18 +11,18 @@ module Stargate
       def parse_content(raw_data)
         case @method
         when :show_row
-          doc = JSON.parse(raw_data)
+          doc = Yajl::Parser.parse(raw_data)
           rows = doc["Row"]
 
           model_rows = []
           rows.each do |row|
-            rname = row["key"].strip.unpack("m").first
+            rname = Base64.decode64(row["key"])
             count = row["Cell"].size
             columns_map = {}
 
             row["Cell"].each do |col|
-              name = col["column"].strip.unpack('m').first
-              value = col["$"].strip.unpack('m').first rescue nil
+              name = Base64.decode64(col["column"])
+              value = Base64.decode64(col["$"])
               timestamp = col["timestamp"].to_i
               column = Stargate::Model::Column.new(:name => name, :value => value, :timestamp => timestamp)
 
