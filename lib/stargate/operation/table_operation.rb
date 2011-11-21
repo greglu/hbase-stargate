@@ -4,7 +4,7 @@ module Stargate
       def show_table(name)
         begin
           request = Request::TableRequest.new(name)
-          Response::TableResponse.new(get(request.show)).parse
+          Response::TableResponse.new(rest_get(request.show)).parse
         rescue => e
           raise TableNotFoundError, "Table '#{name}' Not found"
         end
@@ -35,7 +35,7 @@ module Stargate
           end
           xml_data << "</TableSchema>"
 
-          put_response(request.create, xml_data).status == 201
+          rest_put_response(request.create, xml_data).status == 201
         rescue => e
           raise TableFailCreateError, e.message
         end
@@ -50,7 +50,7 @@ module Stargate
 
         begin
           xml_data = construct_xml_stream(name, *args)
-          Response::TableResponse.new(put(request.update, xml_data))
+          Response::TableResponse.new(rest_put(request.update, xml_data))
         rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table '#{name}' not exists"
@@ -63,7 +63,7 @@ module Stargate
       def delete_table(name, columns = nil)
         begin
           request = Request::TableRequest.new(name)
-          Response::TableResponse.new(delete(request.delete(columns)))
+          Response::TableResponse.new(rest_delete(request.delete(columns)))
         rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table '#{name}' not exists"

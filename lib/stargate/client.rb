@@ -27,35 +27,35 @@ module Stargate
       @connection.proxy = opts[:proxy] unless opts[:proxy].nil?
     end
 
-    def get(path, options = {})
+    def rest_get(path, options = {})
       safe_request { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
 
-    def get_response(path, options = {})
+    def rest_get_response(path, options = {})
       safe_response { @connection.get(@url.path + path, {"Accept" => "application/json"}.merge(options)) }
     end
 
-    def post(path, data = nil, options = {})
+    def rest_post(path, data = nil, options = {})
       safe_request { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
-    def post_response(path, data = nil, options = {})
+    def rest_post_response(path, data = nil, options = {})
       safe_response { @connection.post(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
-    def delete(path, options = {})
+    def rest_delete(path, options = {})
       safe_request { @connection.delete(@url.path + path, options) }
     end
 
-    def delete_response(path, options = {})
+    def rest_delete_response(path, options = {})
       safe_response { @connection.delete(@url.path + path, options) }
     end
 
-    def put(path, data = nil, options = {})
+    def rest_put(path, data = nil, options = {})
       safe_request { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 
-    def put_response(path, data = nil, options = {})
+    def rest_put_response(path, data = nil, options = {})
       safe_response { @connection.put(@url.path + path, data, {'Content-Type' => 'text/xml'}.merge(options)) }
     end
 

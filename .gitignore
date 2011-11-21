@@ -3,4 +3,5 @@
 .project
 nbproject*
 .loadpath
+.rspec
 pkg/

@@ -11,10 +11,6 @@ module Stargate
         super(path)
       end
 
-      # def timestamp
-      #   @timestamp*1000 rescue nil
-      # end
-
       def show(columns = nil, options = {})
         @path << (columns ? "/#{pack_params(columns)}" : "/")
         @path << "/#{timestamp}" if timestamp
@@ -25,6 +21,11 @@ module Stargate
       def create(columns = nil)
         @path << (columns ? "/#{pack_params(columns)}" : "/")
         @path << "/#{timestamp}" if timestamp
+        @path
+      end
+
+      def batch_set
+        @path << "/"
         @path
       end
 

@@ -11,9 +11,11 @@ module Stargate
       def open_scanner(table_name, options = {})
         raise ArgumentError, "options should be given as a Hash" unless options.instance_of? Hash
         columns = options.delete(:columns)
-        batch = options.delete(:batch) || "1000"
+        batch = options.delete(:batch) || "100"
         start_time = options.delete(:start_time)
+        start_time = start_time*1000 unless start_time.nil?
         end_time = options.delete(:end_time)
+        end_time = end_time*1000 unless end_time.nil?
 
         begin
           request = Request::ScannerRequest.new(table_name)
@@ -39,7 +41,7 @@ module Stargate
             xml_data << "/>"
           end
 
-          scanner = Response::ScannerResponse.new(post_response(request.open, xml_data), :open_scanner).parse
+          scanner = Response::ScannerResponse.new(rest_post_response(request.open, xml_data), :open_scanner).parse
           scanner.table_name = table_name
           scanner.batch_size = batch
           scanner
@@ -55,7 +57,7 @@ module Stargate
 
           begin
             # Loop until we've reached the limit, or the scanner was exhausted (HTTP 204 returned)
-            until (response = get_response(request_url)).status == 204
+            until (response = rest_get_response(request_url)).status == 204
               rows = Response::ScannerResponse.new(response.body, :get_rows).parse
 
               rows.each do |row|
@@ -87,7 +89,7 @@ module Stargate
       def close_scanner(scanner)
         begin
           request = Request::ScannerRequest.new(scanner.table_name)
-          Response::ScannerResponse.new(delete_response(request.close(scanner)), :close_scanner).parse
+          Response::ScannerResponse.new(rest_delete_response(request.close(scanner)), :close_scanner).parse
         rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table #{table_name} Not Found!"

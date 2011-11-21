@@ -5,39 +5,56 @@ module Stargate
       CONVERTER = { '&' => '&amp;', '<' => '&lt;', '>' => '&gt;', "'" => '&apos;', '"' => '&quot;' }.freeze
 
       def set(table_name, row, columns, timestamp = nil)
-        request = Request::RowRequest.new(table_name, row, timestamp)
+        # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
+        timestamp = timestamp*1000 unless timestamp.nil?
 
         cells = []
         columns.each do |name, value|
           escaped_name = name.gsub(/[&<>'"]/) { |match| CONVERTER[match] }
           cell = {}
           cell["@column"] = [escaped_name].pack('m') rescue ''
+          cell["@timestamp"] = timestamp unless timestamp.nil?
           cell["$"] = [value].pack("m") rescue ''
-          cell["@timestamp"] = timestamp*1000 unless timestamp.nil?
           cells << cell
         end
 
+        request = Request::RowRequest.new(table_name, row, timestamp)
         json_data = Yajl::Encoder.encode({"Row" => {"@key" => [row].pack('m'), "Cell" => cells}})
 
         handle_exception(table_name, row) do
-          response = post_response(request.create(columns.keys), json_data, {'Content-Type' => 'application/json'})
+          response = rest_post_response(request.create(columns.keys), json_data, {'Content-Type' => 'application/json'})
           Response::RowResponse.new(response, :create_row).parse
         end
       end
 
-      # def get(table_name, rows, options = {})
-      #   request = Request::RowRequest.new(table_name, name, options.delete(:timestamp))
-      #   options[:version] ||= 1
-      #
-      #   results = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse
-      # end
+      def multi_get(table_name, rows, options = {})
+        if rows.is_a? String
+          request = Request::RowRequest.new(table_name, rows, options.delete(:timestamp))
+        elsif rows.is_a? Array
+
+        end
+        options[:version] ||= 1
+
+        handle_exception(table_name, rows) do
+          rows = {}
+          Response::RowResponse.new(rest_get(request.show(options.delete(:columns), options)), :show_row).parse.each do |row|
+            row.table_name = table_name
+            rows[row.name] = row
+          end
+          return rows
+        end
+      end
+
+      def get(table_name, row, options = {})
+        multi_get(table_name, row, options)[row]
+      end
 
       def show_row(table_name, name, timestamp = nil, columns = nil, options = {})
         handle_exception(table_name, name) do
           options[:version] ||= 1
 
           request = Request::RowRequest.new(table_name, name, timestamp)
-          rows = Response::RowResponse.new(get(request.show(columns, options)), :show_row).parse
+          rows = Response::RowResponse.new(rest_get(request.show(columns, options)), :show_row).parse
           if rows.size == 1
             row = rows.first
             row.table_name = table_name
@@ -52,6 +69,9 @@ module Stargate
       end
 
       def create_row(table_name, name, timestamp = nil, columns = nil)
+        # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
+        timestamp = timestamp*1000 unless timestamp.nil?
+
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           data = []
@@ -77,14 +97,14 @@ module Stargate
           end
           xml_data << "</Row></CellSet>"
 
-          Response::RowResponse.new(post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
+          Response::RowResponse.new(rest_post_response(request.create(data.map{|col| col[:name]}), xml_data), :create_row).parse
         end
       end
 
       def delete_row(table_name, name, timestamp = nil, columns = nil)
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
-          response = delete_response(request.delete(columns))
+          response = rest_delete_response(request.delete(columns))
           Response::RowResponse.new(response, :delete_row).parse
         end
       end
