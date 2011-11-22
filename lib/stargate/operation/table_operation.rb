@@ -21,65 +21,70 @@ module Stargate
       #
       # Example:
       #  client = Stargate::Client.new("http://localhost:8080")
-      #  table_options = { :name => 'columnfamily1',
-      #          :max_version => 3,
-      #          :compression => Stargate::Model::CompressionType::NONE,
-      #          :in_memory => false,
-      #          :block_cache => false,
-      #          :ttl => -1,
-      #          :max_cell_size => 2147483647,
-      #          :bloomfilter => false
+      #  table_options = { :name => 'columnfamily1', \
+      #          :max_versions => 3, \
+      #          :compression => Stargate::Model::CompressionType::NONE, \
+      #          :in_memory => false, \
+      #          :block_cache => false, \
+      #          :ttl => -1, \
+      #          :max_cell_size => 2147483647, \
+      #          :bloomfilter => Stargate::Model::BloomType::NONE \
       #        }
       #  client.create_table('test-hbase-stargate', table_options)
       #
       # @see Model::ColumnDescriptor::AVAILABLE_OPTS
       # @param [String] name the table name
-      # @param [String, Hash] args initial column family
-      # @return [true,false] whether or not the table was created
+      # @param [Array<String, Hash>] args column family definitions. When it's a String, it will create
+      #     a column family with default options. Otherwise you can pass a hash with the options
+      #     defined in {Model::ColumnDescriptor::AVAILABLE_OPTS}
+      # @return [true,false] true if the table was created successfully, false otherwise
       def create_table(name, *args)
         raise ArgumentError, "Table name must be of type String" unless name.instance_of? String
+        raise ArgumentError, "#alter_table requires column family arguments" if args.empty?
 
         request = Request::TableRequest.new(name)
         begin
-          xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><TableSchema name='#{name}' IS_META='false' IS_ROOT='false'>"
-          for arg in args
-            if arg.instance_of? String
-              xml_data << "<ColumnSchema name='#{arg}' />"
-            elsif arg.instance_of? Hash
-              xml_data << "<ColumnSchema "
-
-              arg.each do |k,v|
-                if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
-                  xml_data << "#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}='#{v}' "
-                end
-              end
-
-              xml_data << "/>"
-            else
-              raise ArgumentError, "#{arg.class.to_s} of #{arg.to_s} is not of Hash Type"
-            end
-          end
-          xml_data << "</TableSchema>"
-
-          rest_put_response(request.create, xml_data).status == 201
+          rest_put_response(request.create, generate_table_xml(name, args)).status == 201
         rescue => e
           raise TableFailCreateError, e.message
         end
       end
 
-      # Will alter the table of the given name. Not currently implemented.
+      # Will alter the table of the given name. Can be used to add new column families to a table
+      # or modify existing ones. The column family configurations don't have to define a complete
+      # set, and can be given partial changes.
+      #
+      # Example:
+      #  client = Stargate::Client.new("http://localhost:8080")
+      #  table_options = { :name => 'columnfamily1', \
+      #          :max_versions => 3, \
+      #          :compression => Stargate::Model::CompressionType::NONE, \
+      #          :in_memory => false, \
+      #          :block_cache => false, \
+      #          :ttl => -1, \
+      #          :max_cell_size => 2147483647, \
+      #          :bloomfilter => Stargate::Model::BloomType::NONE \
+      #        }
+      #  client.create_table('test-hbase-stargate', table_options)
+      #
+      #  # this will alter the existing column family 'columnfamily1' to store 1 version only, and create
+      #  # a new column family named 'columnfamily2'
+      #  client.alter_table('test-hbase-stargate', {:name => 'columnfamily1', :max_versions => 1}, 'columnfamily2')
       #
       # @param [String] name the table name
+      # @param [Array<String, Hash>] args column family definitions. When it's a String, it will create
+      #     a column family with default options. Otherwise you can pass a hash with the options
+      #     defined in {Model::ColumnDescriptor::AVAILABLE_OPTS}
+      # @return [true,false] true if the altering was successful, false otherwise
       def alter_table(name, *args)
-        raise NotImplementedError, "Altering the table is not supported yet"
-
-        raise StandardError, "Table name must be of type String" unless name.instance_of? String
+        raise ArgumentError, "Table name must be of type String" unless name.instance_of? String
+        raise ArgumentError, "#alter_table requires column family arguments" if args.empty?
 
         request = Request::TableRequest.new(name)
 
         begin
-          xml_data = construct_xml_stream(name, *args)
-          Response::TableResponse.new(rest_put(request.update, xml_data))
+          response = rest_post_response(request.create, generate_table_xml(name, args))
+          response.status == 200
         rescue => e
           if e.to_s.include?("TableNotFoundException")
             raise TableNotFoundError, "Table '#{name}' not exists"
@@ -115,6 +120,31 @@ module Stargate
       #
       def table_regions(name, start_row = nil, end_row = nil)
         raise NotImplementedError, "Getting the table regions is not supported yet"
+      end
+
+      private
+
+      def generate_table_xml(table_name, args)
+        xml_data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?><TableSchema name='#{table_name}' IS_META='false' IS_ROOT='false'>"
+        for arg in args
+          if arg.instance_of? String
+            xml_data << "<ColumnSchema name='#{arg}' />"
+          elsif arg.instance_of? Hash
+            xml_data << "<ColumnSchema "
+
+            arg.each do |k,v|
+              if Model::ColumnDescriptor::AVAILABLE_OPTS.include? k
+                xml_data << "#{Model::ColumnDescriptor::AVAILABLE_OPTS[k]}='#{v}' "
+              end
+            end
+
+            xml_data << "/>"
+          else
+            raise ArgumentError, "#{arg.class.to_s} of #{arg.to_s} is not of Hash Type"
+          end
+        end
+        xml_data << "</TableSchema>"
+        return xml_data
       end
 
     end

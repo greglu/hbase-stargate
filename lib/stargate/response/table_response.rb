@@ -9,12 +9,12 @@ module Stargate
         table["ColumnSchema"].each do |columnfamily|
           colname = columnfamily["name"].strip
           compression = columnfamily["COMPRESSION"].strip
-          bloomfilter = (columnfamily["BLOOMFILTER"].strip =~ /^true$/i ? true : false)
+          bloomfilter = columnfamily["BLOOMFILTER"].strip
           max_versions = columnfamily["VERSIONS"].strip.to_i
 
           column_descriptor = Model::ColumnDescriptor.new(:name => colname,
                                                           :compression => Model::CompressionType.to_compression_type(compression),
-                                                          :bloomfilter => bloomfilter,
+                                                          :bloomfilter => Model::BloomType.to_bloom_type(bloomfilter),
                                                           :max_versions => max_versions)
           column_families << column_descriptor
         end

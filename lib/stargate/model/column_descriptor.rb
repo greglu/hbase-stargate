@@ -14,6 +14,24 @@ module Stargate
       module_function :to_compression_type
     end
 
+    module BloomType
+      NONE = "NONE"
+      ROW = "ROW"
+      ROWCOL = "ROWCOL"
+
+      TYPES = [NONE, ROW, ROWCOL]
+
+      def to_bloom_type(type_string)
+        TYPES.include?(type_string) ? type_string : NONE
+      end
+
+      module_function :to_bloom_type
+    end
+
+    # Class that defines a column family in HBase.
+    #
+    # @see CompressionType
+    # @see BloomType
     class ColumnDescriptor < Record
       AVAILABLE_OPTS = {  :name => "name", :max_versions => "VERSIONS", :versions => "VERSIONS",
                           :compression => "COMPRESSION", :in_memory => "IN_MEMORY",
