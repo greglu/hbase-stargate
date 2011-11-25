@@ -158,6 +158,7 @@ module Stargate
       # @param [Integer] timestamp optional timestamp value (deletes all timestamp if not specified)
       # @param [Array<String>] optional list of specific columns to delete (deletes all columns if not specified)
       def delete_row(table_name, name, timestamp = nil, columns = nil)
+        timestamp *= 1000 unless timestamp.nil?
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           response = rest_delete_response(request.delete(columns))
