@@ -13,12 +13,9 @@ module Stargate
       # @param [String] table_name The HBase table name
       # @param [String] row The row id
       # @param [Hash] columns hash consisting of the keys as column names and their corresponding values
-      # @param [Integer] timestamp optional timestamp argument. Can be any custom value (in seconds), but HBase uses the time since epoch.
+      # @param [Integer] timestamp optional timestamp argument. Can be any custom value, but HBase uses the millisecond time since epoch.
       # @return [true,false] true or false depending on whether the row was added successfully
       def set(table_name, row, columns, timestamp = nil)
-        # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
-        timestamp = timestamp*1000 unless timestamp.nil?
-
         cells = []
         columns.each do |name, value|
           escaped_name = name.gsub(/[&<>'"]/) { |match| CONVERTER[match] }
@@ -65,7 +62,7 @@ module Stargate
       # @param [String] table_name The HBase table name
       # @param [String] row The row id
       # @param [Hash] options the options to retrieve the row with
-      # @option options [Integer] :timestamp A specific timestamp the rows should have
+      # @option options [Integer] :timestamp A specific timestamp the rows should have (in seconds)
       # @option options [Array<String>] :columns List of columns to get
       # @option options [Integer] :versions The number of versions to get back
       # @return [Model::Row] object corresponding to the requested row, or nil if it could not be found
@@ -115,13 +112,10 @@ module Stargate
       # @deprecated Use the {#set} method instead
       # @param [String] table_name The HBase table name
       # @param [String] name The row id
-      # @param [Integer] timestamp optional timestamp argument. Can be any custom value (in seconds), but HBase uses the time since epoch.
+      # @param [Integer] timestamp optional timestamp argument. Can be any custom value (in seconds), but HBase uses the millisecond time since epoch.
       # @param [Hash, Array<Hash>] columns
       # @return [true,false] true or false depending on whether the row was added successfully
       def create_row(table_name, name, timestamp = nil, columns = nil)
-        # Changing from Ruby epoch time (seconds) to Java epoch time (milliseconds)
-        timestamp = timestamp*1000 unless timestamp.nil?
-
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           data = []
@@ -158,7 +152,6 @@ module Stargate
       # @param [Integer] timestamp optional timestamp value (deletes all timestamp if not specified)
       # @param [Array<String>] optional list of specific columns to delete (deletes all columns if not specified)
       def delete_row(table_name, name, timestamp = nil, columns = nil)
-        timestamp *= 1000 unless timestamp.nil?
         handle_exception(table_name, name) do
           request = Request::RowRequest.new(table_name, name, timestamp)
           response = rest_delete_response(request.delete(columns))

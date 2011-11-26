@@ -77,7 +77,7 @@ describe Stargate::Operation::RowOperation do
   end
 
   it "should be able to store multiple columns and use timestamps" do
-    timestamp = (Time.now.to_i - 5)
+    timestamp = (Time.now.to_i - 5)*1000
 
     @client.set(@table_name, "new-set-row1", {"col1:cell1" => "col1-cell1-value", "col1:cell2" => "col1-cell2-value" }).should be_true
     @client.set(@table_name, "new-set-row2", {"col1:cell1" => "col1-cell1-value", "col1:cell2" => "col1-cell2-value" }, timestamp).should be_true
@@ -90,8 +90,8 @@ describe Stargate::Operation::RowOperation do
       row["col1:cell2"].value.should == "col1-cell2-value"
     end
 
-    row2["col1:cell1"].timestamp.should == timestamp*1000
-    row2["col1:cell2"].timestamp.should == timestamp*1000
+    row2["col1:cell1"].timestamp.should == timestamp
+    row2["col1:cell2"].timestamp.should == timestamp
   end
 
   it "should be able to get versions" do
@@ -124,7 +124,7 @@ describe Stargate::Operation::RowOperation do
   end
 
   it "should create a rows with multiple columns and timestamps" do
-    timestamp = Time.now.to_i
+    timestamp = Time.now.to_i*1000
 
     @client.set(@table_name, "row2-newapi", {"col1:cell1" => "row2-col1-cell1", "col1:cell2" => "row2-col1-cell2" }, timestamp).should be_true
     @client.create_row(@table_name, "row2-oldapi", timestamp, [{ :name => "col1:cell1", :value => "row2-col1-cell1" }, { :name => "col1:cell2", :value => "row2-col1-cell2" }]).should be_true
@@ -134,7 +134,7 @@ describe Stargate::Operation::RowOperation do
     rows << @client.get(@table_name, "row2-oldapi")
     rows.size.should == 2
 
-    expected_timestamp = timestamp*1000
+    expected_timestamp = timestamp
 
     rows.each do |row|
       row.should be_a_kind_of(Stargate::Model::Row)

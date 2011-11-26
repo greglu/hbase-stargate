@@ -14,19 +14,19 @@ describe Stargate::Operation::ScannerOperation do
 
     scan_table = @client.create_table("test-hbase-stargate-scan", "col1")
 
-    @ts1 = (Time.now - (5*60)).to_i
+    @ts1 = (Time.now - (5*60)).to_i*1000
     @client.set("test-hbase-stargate-scan", "rowts11", { "col1:cell1" => "rowts11-col1-cell1" }, @ts1).should be_true
     @client.set("test-hbase-stargate-scan", "rowts12", { "col1:cell1" => "rowts12-col1-cell1" }, @ts1).should be_true
 
-    @ts2 = @ts1 + 10
+    @ts2 = @ts1 + 10000
     @client.set("test-hbase-stargate-scan", "rowts21", { "col1:cell1" => "rowts21-col1-cell1" }, @ts2).should be_true
     @client.set("test-hbase-stargate-scan", "rowts22", { "col1:cell1" => "rowts22-col1-cell1" }, @ts2).should be_true
 
-    @ts3 = @ts1 + 20
+    @ts3 = @ts1 + 20000
     @client.set("test-hbase-stargate-scan", "rowts31", { "col1:cell1" => "rowts31-col1-cell1" }, @ts3).should be_true
     @client.set("test-hbase-stargate-scan", "rowts32", { "col1:cell1" => "rowts32-col1-cell1" }, @ts3).should be_true
 
-    @ts4 = @ts1 + 30
+    @ts4 = @ts1 + 30000
   end
 
   after :all do
@@ -121,6 +121,7 @@ describe Stargate::Operation::ScannerOperation do
   it "should scan all 6 rows when given first timestamp" do
     scanner = @client.open_scanner("test-hbase-stargate-scan", {:start_time => @ts1})
     rows = @client.get_rows(scanner)
+
     rows.size.should == 6
     rows.each do |row|
       row.should be_an_instance_of Stargate::Model::Row

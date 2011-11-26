@@ -17,9 +17,7 @@ module Stargate
         columns = options.delete(:columns)
         batch = options.delete(:batch) || "100"
         start_time = options.delete(:start_time)
-        start_time = start_time*1000 unless start_time.nil?
         end_time = options.delete(:end_time)
-        end_time = end_time*1000 unless end_time.nil?
 
         begin
           request = Request::ScannerRequest.new(table_name)
