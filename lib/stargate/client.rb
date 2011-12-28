@@ -22,7 +22,7 @@ module Stargate
 
       @connection = Patron::Session.new
       @connection.base_url = url
-      @connection.timeout = opts[:timeout] unless opts[:timeout].nil?
+      @connection.timeout = opts[:timeout] || 60 # cause some networks are super slow
 
       # Not actually opening the connection yet, just setting up the persistent connection.
       @connection.proxy = opts[:proxy] unless opts[:proxy].nil?
