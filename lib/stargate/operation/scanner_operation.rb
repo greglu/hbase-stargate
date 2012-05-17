@@ -6,7 +6,7 @@ module Stargate
       #
       # Example:
       #  client = Stargate::Client.new("http://localhost:8080")
-      #  scanner = client.open_scanner("test-hbase-stargate", :batch_size => 1000, :start_row => "row1", :end_row => "row2")
+      #  scanner = client.open_scanner("test-hbase-stargate", :batch => 1000, :start_row => "row1", :end_row => "row2")
       #
       # @see Model::Scanner::AVAILABLE_OPTS
       # @param [String] table_name the table name
