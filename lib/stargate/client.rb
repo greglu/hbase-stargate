@@ -22,6 +22,8 @@ module Stargate
 
       @connection = Patron::Session.new
       @connection.base_url = url
+      # Add timeout config for http connection
+      @connection.connect_timeout = opts[:connect_timeout] unless opts[:connect_timeout].nil?
       @connection.timeout = opts[:timeout] unless opts[:timeout].nil?
 
       # Not actually opening the connection yet, just setting up the persistent connection.
