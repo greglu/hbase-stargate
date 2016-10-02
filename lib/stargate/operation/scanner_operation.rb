@@ -19,6 +19,8 @@ module Stargate
         start_time = options.delete(:start_time)
         end_time = options.delete(:end_time)
 
+        filters = options.delete(:filters)
+
         begin
           request = Request::ScannerRequest.new(table_name)
 
@@ -33,14 +35,23 @@ module Stargate
               warn "[open_scanner] Received invalid option key :#{key}"
             end
           end
-          if columns
+          if filters
+            # close the header
             xml_data << ">"
+            filters.each do |filter|
+              filter_string = "<filter>#{Oj.dump(filter)}</filter>"
+              xml_data << filter_string
+            end
+            xml_data << "</Scanner>" unless columns
+          end
+          if columns
+            xml_data << ">" unless filters
             [columns].flatten.each do |col|
               xml_data << "<column>#{Base64.encode64(col)}</column>"
             end
             xml_data << "</Scanner>"
           else
-            xml_data << "/>"
+            xml_data << "/>" unless filters
           end
 
           scanner = Response::ScannerResponse.new(rest_post_response(request.open, xml_data), :open_scanner).parse
